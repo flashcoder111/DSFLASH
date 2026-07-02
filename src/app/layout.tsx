@@ -10,20 +10,6 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`
   },
   description: siteConfig.description,
-  keywords: [
-    "DeepSeek V4",
-    "DeepSeek V4 Flash",
-    "DeepSeek V4 Flash pricing",
-    "DeepSeek V4 Flash OpenClaw",
-    "OpenClaw DeepSeek",
-    "OpenClaw adapter",
-    "DeepSeek V4 Pro",
-    "DeepSeek V4 vs GPT",
-    "DeepSeek V4 vs Claude",
-    "DeepSeek V4 vs Gemini",
-    "AI model price comparison",
-    "LLM pricing 2026"
-  ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
   publisher: siteConfig.name,

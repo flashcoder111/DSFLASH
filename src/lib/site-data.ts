@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "DSFlashHub",
   title: "DeepSeek V4 Flash & OpenClaw Intelligence",
-  url: "https://dsflashhub.com",
+  url: "https://deepseekv4flash.com",
   description:
     "A DeepSeek V4 Flash information hub focused on pricing, OpenClaw adaptation, model comparisons, and practical routing decisions.",
   lastVerified: "2026-04-25"
