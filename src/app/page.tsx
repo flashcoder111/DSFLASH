@@ -26,9 +26,9 @@ import {
 } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "DeepSeek V4 Flash & OpenClaw Intelligence",
+  title: "DeepSeek V4 Flash: Pricing, Guides & News (2026)",
   description:
-    "Track DeepSeek V4 Flash pricing, OpenClaw adaptation, model comparisons, and practical API routing.",
+    "DeepSeek V4 Flash costs $0.14/M input, $0.28/M output. Pricing tables, local setup guides, OpenClaw integration, and model comparisons with official sources.",
   alternates: {
     canonical: "/"
   }
@@ -57,12 +57,14 @@ function Hero() {
               DeepSeek V4 Flash + OpenClaw adaptation
             </p>
             <h1 className="mt-6 max-w-4xl text-4xl font-semibold tracking-normal text-white sm:text-6xl lg:text-7xl">
-              DeepSeek V4 Flash and OpenClaw adapter hub
+              DeepSeek V4 Flash: pricing, setup guides, and OpenClaw integration
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              Make V4 Flash the lead DeepSeek route, document its OpenClaw
-              adaptation separately, and keep Pro, GPT, Claude, Gemini, and Grok
-              as explicit comparison or escalation choices.
+              V4 Flash runs API traffic at $0.14/M input and $0.28/M output —
+              18–54× below frontier-model prices. This site tracks what it
+              costs, how to run it (API, Ollama, or OpenClaw), and where it
+              beats GPT, Claude, Gemini, and Grok. Every number links to its
+              official source.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -194,9 +196,9 @@ export default function Home() {
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Content cluster"
-            title="More indexable pages around Flash and OpenClaw"
-            description="The site now has a larger page set: Flash guide, OpenClaw adaptation, routing, comparison, benchmarks, use cases, and migration pages."
+            eyebrow="Guides & references"
+            title="What do you need to do with V4 Flash?"
+            description="Setup, migration, routing, and comparison pages — each one answers a specific question, from the July 24 alias retirement to running Flash on your own GPUs."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {contentPages.map((page) => (
@@ -223,9 +225,9 @@ export default function Home() {
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Flash first"
-            title="Start with Flash, then route exceptions"
-            description="DeepSeek V4 matters because Flash gives the site a clear low-cost default route. Pro remains documented, but the main story should be Flash performance, cache economics, and OpenClaw adaptation."
+            eyebrow="Pricing"
+            title="What does V4 Flash cost next to GPT, Claude, Gemini, and Grok?"
+            description="Official list prices per 1M tokens, including the cache-hit rates that cut repeated-context input cost 5×. Sources linked in every row."
           />
           <div className="mt-10">
             <PricingTable />
@@ -236,9 +238,9 @@ export default function Home() {
       <section className="section-band px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Comparison logic"
-            title="Compare around Flash, not around Pro"
-            description="The comparison set still separates DeepSeek, GPT, Claude, Gemini, and Grok, but the DeepSeek row now treats V4 Flash as the default product route."
+            eyebrow="Which model when"
+            title="Which model wins each workload?"
+            description="Four common workloads, one recommendation each — based on price-per-task and each family's documented strengths."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {comparisonUseCases.map((item) => (
@@ -271,10 +273,10 @@ export default function Home() {
               V4 is a Flash-led family with a Pro escalation path
             </h2>
             <p className="mt-4 text-sm leading-7 text-slate-400">
-              DeepSeek documents Flash and Pro under the same generation, but
-              this site should lead with Flash because it is the practical route
-              for OpenClaw agent turns, batch workloads, and high-volume content
-              operations.
+              DeepSeek ships Flash and Pro as one generation with the same 1M
+              context. In practice Flash carries the volume — agent turns,
+              batch workloads, high-frequency content operations — while Pro
+              picks up long reasoning and review at 12× the output price.
             </p>
             <Link
               href="/flash-vs-pro"
@@ -303,13 +305,13 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Latest news"
-            title="DeepSeek V4 news timeline"
-            description="Pricing, open weights, API migration, and model comparison updates with traceable sources."
+            title="What changed recently — and what it costs you"
+            description="Dated updates that move API budgets: price changes, the July 24 alias retirement, and ecosystem support. Every item links to its primary source."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {newsItems.map((item) => (
+            {newsItems.slice(0, 3).map((item) => (
               <article
-                key={item.title}
+                key={item.slug}
                 className="rounded-lg border border-white/10 bg-[#0d141c] p-5"
               >
                 <p className="flex items-center justify-between gap-3 text-xs text-slate-500">
@@ -325,7 +327,7 @@ export default function Home() {
                   {item.summary}
                 </p>
                 <Link
-                  href={item.href}
+                  href={`/news/${item.slug}`}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-cyan-200"
                 >
                   Read more

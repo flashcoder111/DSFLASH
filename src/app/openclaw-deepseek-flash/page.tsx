@@ -5,9 +5,9 @@ import SectionHeading from "@/components/SectionHeading";
 import { openClawAdapterPoints, routePlaybook } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "DeepSeek V4 Flash for OpenClaw",
+  title: "DeepSeek V4 Flash for OpenClaw: Default-Route Setup",
   description:
-    "Standalone guide for adapting OpenClaw workflows to DeepSeek V4 Flash with prompt cache design, escalation rules, and fallback comparisons.",
+    "Configure OpenClaw with deepseek-v4-flash as the default route: the 4-point checklist, cache design for $0.028/M input, and explicit Pro escalation triggers.",
   alternates: {
     canonical: "/openclaw-deepseek-flash"
   }
@@ -30,13 +30,15 @@ export default function OpenClawDeepSeekFlashPage() {
             Dedicated adaptation
           </p>
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-6xl">
-            DeepSeek V4 Flash for OpenClaw
+            DeepSeek V4 Flash for OpenClaw: the default-route setup
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-400">
-            This page is the strongest standalone statement on the site:
-            OpenClaw should not be treated as a generic compatibility bullet.
-            It gets a Flash-first routing model, cache strategy, and escalation
-            policy.
+            Set deepseek-v4-flash as OpenClaw&apos;s default model and an
+            always-on agent stops being a budget question: routine turns bill
+            at $0.14/M input — $0.028/M once your prompt scaffolds hit the
+            cache. Below is the four-point configuration checklist, the cache
+            design that earns the 5× discount, and the escalation triggers
+            for V4 Pro.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -61,8 +63,8 @@ export default function OpenClawDeepSeekFlashPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Implementation checklist"
-            title="Make OpenClaw visibly Flash-adapted"
-            description="The content should read like a specific adapter page, not a generic DeepSeek page with OpenClaw inserted once."
+            title="Set Flash as the default route: 4 steps"
+            description="Work through these in order — each one either cuts cost or catches the quality regressions that cost-cutting can introduce."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {adapterChecklist.map((item) => (

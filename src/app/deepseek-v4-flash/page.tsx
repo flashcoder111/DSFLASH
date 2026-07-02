@@ -11,9 +11,9 @@ import {
 } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "DeepSeek V4 Flash Guide",
+  title: "DeepSeek V4 Flash: $0.14/M Input, 1M Context — Specs",
   description:
-    "DeepSeek V4 Flash pricing, cache-hit economics, OpenClaw adaptation role, routing rules, and when to escalate to V4 Pro.",
+    "V4 Flash specs and pricing: $0.14/M input ($0.028 cache-hit), $0.28/M output, 1M context, 284B/13B MoE. When Flash is enough — and when to escalate to Pro.",
   alternates: {
     canonical: "/deepseek-v4-flash"
   }
@@ -31,13 +31,13 @@ export default function DeepSeekV4FlashPage() {
             Flash first
           </p>
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-6xl">
-            DeepSeek V4 Flash is the main route
+            DeepSeek V4 Flash: $0.14/M input, 1M context — the full guide
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-400">
-            V4 Flash should carry the DSFlashHub story: low input cost, very low
-            cache-hit input cost, 1M context, and a clean default path for
-            OpenClaw agent workflows. V4 Pro stays available, but only as an
-            escalation model.
+            V4 Flash is DeepSeek&apos;s volume model: $0.14/M input ($0.028 on
+            cache hits), $0.28/M output, a 1M-token context window, and open
+            MIT-licensed weights. Here are the specs, the routing rules, and
+            the escalation triggers for when a task needs V4 Pro instead.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -61,9 +61,9 @@ export default function DeepSeekV4FlashPage() {
       <section className="px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
-            eyebrow="Price signal"
-            title="Flash economics are the headline"
-            description="The pricing story should start with V4 Flash: $0.14/M input, $0.028/M cache-hit input, and $0.28/M output."
+            eyebrow="Pricing"
+            title="What does V4 Flash cost?"
+            description="$0.14/M input, $0.028/M cache-hit input, $0.28/M output. The cache-hit rate is the number to engineer around: stable prompts cut repeated input cost 5×."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {flashHighlights.map((item) => (
@@ -91,8 +91,8 @@ export default function DeepSeekV4FlashPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Model details"
-            title="What the Flash page should emphasize"
-            description="Keep the model specification factual, but make the editorial emphasis clear: Flash is the default, Pro is the exception."
+            title="V4 Flash specs at a glance"
+            description="Every figure below traces to the DeepSeek API docs or the Hugging Face model card. Flash is the default; Pro is the exception."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {deepSeekSpecs.map((spec) => (
@@ -119,7 +119,7 @@ export default function DeepSeekV4FlashPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Routing"
-            title="Default V4 Flash routes"
+            title="Which tasks should run on Flash?"
             description={`Current Flash row: ${flash.note}`}
           />
           <div className="mt-10 overflow-x-auto rounded-lg border border-white/10 bg-[#0d141c]">
@@ -151,7 +151,7 @@ export default function DeepSeekV4FlashPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Full table"
-            title="Flash still sits inside the broader comparison"
+            title="How Flash compares with GPT, Claude, Gemini, and Grok"
             description="The site can compare GPT, Claude, Gemini, and Grok, but the DeepSeek column should lead with V4 Flash."
           />
           <div className="mt-10">

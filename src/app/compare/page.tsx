@@ -1,16 +1,40 @@
 import type { Metadata } from "next";
-import { ArrowDownRight, CheckCircle2, GitCompareArrows } from "lucide-react";
+import Link from "next/link";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  CheckCircle2,
+  GitCompareArrows
+} from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import { comparisonMatrix, comparisonUseCases } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "DeepSeek V4 vs GPT, Claude, Gemini, and Grok",
+  title: "DeepSeek V4 vs GPT, Claude, Gemini & Grok (2026)",
   description:
-    "A practical comparison of DeepSeek V4, GPT, Claude, Gemini, and Grok across pricing, routing, strengths, and caveats.",
+    "Five model families, one price-and-fit table: DeepSeek V4 Flash from $0.14/M vs GPT-5.4, Claude, Gemini 3.1, and Grok 4.20 — with per-workload picks.",
   alternates: {
     canonical: "/compare"
   }
 };
+
+const deepDives = [
+  {
+    href: "/compare/deepseek-v4-flash-vs-gpt-5-4",
+    title: "Flash vs GPT-5.4",
+    description: "Is 54× cheaper output good enough? The numbers behind the gap."
+  },
+  {
+    href: "/compare/deepseek-v4-flash-vs-claude",
+    title: "Flash vs Claude Sonnet & Opus",
+    description: "Volume work vs review work — and a routing rule for using both."
+  },
+  {
+    href: "/flash-vs-pro",
+    title: "Flash vs Pro",
+    description: "Same family, 12× price gap. Task-level escalation triggers."
+  }
+];
 
 export default function ComparePage() {
   return (
@@ -22,13 +46,14 @@ export default function ComparePage() {
             Model comparison
           </p>
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-6xl">
-            DeepSeek V4 vs GPT, Claude, Gemini, and Grok
+            DeepSeek V4 vs GPT, Claude, Gemini, and Grok: who wins what?
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-400">
-            The comparison is organized by model family. DeepSeek is the
-            V4 Flash and OpenClaw route, GPT is the broad frontier baseline,
-            Claude is the enterprise review route, Gemini is the
-            multimodal/Google route, and Grok is the realtime/xAI route.
+            Five model families, five different jobs. DeepSeek V4 Flash wins
+            on cost ($0.14/M input), GPT-5.4 is the frontier baseline, Claude
+            leads review-quality work, Gemini owns multimodal, and Grok covers
+            realtime/xAI workflows. The matrix below turns that into routing
+            decisions.
           </p>
         </div>
       </section>
@@ -37,8 +62,8 @@ export default function ComparePage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Decision matrix"
-            title="One row per model family, Flash first"
-            description="This removes duplicate cheapest-row cards while making DeepSeek V4 Flash the primary DeepSeek route and OpenClaw adaptation target."
+            title="Which model family fits which job?"
+            description="One card per family: what it's best at, which variant to pick, and the price signal that matters."
           />
           <div className="mt-10 grid gap-4 lg:grid-cols-5">
             {comparisonMatrix.map((item) => (
@@ -69,8 +94,8 @@ export default function ComparePage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Use cases"
-            title="Practical routing recommendations"
-            description="Turn the comparison table into production routing rules: default model, upgrade model, and audit model should have separate jobs."
+            title="Four workloads, four winners"
+            description="Production routing works best when the default model, the upgrade model, and the audit model have separate, explicit jobs."
           />
           <div className="mt-10 grid gap-4 lg:grid-cols-2">
             {comparisonUseCases.map((item) => (
@@ -118,6 +143,36 @@ export default function ComparePage() {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section className="px-4 pb-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            eyebrow="Deep dives"
+            title="Head-to-head comparisons"
+            description="Two-model matchups with full price tables, workload math, and FAQ answers."
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {deepDives.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group rounded-lg border border-white/10 bg-[#0d141c] p-5 transition hover:border-cyan-300/40"
+              >
+                <h3 className="text-lg font-semibold text-white group-hover:text-cyan-200">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-slate-400">
+                  {item.description}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-cyan-200">
+                  Read the comparison
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </>

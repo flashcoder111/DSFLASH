@@ -1,0 +1,32 @@
+# DSFlashHub — DeepSeek V4 Flash & OpenClaw intelligence
+
+> Independent hub tracking DeepSeek V4 Flash pricing, local deployment,
+> OpenClaw integration, and model comparisons. Not affiliated with DeepSeek,
+> OpenAI, Anthropic, Google, xAI, or the OpenClaw project.
+
+## Key pages
+
+- [V4 Flash specs & guide](https://deepseekv4flash.com/deepseek-v4-flash): pricing, cache economics, escalation triggers
+- [Pricing & cost calculator](https://deepseekv4flash.com/pricing): official + provider prices with sources
+- [Run V4 Flash locally](https://deepseekv4flash.com/guides/run-deepseek-v4-flash-locally): Ollama setup, GGUF picks, VRAM tiers
+- [deepseek-chat migration](https://deepseekv4flash.com/guides/deepseek-chat-migration): legacy IDs retire 2026-07-24
+- [API quickstart](https://deepseekv4flash.com/guides/deepseek-v4-flash-api-quickstart): OpenAI-compatible setup in Python/TS/curl
+- [OpenClaw integration](https://deepseekv4flash.com/openclaw-deepseek-flash): Flash as the default agent route
+- [Flash vs Pro](https://deepseekv4flash.com/flash-vs-pro): routing rules and escalation triggers
+- [Flash vs GPT-5.4](https://deepseekv4flash.com/compare/deepseek-v4-flash-vs-gpt-5-4): price and task comparison
+- [News](https://deepseekv4flash.com/news): dated updates with primary sources
+
+## Facts (verified 2026-07-02)
+
+- DeepSeek V4 Flash official API pricing: $0.14/M input, $0.028/M cache-hit input, $0.28/M output
+- DeepSeek V4 Pro official API pricing: $1.74/M input, $0.145/M cache-hit input, $3.48/M output
+- Model IDs: deepseek-v4-flash, deepseek-v4-pro (base URL https://api.deepseek.com, OpenAI-compatible)
+- Legacy aliases deepseek-chat and deepseek-reasoner retire 2026-07-24 15:59 UTC, then route to deepseek-v4-flash
+- V4 Flash architecture: 284B total / 13B active MoE, 1M-token context, 384K max output, MIT-licensed open weights
+- V4 Pro architecture: 1.6T total / 49B active MoE, 1M-token context
+- Local hardware tiers (community-reported): ~33 GB VRAM quantized GGUF, ~80 GB FP8 (1× H100), ~170 GB full precision (2× H200)
+- Ollama library lists deepseek-v4-flash; OpenClaw one-liner: `ollama launch openclaw --model deepseek-v4-flash:cloud`
+
+## Contact
+
+- Corrections: hello@deepseekv4flash.com (include page URL + source link)

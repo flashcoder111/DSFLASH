@@ -49,7 +49,7 @@ const checklist = [
   "Track cache-hit ratio separately from raw input-token volume.",
   "Score retry cost and failed-turn cost, not only first-response price.",
   "Include a Pro escalation lane so Flash is tested as the default, not the only model.",
-  "Keep provider-specific strengths visible without weakening the Flash headline."
+  "Record provider-specific strengths honestly — a benchmark that can't lose isn't a benchmark."
 ];
 
 export default function BenchmarksPage() {
@@ -62,12 +62,13 @@ export default function BenchmarksPage() {
             Benchmarks
           </p>
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-6xl">
-            DeepSeek V4 Flash benchmark checklist
+            How to benchmark DeepSeek V4 Flash on your real workload
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-400">
-            Benchmarks should prove the Flash-first route under realistic
-            OpenClaw and production workloads. Use closed models as comparison
-            references, not as the center of the page.
+            Public leaderboards won&apos;t tell you whether Flash survives
+            your prompt stack. This checklist tests it under realistic agent
+            and production traffic — measuring cost per completed task, not
+            just tokens.
           </p>
         </div>
       </section>
@@ -76,8 +77,8 @@ export default function BenchmarksPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Evaluation matrix"
-            title="Compare by workload"
-            description="The matrix makes the site more crawlable and gives readers a concrete testing plan."
+            title="What should each workload be tested against?"
+            description="One row per workload: the model to test, the comparison reference, and the metric that decides."
           />
           <div className="mt-10 overflow-x-auto rounded-lg border border-white/10 bg-[#0d141c]">
             <table className="price-table min-w-[920px]">

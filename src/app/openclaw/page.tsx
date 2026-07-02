@@ -5,9 +5,9 @@ import SectionHeading from "@/components/SectionHeading";
 import { contentPages, openClawAdapterPoints } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "OpenClaw Adaptation Hub",
+  title: "OpenClaw + DeepSeek V4 Flash: Setup & Routing Hub",
   description:
-    "OpenClaw adaptation hub for DeepSeek V4 Flash routing, cache strategy, escalation policy, and comparison boundaries.",
+    "Run OpenClaw agents on DeepSeek V4 Flash at $0.14/$0.28 per 1M tokens: default routing, prompt cache design, and escalation rules — with setup guides.",
   alternates: {
     canonical: "/openclaw"
   }
@@ -27,13 +27,18 @@ export default function OpenClawPage() {
             OpenClaw adaptation
           </p>
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-6xl">
-            OpenClaw should be paired with DeepSeek V4 Flash first
+            Run OpenClaw on DeepSeek V4 Flash: routing, cache, and cost
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-400">
-            This hub separates the OpenClaw story from generic model comparison.
-            The site should explain how OpenClaw routine agent turns, tool
-            narration, retrieval wrappers, and prompt cache design can default to
-            V4 Flash before escalating to Pro or another provider.
+            OpenClaw agents make hundreds of model calls a day — planning
+            turns, tool narration, retrieval wrappers. Routing those calls to
+            V4 Flash at $0.14/$0.28 per 1M tokens keeps an always-on agent
+            affordable, and the fastest setup is one line:{" "}
+            <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm text-cyan-100">
+              ollama launch openclaw --model deepseek-v4-flash:cloud
+            </code>
+            . This hub covers the routing rules, cache design, and escalation
+            policy.
           </p>
           <Link
             href="/openclaw-deepseek-flash"
@@ -49,8 +54,8 @@ export default function OpenClawPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Adapter rules"
-            title="Four OpenClaw adaptation layers"
-            description="These rules give OpenClaw a stronger standalone role instead of leaving it as a passing mention on a comparison page."
+            title="The four layers of an OpenClaw model configuration"
+            description="Default route, escalation trigger, cache design, and audit lane — set these four explicitly and your agent's cost per day becomes predictable."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {openClawAdapterPoints.map((point) => (
@@ -78,7 +83,7 @@ export default function OpenClawPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Related pages"
-            title="OpenClaw content cluster"
+            title="Related OpenClaw guides"
             description="These pages create enough crawlable surface for OpenClaw and Flash together."
           />
           <div className="mt-10 grid gap-4 md:grid-cols-2">

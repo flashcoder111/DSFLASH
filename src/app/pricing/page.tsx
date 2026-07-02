@@ -6,9 +6,9 @@ import SectionHeading from "@/components/SectionHeading";
 import { blendedCost, formatUsd, pricingModels } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "DeepSeek V4 Flash Pricing",
+  title: "DeepSeek V4 API Pricing: Official Rates (July 2026)",
   description:
-    "DeepSeek V4 Flash pricing with cache-hit cost, OpenClaw routing context, Pro escalation pricing, and comparisons against GPT, Claude, Gemini, and Grok.",
+    "DeepSeek V4 Flash: $0.14/M input, $0.28/M output. V4 Pro: $1.74/$3.48. Full price table vs GPT, Claude, Gemini, Grok — plus an interactive cost calculator.",
   alternates: {
     canonical: "/pricing"
   }
@@ -48,14 +48,14 @@ export default function PricingPage() {
             Pricing intelligence
           </p>
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-6xl">
-            DeepSeek V4 Flash pricing is the lead story
+            DeepSeek V4 API pricing: official rates and cost calculator
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-400">
-            DeepSeek prices are listed per 1M tokens in USD. Start with V4
-            Flash: $0.14 input, $0.028 cache-hit input, and $0.28 output. V4 Pro
-            remains documented as an escalation route at $0.145 cache hit, $1.74
-            input, and $3.48 output. The $12/M output value belongs to Gemini
-            3.1 Pro Preview, not DeepSeek V4 Pro.
+            All prices per 1M tokens in USD, verified against the official
+            pricing page. V4 Flash: $0.14 input, $0.028 cache-hit input, $0.28
+            output. V4 Pro: $1.74 input, $0.145 cache-hit, $3.48 output. One
+            common mix-up to avoid: the $12/M output figure circulating in
+            comparison tables belongs to Gemini 3.1 Pro Preview, not DeepSeek.
           </p>
         </div>
       </section>

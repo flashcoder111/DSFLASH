@@ -36,8 +36,8 @@ export default function ApiRoutingPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Routing table"
-            title="Default model, escalation, and metric"
-            description="This page adds a crawlable operational table that turns the Flash-first story into a concrete policy."
+            title="Default model, escalation trigger, and success metric"
+            description="One row per traffic type: where it runs by default, when it escalates, and the number that tells you the routing works."
           />
           <div className="mt-10 overflow-x-auto rounded-lg border border-white/10 bg-[#0d141c]">
             <table className="price-table min-w-[900px]">

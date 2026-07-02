@@ -4,9 +4,9 @@ import SectionHeading from "@/components/SectionHeading";
 import { deepSeekSpecs } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "DeepSeek V4 Flash Model Specs",
+  title: "DeepSeek V4 Specs: 1M Context, MoE, Open Weights",
   description:
-    "DeepSeek V4 Flash model specs with Pro escalation context, model IDs, context length, output limit, reasoning modes, open weights, and architecture notes.",
+    "DeepSeek V4 model specs: Flash 284B/13B active, Pro 1.6T/49B active, 1M context, 384K max output, three reasoning modes, MIT-licensed weights.",
   alternates: {
     canonical: "/models"
   }
@@ -24,13 +24,13 @@ export default function ModelsPage() {
             Model dossier
           </p>
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-6xl">
-            DeepSeek V4 Flash specs and Pro escalation notes
+            DeepSeek V4 specs: Flash 284B/13B, Pro 1.6T/49B, 1M context
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-400">
-            This page tracks source-backed model details only: IDs, context,
-            output limit, reasoning modes, open weights, and architecture notes.
-            The editorial priority is V4 Flash; Pro is documented as the
-            escalation path.
+            Source-backed model details only: API IDs, context window, output
+            limit, reasoning modes, open-weight license, and architecture.
+            Every figure traces to the DeepSeek API docs or the Hugging Face
+            model card.
           </p>
         </div>
       </section>
@@ -87,7 +87,8 @@ export default function ModelsPage() {
             <p className="mt-3 text-sm leading-7 text-slate-400">
               V4 Pro is the higher-reasoning route for difficult debugging,
               long-context repository review, incident analysis, and high-value
-              reports. It should not replace every Flash request.
+              reports. At 12× Flash&apos;s output price, reserve it for tasks
+              that fail on Flash.
             </p>
           </div>
         </div>

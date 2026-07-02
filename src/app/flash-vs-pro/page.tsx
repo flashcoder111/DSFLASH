@@ -4,9 +4,9 @@ import SectionHeading from "@/components/SectionHeading";
 import { formatUsd, pricingModels } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "DeepSeek V4 Flash vs Pro",
+  title: "DeepSeek V4 Flash vs Pro: When Is 12× Worth It?",
   description:
-    "DeepSeek V4 Flash vs Pro routing comparison with pricing, production role, escalation triggers, and OpenClaw guidance.",
+    "Flash outputs at $0.28/M, Pro at $3.48/M — a 12× gap. Task-by-task routing rules and the escalation triggers that tell you when Pro earns its premium.",
   alternates: {
     canonical: "/flash-vs-pro"
   }
@@ -24,9 +24,9 @@ const rows = [
     pro: "Complex debugging, high-value review, long reasoning tasks"
   },
   {
-    label: "Editorial priority",
-    flash: "Lead story",
-    pro: "Support story"
+    label: "Cost per 1M output",
+    flash: "$0.28",
+    pro: "$3.48 (12× Flash)"
   },
   {
     label: "Risk",
@@ -48,12 +48,13 @@ export default function FlashVsProPage() {
             Routing comparison
           </p>
           <h1 className="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-6xl">
-            DeepSeek V4 Flash vs Pro
+            DeepSeek V4 Flash vs Pro: when is 12× the price worth it?
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-8 text-slate-400">
-            The site should not imply that V4 Pro is the main product. Flash is
-            the production default and OpenClaw adapter route; Pro is a controlled
-            escalation path.
+            Same generation, same 1M context, a 12× gap in output price. The
+            short answer: Flash for volume, Pro for judgment. The longer
+            answer is a routing rule — run everything on Flash by default and
+            escalate to Pro on defined triggers, not vibes.
           </p>
         </div>
       </section>
@@ -86,8 +87,8 @@ export default function FlashVsProPage() {
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Decision table"
-            title="Flash should win most default traffic"
-            description="Use Pro only when the task needs deeper reasoning or when Flash fails a defined quality check."
+            title="Which tasks justify Pro's premium?"
+            description="Escalate when a task needs deeper reasoning or fails a defined quality check — and stay on Flash everywhere else."
           />
           <div className="mt-10 overflow-x-auto rounded-lg border border-white/10 bg-[#0d141c]">
             <table className="price-table min-w-[860px]">

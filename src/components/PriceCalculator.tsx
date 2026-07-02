@@ -13,7 +13,7 @@ const selectableModels = pricingModels.filter(
   (model) =>
     model.provider === "DeepSeek" ||
     model.model === "GPT-5.4" ||
-    model.model.startsWith("Claude Opus") ||
+    model.model.startsWith("Claude") ||
     model.model.startsWith("Gemini") ||
     model.model.startsWith("Grok")
 );
