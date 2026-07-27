@@ -731,9 +731,8 @@ export const articles: Article[] = [
     updated: "July 27, 2026",
     sourceCount: 4,
     visual: "loop",
-    imageSrc: "/images/agent-harness-loop-graph-explained-diagram.png",
-    imageAlt: "Annotated diagram explaining an AI agent harness, feedback loop, and workflow graph with labels for tools, memory, evidence, branching, joins, and state.",
-    imageAspect: "portrait",
+    imageSrc: "/images/articles/ai-agent-harness-langgraph-graph-api.png",
+    imageAlt: "LangGraph Graph API overview showing how agent workflow graphs define state, nodes, and edges.",
     body: [
       "The words get mixed together because a working agent usually contains all three. It has a place to run, it keeps taking actions until it reaches some stopping point, and it may hand work from one step to another. The trouble starts when a team tries to solve the wrong problem. A brittle tool permission policy will not be repaired by drawing a prettier workflow. A missing review step will not be fixed by adding more memory.",
       "Start with the harness. This is everything around the model that makes a task possible and bounded: its tools, files, durable instructions, session state, model routing, permissions, logs and sandbox. If an agent can draft a useful answer but cannot reliably find the right repository, retain the right state, or explain which tool changed something, the harness is the weak point. The first repair is usually mundane: narrow the tool allowlist, separate stable instructions from task notes, and keep an audit trail that a human can read.",
@@ -762,6 +761,8 @@ export const articles: Article[] = [
     updated: "July 27, 2026",
     sourceCount: 3,
     visual: "network",
+    imageSrc: "/images/articles/openclaw-hermes-personal-ai-agent.png",
+    imageAlt: "OpenClaw documentation cover image for a self-hosted personal AI agent gateway.",
     body: [
       "Personal agents are becoming less like a single chat window and more like a small operating layer: they receive requests where people already communicate, hold context across sessions, call tools, and return a result. That is why the comparison between OpenClaw and Hermes is more useful when framed as systems design. The hard part is not producing a reply; it is deciding where identity, permissions, memory and long-running work should live.",
       "OpenClaw is built around a self-hosted gateway that can connect multiple messaging channels to one agent system. Its documentation makes the workspace contract unusually explicit: agent instructions, tools, identity and memory are files under a controlled working directory, while sessions and routing are part of the platform. That separation is valuable for teams who want to inspect the boundary between an incoming message, a workspace and an action before letting the agent run continuously.",
@@ -784,6 +785,8 @@ export const articles: Article[] = [
     updated: "July 27, 2026",
     sourceCount: 2,
     visual: "report",
+    imageSrc: "/images/articles/workbuddy-chinese-ai-agent-model-configuration.png",
+    imageAlt: "Tencent WorkBuddy model configuration interface for workplace AI agent workflows.",
     body: [
       "Chinese model releases are often discussed abroad as a price-performance story. That misses a more operational development: products such as Tencent WorkBuddy package the model choice, task planning, tool use and deliverable into a workplace flow that does not ask the user to assemble an agent stack from scratch. The relevant question is therefore not simply which model sits underneath, but how the product distributes responsibility between the model, orchestration layer and human reviewer.",
       "WorkBuddy describes a natural-language workbench that decomposes complex requests, invokes tools and can coordinate multiple agents. Its enterprise model documentation also shows a practical routing posture: users can select built-in models, connect third-party providers, run a local model through Ollama, or configure a custom API. That is a meaningful design decision because it avoids making a single model vendor the permanent definition of the product.",
@@ -805,6 +808,8 @@ export const articles: Article[] = [
     updated: "July 27, 2026",
     sourceCount: 3,
     visual: "context",
+    imageSrc: "/images/articles/claude-code-codex-workflow-design.png",
+    imageAlt: "Claude Code documentation graphic about extending a coding-agent workflow with project context, skills, and tools.",
     body: [
       "A coding agent is most useful when it can move from an intent to a checked change without concealing the path between the two. Both Codex and Claude Code expose the ingredients of that loop: repository context, command-line or editor tools, durable project guidance and ways to split work. The important comparison is therefore not a generic capability score. It is whether a team can turn those ingredients into a reviewable engineering practice.",
       "Codex’s official guidance emphasizes naming the desired behavior, pointing to the relevant code or reproduction, preserving constraints and stating how to verify the result. Its customization model separates project guidance, reusable skills and live integrations so a team can choose the smallest durable surface for each rule. That is useful when a repository has conventions that should survive beyond one chat session.",
@@ -827,6 +832,8 @@ export const articles: Article[] = [
     updated: "July 27, 2026",
     sourceCount: 3,
     visual: "context",
+    imageSrc: "/images/articles/ai-agent-context-engineering-runtime.png",
+    imageAlt: "OpenClaw agent runtime documentation graphic showing the layers of an AI agent workspace.",
     body: [
       "People often describe context engineering as a prompt-writing technique. For agents, it is closer to interface design. Every persistent instruction, workspace file, memory record and tool policy changes the evidence the system sees before it acts. If those layers are mixed together, an agent can appear capable while remaining impossible to audit or safely correct.",
       "OpenClaw’s workspace contract is a useful concrete example: separate files express operating instructions, tool notes, identity, user preferences and memory. Codex similarly distinguishes durable repository guidance from reusable skills and live tool integrations. These boundaries matter because a one-off request should not silently become a permanent rule, and a preference should not grant authority to run a tool.",
@@ -849,6 +856,8 @@ export const articles: Article[] = [
     updated: "July 27, 2026",
     sourceCount: 2,
     visual: "report",
+    imageSrc: "/images/agent-harness-loop-workflow-graph-editorial-illustration.png",
+    imageAlt: "Editorial illustration of an AI-agent workflow with harness, loop, and graph stages.",
     body: [
       "Codex is most useful when a software task can be expressed as an engineering contract rather than a vague wish. That contract has four artifacts: a scope that says what should change, repository context that makes local conventions visible, a patch that can be reviewed, and a verification step that can fail. Omitting any one of them makes a result harder to trust, even if the code looks plausible at first glance.",
       "The official prompting guidance points in this direction: identify the desired behavior, name relevant files or reproduction steps, preserve constraints and state how the result should be verified. This is not prompt ornament. It gives the agent an observable target and tells a reviewer what evidence to expect when the work is done.",
@@ -870,6 +879,8 @@ export const articles: Article[] = [
     updated: "July 27, 2026",
     sourceCount: 2,
     visual: "context",
+    imageSrc: "/images/ai-agent-context-engineering-workspace.png",
+    imageAlt: "AI agent workspace illustration showing context, tools, and review steps.",
     body: [
       "Claude Code can inspect a codebase, use tools and work through a multi-step task. That ability is only dependable when the information it receives is separated by purpose. Project instructions should express stable conventions; task prompts should express the change at hand; memory should preserve useful context without becoming an unbounded archive; and tools should be granted only where they are needed.",
       "The product documentation describes an agentic loop in which tool results inform the next action, and it points to skills, MCP, hooks and subagents as extensions rather than substitutes for that loop. This matters because a long list of integrations can create the impression of capability while making it unclear which tool produced a particular conclusion or changed a file.",
@@ -891,6 +902,8 @@ export const articles: Article[] = [
     updated: "July 27, 2026",
     sourceCount: 3,
     visual: "world",
+    imageSrc: "/images/articles/alphafold-3-biomolecular-interactions.png",
+    imageAlt: "AlphaFold 3 research figure showing predicted biomolecular interactions.",
     body: [
       "AI for science should be judged differently from an ordinary product feature. A compelling output is not the end of the workflow; it is a candidate explanation, structure or experiment that must be connected to data provenance, uncertainty and independent validation. The most valuable systems shorten the cycle between a scientific question and a testable next step, rather than simply generating a more persuasive visual.",
       "AlphaFold 3 is a useful case study because the published work addresses biomolecular interactions while the released inference pipeline makes concrete operational demands. The project documentation distinguishes the code, model parameters, data pipeline and input formats. Those details matter: a result depends on how sequences, ligands, templates and other evidence entered the system, not just on the final predicted structure.",
@@ -913,6 +926,8 @@ export const articles: Article[] = [
     updated: "July 24, 2026",
     sourceCount: 2,
     visual: "network",
+    imageSrc: "/images/articles/kimi-k3-open-world-model-capability.png",
+    imageAlt: "Kimi K3 launch-blog example of an open-world interactive experience generated by the model.",
     modelSlugs: ["kimi"],
     body: [
       "Moonshot describes Kimi K3 as a 2.8 trillion-parameter model with native visual capabilities and a one-million-token context window. Its announcement also says that the model uses Kimi Delta Attention and Attention Residuals. Those are the company’s descriptions; they should be read alongside the technical report when it is published.",
@@ -934,6 +949,8 @@ export const articles: Article[] = [
     updated: "July 24, 2026",
     sourceCount: 2,
     visual: "context",
+    imageSrc: "/images/articles/qwen-3-5-native-multimodal-agents.png",
+    imageAlt: "Qwen3.5 launch visual for native multimodal agent capabilities.",
     modelSlugs: ["qwen"],
     body: [
       "Alibaba introduced Qwen3.5 as an open-weight, natively multimodal model family. Its launch materials describe a 397B-parameter mixture-of-experts model with 17B activated parameters per forward pass, alongside reasoning, coding, agent and multimodal claims.",
@@ -955,6 +972,8 @@ export const articles: Article[] = [
     updated: "July 24, 2026",
     sourceCount: 2,
     visual: "world",
+    imageSrc: "/images/articles/qwen-agentworld-language-world-model.png",
+    imageAlt: "Qwen-AgentWorld GitHub project preview for language world models and general agents.",
     modelSlugs: ["qwen"],
     body: [
       "Qwen-AgentWorld is presented by its authors as a language world model for general agents. The project focuses on modeling agent environments across tool-oriented domains rather than only producing a final text response.",
@@ -976,6 +995,8 @@ export const articles: Article[] = [
     updated: "July 24, 2026",
     sourceCount: 2,
     visual: "loop",
+    imageSrc: "/images/articles/loopformer-looped-transformer-architecture.png",
+    imageAlt: "LoopFormer architecture figure illustrating recurrent transformer computation.",
     body: [
       "Looped transformers reuse computation across steps or depth. The appeal is an adjustable trade-off between parameter count, inference compute and iterative refinement—but the design also changes optimization and evaluation questions.",
       "Loopie and LoopFormer are useful entry points because they make distinct claims about scaling and variable compute. They are research materials, not product documentation, and their reported results should be read with their methods and publication status in view.",
@@ -996,6 +1017,8 @@ export const articles: Article[] = [
     updated: "July 24, 2026",
     sourceCount: 2,
     visual: "release",
+    imageSrc: "/images/articles/gpt-5-6-sol-terra-luna-model-family.png",
+    imageAlt: "Illustration of the GPT-5.6 Sol, Terra, and Luna model family.",
     modelSlugs: ["openai"],
     body: [
       "OpenAI’s July announcement describes the GPT-5.6 family and its product rollout. Availability, plan access and product behavior can change during staged releases, so the announcement should be read with the release notes rather than as a permanent compatibility matrix.",
@@ -1017,6 +1040,8 @@ export const articles: Article[] = [
     updated: "July 24, 2026",
     sourceCount: 1,
     visual: "context",
+    imageSrc: "/images/articles/anthropic-economic-index-connector.png",
+    imageAlt: "Anthropic Economic Index connector announcement illustration.",
     modelSlugs: ["anthropic"],
     body: [
       "Anthropic’s announcement describes a connector that lets Claude users explore the Anthropic Economic Index. The company also states a crucial limitation: the index reflects patterns in Claude usage, not the labor market as a whole.",
@@ -1037,6 +1062,8 @@ export const articles: Article[] = [
     updated: "July 24, 2026",
     sourceCount: 2,
     visual: "report",
+    imageSrc: "/images/articles/deepseek-liang-wenfeng-investor-meeting.jpg",
+    imageAlt: "DeepSeek image accompanying reporting on its reported investor meeting.",
     modelSlugs: ["deepseek"],
     body: [
       "News reports have described a four-hour DeepSeek investor meeting and attributed comments to founder Liang Wenfeng. This is reporting, not an official company release or a primary meeting record published by DeepSeek.",
@@ -1058,6 +1085,8 @@ export const articles: Article[] = [
     updated: "July 24, 2026",
     sourceCount: 1,
     visual: "report",
+    imageSrc: "/images/articles/baidu-ai-commercialization-2026-okrs.jpg",
+    imageAlt: "Baidu image accompanying reporting on its 2026 AI commercialization priorities.",
     body: [
       "Reporting on Baidu’s 2026 OKRs describes a greater emphasis on commercial outcomes after earlier AI reorganization. The underlying OKR document is not presented as a public company announcement in the source used here.",
       "That makes this a reported industry analysis, not a company fact sheet. The article should attribute the claims, avoid extending them to unannounced model plans, and be revised if Baidu publishes primary material.",

@@ -16,7 +16,7 @@ export default function LatestArticlesCarousel({ articles }: { articles: Article
 
   return <article className="featured latest-carousel" aria-label="Latest articles carousel">
     <Link href={`/articles/${article.slug}`} className="latest-carousel__visual" aria-label={`Read ${article.title}`}>
-      <ArticleVisual variant={article.visual} label="Latest article" />
+      {article.imageSrc ? <img className="latest-carousel__image" src={article.imageSrc} alt={article.imageAlt ?? ""} /> : <ArticleVisual variant={article.visual} label="Latest article" />}
     </Link>
     <div className="featured__content">
       <p className="eyebrow">{article.topic}</p>
