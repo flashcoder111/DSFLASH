@@ -1,12 +1,3 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/site-data";
-
-export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: {
-      userAgent: "*",
-      allow: "/"
-    },
-    sitemap: `${siteConfig.url}/sitemap.xml`
-  };
-}
+import { siteConfig } from "@/lib/blog-data";
+export default function robots(): MetadataRoute.Robots { return { rules: [{ userAgent: "*", allow: "/", disallow: ["/admin/", "/api/", "/contact"] }], sitemap: `${siteConfig.url}/sitemap.xml` }; }

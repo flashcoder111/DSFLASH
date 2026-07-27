@@ -1,42 +1,12 @@
 import type { MetadataRoute } from "next";
-import { guidePages, newsItems, siteConfig } from "@/lib/site-data";
-
-const staticRoutes = [
-  "",
-  "/deepseek-v4-flash",
-  "/openclaw",
-  "/openclaw-deepseek-flash",
-  "/flash-vs-pro",
-  "/api-routing",
-  "/benchmarks",
-  "/pricing",
-  "/compare",
-  "/models",
-  "/news",
-  "/guides",
-  "/faq",
-  "/about",
-  "/contact",
-  "/privacy",
-  "/terms",
-  "/zh",
-  "/ja"
-];
+import { articles, models, siteConfig, topics } from "@/lib/blog-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    ...staticRoutes,
-    ...guidePages.map((page) => page.href),
-    ...newsItems.map((item) => `/news/${item.slug}`)
+  const staticRoutes = ["", "/china-models", "/global-models", "/github-radar", "/topics", "/models", "/compare", "/compare/kimi-k3-vs-qwen35", "/about", "/editorial-policy", "/privacy", "/terms"];
+  return [
+    ...staticRoutes.map((route) => ({ url: `${siteConfig.url}${route}`, lastModified: "2026-07-24", changeFrequency: route === "" ? "daily" as const : "weekly" as const, priority: route === "" ? 1 : 0.7 })),
+    ...topics.map((topic) => ({ url: `${siteConfig.url}/topics/${topic.slug}`, lastModified: "2026-07-24", changeFrequency: "weekly" as const, priority: 0.7 })),
+    ...models.map((model) => ({ url: `${siteConfig.url}/models/${model.slug}`, lastModified: "2026-07-24", changeFrequency: "weekly" as const, priority: 0.7 })),
+    ...articles.map((article) => ({ url: `${siteConfig.url}/articles/${article.slug}`, lastModified: article.updated, changeFrequency: "weekly" as const, priority: 0.8 }))
   ];
-
-  const unique = Array.from(new Set(routes));
-
-  return unique.map((route) => ({
-    url: `${siteConfig.url}${route}`,
-    lastModified: siteConfig.lastVerified,
-    changeFrequency:
-      route === "" || route === "/news" ? ("daily" as const) : ("weekly" as const),
-    priority: route === "" ? 1 : 0.8
-  }));
 }

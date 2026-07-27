@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function NotFound() { return <div className="article-container"><header className="page-intro"><p className="eyebrow">404</p><h1>That page is not here.</h1><p>Try the latest reporting, a topic page, or the model library.</p></header><div className="topic-row"><Link href="/">Latest articles</Link><Link href="/topics">Topics</Link><Link href="/models">Model Library</Link></div></div>; }

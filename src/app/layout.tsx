@@ -1,86 +1,38 @@
 import type { Metadata, Viewport } from "next";
 import SiteFrame from "@/components/SiteFrame";
-import { siteConfig } from "@/lib/site-data";
+import { siteConfig } from "@/lib/blog-data";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: {
-    default: `${siteConfig.title} | ${siteConfig.name}`,
-    template: `%s | ${siteConfig.name}`
-  },
+  title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
   description: siteConfig.description,
-  authors: [{ name: siteConfig.name, url: siteConfig.url }],
-  creator: siteConfig.name,
   publisher: siteConfig.name,
   openGraph: {
     type: "website",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.title} | ${siteConfig.name}`,
-    description: siteConfig.description,
-    images: [
-      {
-        url: "/deepseek-v4-market-map.png",
-        width: 1600,
-        height: 900,
-        alt: "DeepSeek V4 price and model comparison market map"
-      }
-    ]
+    title: siteConfig.name,
+    description: siteConfig.description
   },
-  twitter: {
-    card: "summary_large_image",
-    title: `${siteConfig.title} | ${siteConfig.name}`,
-    description: siteConfig.description,
-    images: ["/deepseek-v4-market-map.png"]
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1
-    }
-  }
+  robots: { index: true, follow: true }
 };
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#080b10"
-};
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#fcfcfa" };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Organization",
-      name: siteConfig.name,
-      url: siteConfig.url,
-      description: siteConfig.description
-    },
-    {
-      "@type": "WebSite",
-      name: siteConfig.name,
-      url: siteConfig.url
-    }
+    { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+    { "@type": "WebSite", name: siteConfig.name, url: siteConfig.url, description: siteConfig.description }
   ]
 };
 
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <SiteFrame>{children}</SiteFrame>
       </body>
     </html>
