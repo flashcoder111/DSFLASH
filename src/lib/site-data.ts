@@ -231,7 +231,7 @@ export type NewsItem = {
 export const newsItems: NewsItem[] = [
   {
     slug: "deepseek-v4-flash-0731-public-beta-benchmarks-cost",
-    title: "DeepSeek V4 Flash 0731 Enters Public Beta: Independent Benchmarks, Cost, and What Changed",
+    title: "DeepSeek V4 Flash 0731: Better Agent Performance at the Same Price",
     date: "2026-07-31",
     tag: "Official",
     summary:
