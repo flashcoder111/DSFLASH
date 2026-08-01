@@ -17,8 +17,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: DeepSeekArticleProps): Promise<Metadata> {
   const { slug } = await params;
   const migratedItem = importedDeepSeekNews.find((entry) => entry.slug === slug);
-  const item = migratedItem ?? newsItems.find((entry) => entry.slug === slug);
-  const articleImageSrc = migratedItem ? `/images/deepseek-news/${migratedItem.slug}.png` : undefined;
+  const nativeItem = newsItems.find((entry) => entry.slug === slug);
+  const item = migratedItem ?? nativeItem;
+  const articleImageSrc = migratedItem ? `/images/deepseek-news/${migratedItem.slug}.png` : nativeItem?.imageSrc;
+  const articleImageAlt = migratedItem ? `Source-page image for ${item?.title ?? "DeepSeek article"}` : nativeItem?.imageAlt;
 
   if (!item) return { title: "DeepSeek article not found" };
 
@@ -31,7 +33,7 @@ export async function generateMetadata({ params }: DeepSeekArticleProps): Promis
       title: item.title,
       description: item.summary,
       publishedTime: item.date,
-      images: articleImageSrc ? [{ url: articleImageSrc, alt: `Source-page image for ${item.title}` }] : undefined
+      images: articleImageSrc ? [{ url: articleImageSrc, alt: articleImageAlt ?? "" }] : undefined
     }
   };
 }
@@ -39,10 +41,12 @@ export async function generateMetadata({ params }: DeepSeekArticleProps): Promis
 export default async function DeepSeekArticlePage({ params }: DeepSeekArticleProps) {
   const { slug } = await params;
   const migratedItem = importedDeepSeekNews.find((entry) => entry.slug === slug);
-  const item = migratedItem ?? newsItems.find((entry) => entry.slug === slug);
+  const nativeItem = newsItems.find((entry) => entry.slug === slug);
+  const item = migratedItem ?? nativeItem;
 
   if (!item) notFound();
-  const articleImageSrc = migratedItem ? `/images/deepseek-news/${migratedItem.slug}.png` : undefined;
+  const articleImageSrc = migratedItem ? `/images/deepseek-news/${migratedItem.slug}.png` : nativeItem?.imageSrc;
+  const articleImageAlt = migratedItem ? `Source-page image for ${item.title}` : nativeItem?.imageAlt;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -69,7 +73,7 @@ export default async function DeepSeekArticlePage({ params }: DeepSeekArticlePro
           </p>
         </div>
       </header>
-      {articleImageSrc ? <div className="article-container article-hero-visual"><img className="article-hero-image" src={articleImageSrc} alt={`Source-page image for ${item.title}`} /></div> : null}
+      {articleImageSrc ? <div className="article-container article-hero-visual"><img className="article-hero-image" src={articleImageSrc} alt={articleImageAlt ?? ""} /></div> : null}
       <article className="article-container article-body">
         {migratedItem ? (
           <p className="article-body__origin">
@@ -88,13 +92,13 @@ export default async function DeepSeekArticlePage({ params }: DeepSeekArticlePro
                 </a>
               </li>
             ) : null}
-            {item.sourceHref ? (
-              <li>
-                <a href={item.sourceHref} target="_blank" rel="noreferrer">
-                  {item.sourceLabel ?? item.sourceHref} <ArrowUpRight aria-hidden="true" />
+            {(nativeItem?.sources ?? (item.sourceHref ? [{ label: item.sourceLabel ?? item.sourceHref, href: item.sourceHref }] : [])).map((source) => (
+              <li key={source.href}>
+                <a href={source.href} target="_blank" rel="noreferrer">
+                  {source.label} <ArrowUpRight aria-hidden="true" />
                 </a>
               </li>
-            ) : null}
+            ))}
           </ul>
         </section>
       </article>

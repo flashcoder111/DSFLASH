@@ -221,11 +221,49 @@ export type NewsItem = {
   tag: string;
   summary: string;
   body: string[];
+  imageSrc?: string;
+  imageAlt?: string;
+  sources?: { label: string; href: string }[];
   sourceLabel?: string;
   sourceHref?: string;
 };
 
 export const newsItems: NewsItem[] = [
+  {
+    slug: "deepseek-v4-flash-0731-public-beta-benchmarks-cost",
+    title: "DeepSeek V4 Flash 0731 Enters Public Beta: Independent Benchmarks, Cost, and What Changed",
+    date: "2026-07-31",
+    tag: "Official",
+    summary:
+      "DeepSeek V4 Flash 0731 is now in public beta with stronger agent-focused performance claims. Independent analysis also places the release on a more competitive intelligence-versus-cost curve.",
+    imageSrc: "/images/deepseek-news/deepseek-v4-flash-0731-benchmark-comparison.jpeg",
+    imageAlt:
+      "DeepSeek's vendor-reported agent and coding benchmark comparison for V4 Flash 0731, Flash Preview, V4 Pro Preview, GLM-5.2, and Opus-4.8.",
+    body: [
+      "DeepSeek moved DeepSeek V4 Flash into public beta with its July 31, 0731 release. Existing API users do not need a new calling pattern: the documented model name remains deepseek-v4-flash, which now accesses the latest version. DeepSeek describes this as an API-only update, so V4 Pro and the models used in DeepSeek's App and Web products are outside this release.",
+      "The company's release materials concentrate on agent and coding work. DeepSeek reports higher scores than both V4 Flash Preview and V4 Pro Preview across nine listed benchmarks, including Terminal Bench 2.1, DeepSWE, Toolathlon-Verified, and Agents' Last Exam. The benchmark comparison shown above is supplied by DeepSeek, so it should be read as provider-reported evidence rather than an independent ranking.",
+      "That distinction matters. DeepSeek says its public code-agent tests used an upcoming DeepSeek Harness in a specified minimal-mode configuration, while DSBench-FullStack and DSBench-Hard are internal evaluation sets. Those details do not invalidate the reported gains, but they mean that a score table cannot substitute for a test on a team's own repositories, tools, latency requirements, and review process.",
+      "Artificial Analysis offers a separate measurement of the release. Its evaluation places V4 Flash 0731 at 50 on its Intelligence Index, a 10-point increase over the April V4 Flash release and six points ahead of V4 Pro on that index. It also reports a GDPval-AA v2 score of 1559, up from 1189 for the earlier Flash model. These figures use Artificial Analysis's own methodology and should remain separate from DeepSeek's published benchmark table, but both sources point to a material update aimed at agentic workloads.",
+      "Cost remains central to the Flash proposition. Artificial Analysis lists the 0731 release at $0.14 per million input tokens and $0.28 per million output tokens on DeepSeek's first-party API, with cache-hit input at $0.0028 per million tokens. It estimates a lower cost per task than GPT-5.6 Luna Max at comparable measured intelligence, while noting that cache behavior and provider pricing affect the comparison. A production team should treat that as a reason to test its own workload, not as a universal purchasing rule.",
+      "DeepSeek says V4 Flash 0731 keeps the same architecture and size as V4 Flash Preview, with the gains coming from further post-training. Artificial Analysis likewise lists the model with the same one-million-token context window and pricing as the earlier Flash release. For current API users, the important implication is that this is a performance update to an existing integration rather than a migration to a new model family or API surface.",
+      "There is also a developer-integration change, though it is not the main story of this release. DeepSeek now documents native Responses API support and a Codex integration path for V4 Flash. Developers who use that route should still validate the exact client configuration and task behavior before changing a production default.",
+      "The practical next step is simple: keep the deepseek-v4-flash model ID, run a representative coding or tool-use workflow, and compare task completion, retry rate, latency, cache-hit rate, and cost against the previous baseline. The announcement and independent measurements make the 0731 release worth evaluating; a controlled test determines whether it improves a particular system."
+    ],
+    sources: [
+      {
+        label: "DeepSeek API change log: V4 Flash update",
+        href: "https://api-docs.deepseek.com/updates/"
+      },
+      {
+        label: "Artificial Analysis: DeepSeek V4 Flash 0731 evaluation",
+        href: "https://x.com/artificialanlys/status/2083123180869496865?s=46"
+      },
+      {
+        label: "DeepSeek Codex integration guide",
+        href: "https://api-docs.deepseek.com/quick_start/agent_integrations/codex/"
+      }
+    ]
+  },
   {
     slug: "why-deepseek-v4-flash-is-cheap-moe-architecture",
     title:
