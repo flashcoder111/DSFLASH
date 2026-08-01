@@ -63,8 +63,8 @@ export default async function DeepSeekArticlePage({ params }: DeepSeekArticlePro
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <header className="article-header">
-        <div className="article-container">
+      <header className="article-header deepseek-article-header">
+        <div className="article-container deepseek-article-container">
           <Link className="eyebrow" href="/deepseek">DeepSeek desk</Link>
           <h1>{item.title}</h1>
           <p className="article-header__dek">{item.summary}</p>
@@ -73,7 +73,7 @@ export default async function DeepSeekArticlePage({ params }: DeepSeekArticlePro
           </p>
         </div>
       </header>
-      {articleImageSrc ? <div className="article-container article-hero-visual"><img className="article-hero-image" src={articleImageSrc} alt={articleImageAlt ?? ""} /></div> : null}
+      {articleImageSrc ? <figure className="article-container deepseek-article-container article-hero-visual deepseek-article-hero"><img className="article-hero-image" src={articleImageSrc} alt={articleImageAlt ?? ""} />{nativeItem?.imageCaption ? <figcaption>{nativeItem.imageCaption}</figcaption> : null}</figure> : null}
       <article className="article-container article-body">
         {migratedItem ? (
           <p className="article-body__origin">
@@ -81,6 +81,7 @@ export default async function DeepSeekArticlePage({ params }: DeepSeekArticlePro
           </p>
         ) : null}
         {item.body.map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}
+        {nativeItem?.sections?.map((section) => <section className="article-section" key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p key={paragraph.slice(0, 72)}>{paragraph}</p>)}</section>)}
         <section className="sources" aria-label="Article sources">
           <h2>Sources and publication record</h2>
           <p>Source material is linked for readers who want to verify the underlying announcement or documentation.</p>
