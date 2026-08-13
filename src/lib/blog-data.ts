@@ -129,12 +129,12 @@ export const topics: Topic[] = [
 export const models: Model[] = [
   {
     slug: "deepseek",
-    name: "DeepSeek R1 & V3",
+    name: "DeepSeek V4",
     organization: "DeepSeek",
     access: "Open Source",
-    description: "Open-weight reasoning and general-purpose model releases used widely for local and hosted inference.",
-    officialUrl: "https://github.com/deepseek-ai/DeepSeek-R1",
-    verifiedAt: "July 27, 2026",
+    description: "DeepSeek's open-weight V4 family and hosted API releases, including the current V4 Pro production build.",
+    officialUrl: "https://api-docs.deepseek.com/quick_start/pricing",
+    verifiedAt: "August 13, 2026",
     license: "MIT"
   },
   {
@@ -269,12 +269,12 @@ export const models: Model[] = [
   },
   {
     slug: "grok",
-    name: "Grok 4",
+    name: "Grok 4.6",
     organization: "xAI",
     access: "Closed Source",
-    description: "xAI’s proprietary frontier model family for reasoning, coding and real-time information tasks.",
-    officialUrl: "https://x.ai/grok",
-    verifiedAt: "July 27, 2026",
+    description: "xAI's proprietary frontier model for long-running agents, coding, knowledge work and interactive visual projects.",
+    officialUrl: "https://x.ai/news/grok-4-6",
+    verifiedAt: "August 13, 2026",
     license: "Proprietary API"
   },
   {
@@ -724,6 +724,60 @@ export const comparisons: Comparison[] = [
 ];
 
 export const articles: Article[] = [
+  {
+    slug: "grok-46-speed-as-a-model-selection-variable",
+    title: "Grok 4.6: Why Speed Has Become a Model-Selection Variable",
+    dek: "Grok 4.6 has a 500K context window, agent and coding features, and a lower frontier price. But its strongest pitch is simpler: a capable model is easier to use when it gets out of your way quickly.",
+    topic: "Closed-Source Models",
+    topicSlug: "closed-source-models",
+    date: "August 13, 2026",
+    updated: "August 13, 2026",
+    sourceCount: 3,
+    visual: "release",
+    imageSrc: "/images/articles/grok-4-6-official-launch.png",
+    imageAlt: "Official Grok 4.6 launch graphic from xAI.",
+    imageCaption: "Official Grok 4.6 launch graphic from xAI.",
+    modelSlugs: ["grok"],
+    body: [
+      "Grok 4.6 is xAI's latest hosted model. It arrived on August 12 with a familiar target list: long-running agents, coding, knowledge work and interactive projects. The docs list a 500,000-token context window, image and text input, text output, selectable reasoning effort, plus function calling, web search, X search and code execution.",
+      "It belongs in Closed-Source Models because you use it through xAI products and APIs; there is no V4.6 checkpoint to download. That classification is tidy. Choosing a model is not. A model can look great on a leaderboard and still be a drag to work with if every turn turns into a wait."
+    ],
+    sections: [
+      {
+        heading: "What is actually on the table",
+        paragraphs: [
+          "xAI says Grok 4.6 can stay with a task over many steps, from research and codebase work to iterative app building. It publishes agentic-coding and knowledge-work scores, but also says the comparison numbers are drawn from developers' public materials. Read the charts that way: they show how xAI positions the model, not a neutral final ranking.",
+          "The API starts at $2 per million input tokens and $6 per million output tokens. There is also a Fast variant at twice the price. More telling than the headline rate is the operational advice in the docs: set a prompt-cache key for multi-turn work and compact context in long agent loops. An agent that resends everything on every turn can make any price look worse."
+        ]
+      },
+      {
+        heading: "Speed is not a cosmetic metric",
+        paragraphs: [
+          "Most model comparisons reduce the choice to intelligence and price. That misses the feeling of sitting in front of an agent. A hands-on report published after this release describes moving day-to-day vibe coding to Grok Build and Grok 4.6 after several hours of use, while keeping other models for work where mistakes are expensive. That is one person's experience, not a latency study. Still, the point lands: the best answer in the world is less useful if it arrives after you have lost the thread.",
+          "Interactive agent work makes this painfully obvious. A slow, capable model can be perfect for an overnight run or a high-stakes review. It can be maddening when an engineer needs to see a result, redirect it and move on. Measure latency in the setup you intend to use, including tool calls, queues, retries and prompt size. A fast chat reply proves very little."
+        ]
+      },
+      {
+        heading: "Don't mix a launch promotion with production maths",
+        paragraphs: [
+          "Grok 4.6 is available in Grok Build, Cursor, xAI's API and some partner services. xAI is also offering double included usage in Grok Build and Cursor for the first week. That is a good reason to try it now. It is not a permanent token-price guarantee.",
+          "Keep subscription usage and API costs separate. If you are budgeting a production system, model the API. If you are buying an interactive coding plan, measure its actual limits after the promotion is gone. Blending a temporary allowance with someone else's API price is how model comparisons get silly."
+        ]
+      },
+      {
+        heading: "Give it a real job",
+        paragraphs: [
+          "Try it on a small feature with tests, a repository diagnosis, or a research-to-brief workflow. Track completion, how often a human has to step in, elapsed time, tool failures, cache behaviour and cost. Then run the same job through the model that owns it today. This is the only comparison that matters.",
+          "Grok 4.6 still has trade-offs. Every model does. But it makes speed hard to dismiss as a nice-to-have. If the real bottleneck is the dead time between agent turns, that may be the deciding feature."
+        ]
+      }
+    ],
+    sources: [
+      { label: "xAI: Introducing Grok 4.6", href: "https://x.ai/news/grok-4-6", type: "Official release" },
+      { label: "xAI: Grok 4.6 developer documentation", href: "https://docs.x.ai/developers/grok-4-6", type: "Documentation" },
+      { label: "Independent hands-on report (WeChat)", href: "https://mp.weixin.qq.com/s/JDYKMEbLYMSAUGnxut7C0g", type: "Reporting" }
+    ]
+  },
   {
     slug: "meta-muse-glimmer-kv-cache-local-agents",
     title: "Meta’s Muse Glimmer: A 30B Open Model Built for Local Agents",

@@ -232,6 +232,66 @@ export type NewsItem = {
 
 export const newsItems: NewsItem[] = [
   {
+    slug: "deepseek-v4-pro-0813-official-api-release",
+    title: "DeepSeek V4 Pro 0813 Is Official: Where the Flagship Now Fits",
+    date: "2026-08-13",
+    tag: "Official",
+    summary:
+      "DeepSeek-V4-Pro-0813 is now the build behind deepseek-v4-pro. It keeps the familiar API and pricing, but changes the question developers should ask: how much work can this route now take before it needs a more expensive fallback?",
+    imageSrc: "/images/deepseek-news/deepseek-v4-pro-0813-official-docs.jpeg",
+    imageAlt:
+      "Official DeepSeek API documentation social image, used with the DeepSeek V4 Pro 0813 release coverage.",
+    imageCaption:
+      "Official DeepSeek API documentation image. The current pricing table identifies DeepSeek-V4-Pro-0813 as the version served by the deepseek-v4-pro endpoint.",
+    body: [
+      "DeepSeek V4 Pro is out of preview, at least on the API side. The pricing page now says that deepseek-v4-pro serves DeepSeek-V4-Pro-0813. Nothing else about the integration has been turned upside down: the endpoint remains the same, both OpenAI- and Anthropic-style APIs are supported, and the documented context window is still one million tokens. Existing users do not have a migration job. They have a new build to test.",
+      "There is a catch. The official record is a documentation change, not a big technical report. We can verify the model version, the API surface, the limits and the prices. We cannot honestly fill in every blank about what changed in post-training, or pretend that a provider chart has settled the model's place in the market. It hasn't."
+    ],
+    sections: [
+      {
+        heading: "The bill is still the point",
+        paragraphs: [
+          "DeepSeek currently charges $0.435 per million cache-miss input tokens, $0.003625 for cache-hit input, and $0.87 for output. The cache number is the eyebrow-raiser. If an agent keeps sending the same system prompt, tool definitions and long-lived context, the price difference becomes real very quickly.",
+          "That makes V4 Pro more interesting as an escalation route than as a universal chat default. Give it long-context jobs, structured-output work, tool calls and agent loops. Don't spend frontier-model money on every intermediate turn if the cheaper route is good enough. DeepSeek has warned that API prices will rise, though it has not yet published the replacement table, so build budgets from the live page rather than today's launch-week maths."
+        ]
+      },
+      {
+        heading: "Where it belongs in a real stack",
+        paragraphs: [
+          "The useful read from the early hands-on report is not that V4 Pro beats every frontier model. It plainly does not claim that. The writer moved background automations and asynchronous agents to DeepSeek, while keeping the hardest work and anything that needed an immediate answer elsewhere. That division makes sense. A model can be cheap enough to run all night and still feel sluggish when someone is waiting for the next turn.",
+          "Test it on a job you already understand. Take a repository issue, a research pipeline or a batch transformation that has a known baseline. Compare completion, retries, tool failures, wall-clock time, cache hits and cost. Then decide. A benchmark chart is useful context; it cannot tell you whether your tool stack behaves well."
+        ]
+      },
+      {
+        heading: "Don't read more into the release than DeepSeek has published",
+        paragraphs: [
+          "DeepSeek said in July that Flash was a re-post-trained version of the preview model and that Pro would follow. Now it has. But the 0813 pricing entry is not a substitute for broad, independent evaluation. DeepSeek's own agent scores tell us how the company sees the release. They don't guarantee the same result in an unfamiliar repository or with a different agent harness.",
+          "Keep the boundaries clean, too. The hosted build is confirmed. A particular downloadable checkpoint, modality or deployment setup is a separate question and needs its own current source."
+        ]
+      },
+      {
+        heading: "The call",
+        paragraphs: [
+          "Use V4 Pro 0813 where its economics matter: high-volume background work, long prompts and agent runs that can take their time. Keep another model around for work where interactive speed or a different capability matters more. The interesting part of this release is not that it kills off every other model. It is that serious agent work just got cheaper again."
+        ]
+      }
+    ],
+    sources: [
+      {
+        label: "DeepSeek API pricing and model details",
+        href: "https://api-docs.deepseek.com/quick_start/pricing"
+      },
+      {
+        label: "DeepSeek V4 preview announcement",
+        href: "https://api-docs.deepseek.com/news/news260424"
+      },
+      {
+        label: "Independent hands-on report (WeChat)",
+        href: "https://mp.weixin.qq.com/s/JDYKMEbLYMSAUGnxut7C0g"
+      }
+    ]
+  },
+  {
     slug: "deepseek-v4-flash-0731-public-beta-benchmarks-cost",
     title: "DeepSeek V4 Flash Is Official: Stronger Agent Performance at the Same Price",
     date: "2026-07-31",
