@@ -232,6 +232,119 @@ export type NewsItem = {
 
 export const newsItems: NewsItem[] = [
   {
+    slug: "deepseek-v4-api-pricing-increase-0817",
+    title: "DeepSeek V4 API Pricing Changes August 17: New V4 Pro and Flash Rates",
+    date: "2026-08-13",
+    tag: "Official",
+    summary:
+      "DeepSeek has published a new V4 API rate card that takes effect at 00:00 Beijing time on August 17. The change introduces peak and off-peak pricing for V4 Flash and V4 Pro, making model routing, caching, and job timing more consequential for API teams.",
+    imageSrc: "/images/deepseek-news/deepseek-v4-api-pricing-0817.jpg",
+    imageAlt:
+      "DeepSeek V4 API pricing card showing new V4 Flash and V4 Pro rates by peak and off-peak period.",
+    imageCaption:
+      "DeepSeek's new V4 API rate card. Prices are listed in Chinese yuan per one million tokens and are scheduled to take effect at 00:00 Beijing time on August 17, 2026.",
+    body: [
+      "DeepSeek has published a new V4 API pricing card, with rates scheduled to change at 00:00 Beijing time on August 17, 2026. For developers searching DeepSeek price, DeepSeek pricing, or DeepSeek V4 Pro pricing, the important change is not a new model name. It is a new operating rule: V4 Flash and V4 Pro will both have separate peak and off-peak prices.",
+      "The rate card lists prices in Chinese yuan per one million tokens. V4 Flash is priced at ¥0.05 for cache-hit input, ¥1.50 for cache-miss input, and ¥4.50 for output in off-peak periods. At peak times, those rates become ¥0.10, ¥3.00, and ¥9.00. V4 Pro is listed at ¥0.15, ¥4.50, and ¥13.50 off-peak, rising to ¥0.30, ¥9.00, and ¥27.00 at peak times.",
+      "The stated peak windows are 09:00–12:00 and 14:00–18:00 Beijing time. All remaining hours are off-peak. That makes the timing of a request part of the cost calculation, particularly for teams running batch jobs, agent loops, evaluations, or long-context coding tasks."
+    ],
+    sections: [
+      {
+        heading: "The price increase is uneven, not universal",
+        paragraphs: [
+          "The new table makes three choices matter more than they did before: which V4 model handles the task, whether the request reuses cached context, and when the work runs. Cache-hit input remains dramatically cheaper than cache-miss input. That is a strong signal to keep stable system prompts, tool descriptions, repository rules, and long-lived context consistent instead of rebuilding them on every turn.",
+          "The peak multiplier is also clear. Every listed rate doubles during the two daytime windows. A latency-sensitive interactive product may have to absorb that. A queue for report generation, repository analysis, offline evaluation, or back-office automation does not. Those jobs can be scheduled around the off-peak clock."
+        ]
+      },
+      {
+        heading: "V4 Pro should be an escalation path",
+        paragraphs: [
+          "V4 Pro is still the route for the tasks where extra reasoning, long context, or a more capable coding agent is worth paying for. But a higher-output price makes a blanket Pro default harder to justify. Use Flash for classification, extraction, drafting, routine transformations, and lightweight agent steps; reserve Pro for planning, difficult debugging, final review, and tasks where a failed answer costs more than another model call.",
+          "That model split is not a downgrade. It is a practical routing policy. The cheapest high-quality workflow is usually a chain of smaller decisions, not a single expensive model assigned to every intermediate step."
+        ]
+      },
+      {
+        heading: "What API teams should change before August 17",
+        paragraphs: [
+          "First, inspect usage by model, hour, input cache status, and output length. A team that only sees a monthly total cannot tell whether it is paying for useful reasoning or repeated context. Second, move deferrable workloads into the off-peak window. Third, set output limits and stop conditions for agent runs so a looping task cannot turn a modest request into an expensive one.",
+          "Finally, treat the live pricing documentation as the billing authority. The announcement card gives the scheduled August 17 rates, while DeepSeek's pricing documentation remains the place to verify model availability, billing terms, and any subsequent revisions before changing production budgets."
+        ]
+      }
+    ],
+    sources: [
+      {
+        label: "DeepSeek API pricing documentation",
+        href: "https://api-docs.deepseek.com/quick_start/pricing/"
+      },
+      {
+        label: "DeepSeek API rate-limit documentation",
+        href: "https://api-docs.deepseek.com/quick_start/rate_limit/"
+      }
+    ]
+  },
+  {
+    slug: "deepseek-harness-github-npm-api-key-developer-preview",
+    title: "DeepSeek Harness Is Live: GitHub, npm Setup, API Keys, and What dsh Adds",
+    date: "2026-08-13",
+    tag: "Official",
+    summary:
+      "DeepSeek Harness is now available in developer preview. The open-source agent framework ships as dsh, starts from npm, and gives developers a plugin-based route to model configuration, workspace tools, delegated tasks, and Web UI workflows.",
+    imageSrc: "/images/deepseek-news/deepseek-harness-model-settings-official.png",
+    imageAlt:
+      "DeepSeek Harness Web UI model settings from the official project documentation.",
+    imageCaption:
+      "Official DeepSeek Harness Web UI documentation screenshot. The project documents this settings screen as the place to add a DeepSeek API key or configure another compatible provider.",
+    body: [
+      "DeepSeek Harness is now public in developer preview, and the first search wave is already highly practical: DeepSeek Harness GitHub, DeepSeek Harness npm, DeepSeek API key, and dsh. The official project answers those questions directly. DeepSeek Harness is an open-source agent harness developed by DeepSeek AI, and its command-line package is called dsh.",
+      "This is not another DeepSeek model. It is the layer that connects a model to a workspace, files, commands, a terminal, plans, delegated tasks, and an interface. The project's central claim is that everything is a plugin, an architecture powered by Cordis. In practical terms, that makes the default Web app one possible assembly of the system rather than the only product it can become.",
+      "The release is explicitly a developer preview. DeepSeek says the project is iterating quickly and that compatibility-breaking changes will happen. That matters: it is a reason to test the framework in a real repository, but not to pin a production workflow to an unversioned setup and assume the configuration will remain stable."
+    ],
+    sections: [
+      {
+        heading: "DeepSeek Harness GitHub and npm quick start",
+        paragraphs: [
+          "The official repository is github.com/deepseek-ai/deepseek-harness and is published under the MIT License. The quickest supported start is to install Node.js and run npx @deepseek-ai/dsh web. That command starts the Web UI at http://127.0.0.1:3080 by default. Developers who want to inspect or extend the project can clone the repository, install dependencies with pnpm, build it, and run pnpm dsh web from the checkout.",
+          "The Web UI uses the directory that launched dsh as its default filesystem location, but a new session still needs a selected workspace. That is a useful safety and usability boundary: starting the service does not silently hand an agent an arbitrary project directory."
+        ]
+      },
+      {
+        heading: "How to add a DeepSeek API key",
+        paragraphs: [
+          "In the documented Web flow, open Settings, choose Models, enter a DeepSeek API key, and save. The model becomes available without restarting the server. The same configuration guide also covers custom OpenAI-compatible providers, so the framework is not restricted to one model endpoint.",
+          "Keep credentials out of source control. Use the app's credential flow or environment-based configuration for local and automated work, and do not paste a live API key into cordis.yml, a repository README, or a screenshot. A framework that can read files and run commands deserves the same credential discipline as any other local development tool."
+        ]
+      },
+      {
+        heading: "What dsh adds beyond a chat window",
+        paragraphs: [
+          "Once a workspace and model are configured, DeepSeek Harness can read and edit files, execute commands, delegate work, and maintain a plan. The Web UI asks for approval when an operation requires it under the active permission policy. Those details are why the project is better understood as agent infrastructure than as a simple API client.",
+          "The useful first task is deliberately modest: ask the agent to summarize a repository and identify its main packages. From there, test it on a bounded issue with a clear acceptance check. Measure the result, retries, tool behavior, and review burden before handing it a broad codebase or a production credential."
+        ]
+      },
+      {
+        heading: "Why DeepSeek Harness matters now",
+        paragraphs: [
+          "DeepSeek V4 gives developers a model route for coding and agent work. Harness provides the surrounding operating model: tool access, task structure, permissions, and a configurable runtime. The combination is notable because teams that want a DeepSeek-backed agent no longer have to treat the agent loop as an opaque feature inside somebody else's application.",
+          "The immediate opportunity is experimentation, not a premature replacement claim. Start with the GitHub repository, run the npm command, configure a key in a disposable local workspace, and follow the project's release notes as its developer-preview interfaces settle."
+        ]
+      }
+    ],
+    sources: [
+      {
+        label: "DeepSeek Harness GitHub repository",
+        href: "https://github.com/deepseek-ai/deepseek-harness"
+      },
+      {
+        label: "DeepSeek Harness Web UI guide",
+        href: "https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/index.md"
+      },
+      {
+        label: "DeepSeek Harness architecture documentation",
+        href: "https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md"
+      }
+    ]
+  },
+  {
     slug: "deepseek-v4-pro-0813-official-api-release",
     title: "DeepSeek V4 Pro 0813 Is Official: Where the Flagship Now Fits",
     date: "2026-08-13",
