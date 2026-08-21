@@ -725,6 +725,130 @@ export const comparisons: Comparison[] = [
 
 export const articles: Article[] = [
   {
+    slug: "openai-codex-harness-open-source-platform",
+    title: "OpenAI Codex Harness Is Open Source: Build Agents Into Your Own App",
+    dek: "OpenAI's Codex platform post explains how the open-source harness, SDK and app-server let products keep their own interface, context, tools and approval rules.",
+    topic: "Codex",
+    topicSlug: "codex",
+    date: "August 20, 2026",
+    updated: "August 21, 2026",
+    sourceCount: 5,
+    visual: "context",
+    imageSrc: "/images/articles/openai-codex-harness-platform-announcement.png",
+    imageAlt: "OpenAI Developers post explaining that applications using the open-source Codex harness control their interface, context, tools and approvals while the harness handles the agent loop.",
+    imageCaption: "Screenshot supplied by the editorial team of an @OpenAIDevs post dated August 20, 2026, linking to OpenAI's Codex-as-a-platform announcement. The image illustrates the application's ownership of interface, context, tools and approvals.",
+    imageFramed: true,
+    modelSlugs: ["gpt"],
+    body: [
+      "OpenAI has published a clearer account of what its open-source Codex harness is for: putting an agent inside the software where work already happens. That may be a security console, an operations dashboard, a support tool or an internal application. The product keeps its interface, business context, tools and approvals. Codex runs the agent loop underneath.",
+      "This is not the first appearance of open-source Codex code. The openai/codex repository was created in 2025 and is Apache-2.0 licensed. What OpenAI's August 19 platform post does is frame the open layer as a reusable integration surface, then spell out which pieces developers can use when a generic chat window is the wrong interface for the job."
+    ],
+    sections: [
+      {
+        heading: "What the Codex harness does, and what remains separate",
+        paragraphs: [
+          "A model response is only one part of an agent. OpenAI describes the Codex harness as the execution system around it: it maintains conversation state, gathers relevant context, calls tools, streams activity, enforces configured sandbox and approval policies, recovers from failure and carries work into later turns. That is the layer an application can inspect and adapt.",
+          "The boundary matters. OpenAI says the open-source layer is the harness and its integration surface, while model access and managed services remain separate. Apache-2.0 does not mean every Codex surface, cloud service or model is being given away. It means the published components can be inspected, modified and used under that licence."
+        ]
+      },
+      {
+        heading: "Three ways to integrate Codex",
+        paragraphs: [
+          "OpenAI points to three practical entry points. codex exec is for bounded, noninteractive work such as a script, CI job or background task, and can return structured output. The official Codex SDK is for application code that needs to start, resume or stream tasks. Both fit cases where the agent is a capability rather than the entire product experience.",
+          "Codex app-server is the lower-level option for products that need the agent to feel native. Its documented client protocol lets an application connect to a local Codex process, maintain a conversation, receive streamed events, interrupt work, expose tools and respond to approval requests. That makes an approval button in an existing dashboard part of the agent workflow instead of a detour into a separate chat client.",
+          "It also means the host application has work to do. It must decide which records become context, which tools an agent can call, where it runs, what gets logged, and which actions need a person to approve. A reusable agent loop does not decide those business rules for you."
+        ]
+      },
+      {
+        heading: "The ARC-AGI-3 result is a harness result",
+        paragraphs: [
+          "OpenAI gives a sharp illustration of why this layer deserves attention. It says retained reasoning and context compaction raised GPT-5.6 Sol's ARC-AGI-3 score from 13.3% to 38.3%, while cutting output tokens by six times. Those are OpenAI-reported results, but the point is narrower than the headline: the model did not change. Two choices in how the agent retained and compressed context changed the outcome.",
+          "That does not make model choice irrelevant. It does make a good warning against judging an agent only by its model label. For long tasks, the context that survives, the tools available, the stopping rules and the approval path can be as important as the next model refresh."
+        ]
+      },
+      {
+        heading: "Relay shows the intended product pattern",
+        paragraphs: [
+          "OpenAI's Relay demo is a fictional shipment-operations application built on app-server. A user selects a delayed shipment and chooses Compare recovery. The application supplies the relevant shipment context; Codex can call application-owned MCP tools for current data; the resulting recommendation needs human approval before a rebooking changes a record. The dashboard then refreshes its own view.",
+          "That is a better mental model than a chatbot pasted over an existing product. The screen is not decoration. It tells the person what matters, scopes the agent's job and gives the business a place to review a proposed action. OpenAI also cites Cisco's App Builder in Cisco Cloud Control and a Thrive Holdings and Crete tax-preparation pilot that processed 7,000 returns and reduced preparation time by about a third. The latter figures are OpenAI's account of the pilot, not an independently audited study."
+        ]
+      },
+      {
+        heading: "Open source, with no need to invent a rivalry",
+        paragraphs: [
+          "As checked on August 21, the openai/codex repository had about 110,000 GitHub stars. DeepSeek Harness, a separate MIT-licensed project created on August 13, had about 179,000. Both numbers move constantly and say little on their own about production fit, security or maintenance.",
+          "It is tempting to turn their proximity into a story that one project forced the other's hand. The public materials reviewed here do not establish that. The concrete news is enough: OpenAI is telling developers that the Codex loop can live inside their own tools, while those tools retain the context and authority that make an agent useful."
+        ]
+      }
+    ],
+    sources: [
+      { label: "OpenAI Developers: Codex as a platform", href: "https://developers.openai.com/blog/codex-as-a-platform", type: "Official release" },
+      { label: "OpenAI Developers: Codex open-source components", href: "https://developers.openai.com/codex/open-source", type: "Documentation" },
+      { label: "OpenAI Developers: Codex app-server", href: "https://developers.openai.com/codex/app-server", type: "Documentation" },
+      { label: "openai/codex repository", href: "https://github.com/openai/codex", type: "Code repository" },
+      { label: "deepseek-ai/deepseek-harness repository", href: "https://github.com/deepseek-ai/deepseek-harness", type: "Code repository" }
+    ]
+  },
+  {
+    slug: "deepseek-v4-flash-vision-exp-multimodal-api",
+    title: "DeepSeek V4 Flash Vision Exp Is Live: Multimodal API, Benchmarks and Price",
+    dek: "DeepSeek's experimental V4 Flash Vision model adds image understanding to the API at V4 Flash pricing, with Chat Completions, Messages, Responses and Files API support.",
+    topic: "AI Agents",
+    topicSlug: "ai-agents",
+    date: "August 21, 2026",
+    updated: "August 21, 2026",
+    sourceCount: 4,
+    visual: "release",
+    imageSrc: "/images/articles/deepseek-v4-flash-vision-exp-api-pricing.png",
+    imageAlt: "DeepSeek API Docs table comparing DeepSeek V4 Flash Vision Exp with V4 Flash and V4 Pro, including API endpoints, context length, supported features, pricing and concurrency limits.",
+    imageCaption: "Screenshot supplied by the editorial team from the DeepSeek API Docs model-and-pricing table. It shows the experimental Vision model alongside V4 Flash and V4 Pro; see the linked official pricing page for the current table.",
+    imageFramed: true,
+    imageAspect: "portrait",
+    modelSlugs: ["deepseek"],
+    body: [
+      "DeepSeek has made DeepSeek-V4-Flash-Vision-Exp available on its API platform. The model is experimental, but it is live: set model='deepseek-v4-flash-vision-exp' to call it. The launch is an API release, so it should not be read as confirmation that the same model has arrived in DeepSeek's consumer app or web chat.",
+      "The change is straightforward but useful. V4 Flash was a text model; Vision Exp accepts images alongside text. DeepSeek's documentation describes image understanding for tasks such as reading screenshots, analysing charts and describing photographs. For an agent that already works from browser captures, tickets or visual test output, that removes one handoff to a separate vision model. Whether it improves a real workflow still depends on the images, tools and review loop around it."
+    ],
+    sections: [
+      {
+        heading: "What DeepSeek reports on the benchmarks",
+        paragraphs: [
+          "DeepSeek reports the following results for V4 Flash Vision Exp: Terminal Bench 2.1, 83.9; NL2Repo, 57.7; DeepSWE, 59.3; DSBench-Hard, 63.6; AutomationBench (Public), 25.7; ApexBench (Pass@1), 36.5; Agents' Last Exam, 27.3; Chartography, 64.3 at p0.95 and 63.3 at p1.0; and ZeroBench (Pass@5), 35.0.",
+          "Those are provider-reported results, not an independent ranking. DeepSeek says its family was tested on public benchmark Code Agent text tasks with DeepSeek Harness minimal mode, maximum effort, temperature 1.0 and top_p 0.95. It also says the text-only V4 Flash baseline ignores multimodal material in ApexBench and Agents' Last Exam. That matters when reading the visual-agent comparison.",
+          "DeepSeek says Vision Exp is on par with the official V4 Flash release on pure-text agent, reasoning and world-knowledge work. It also says the model makes a substantial gain over V4 Flash on benchmarks requiring visual understanding and comes close to Opus-4.8 in multimodal agent capability. Treat that last comparison as DeepSeek's interpretation of its benchmark results, not a general claim that the two models are interchangeable."
+        ]
+      },
+      {
+        heading: "How to call the multimodal API",
+        paragraphs: [
+          "The documented API model name is deepseek-v4-flash-vision-exp. DeepSeek supports image input through its OpenAI-compatible Chat Completions API, its Anthropic-compatible Messages API and its OpenAI-compatible Responses API. The same base URLs remain https://api.deepseek.com and https://api.deepseek.com/anthropic for the respective API families.",
+          "For Chat Completions, image input is sent in a user message as a content block rather than as a plain-string prompt. The Vision guide documents three paths: a base64 data URL, a public external URL, or an uploaded Files API file_id. The model accepts JPEG, PNG, GIF and WebP. Images in system or assistant messages are rejected, and other DeepSeek models reject image input.",
+          "Files API is useful when an agent needs the same image more than once or when inline payload limits get in the way. The official guide documents POST /files uploads and later file_id references. A file can be up to 64 MiB, while base64 or external-URL images are limited to 32 MiB. DeepSeek's documentation does not list a separate Files API upload price; image processing is billed through the model's input-token usage."
+        ]
+      },
+      {
+        heading: "Pricing and the practical constraint",
+        paragraphs: [
+          "The current official pricing table gives Vision Exp the same token rates as V4 Flash: $0.007 per million cached-input tokens, $0.22 per million uncached-input tokens and $0.66 per million output tokens off-peak; peak rates are double. The model also shares V4 Flash's listed 1M-token context window, 384K maximum output and 2,500 concurrency limit. Prices can change, so production estimates should use the live pricing page rather than this article alone.",
+          "Images are converted to input tokens and billed with the text. DeepSeek says each image is resized before inference and consumes at most 384 tokens. Large images therefore do not keep increasing token cost indefinitely, although the API still imposes request-size, image-count and dimension limits. That makes the model easier to test with screenshots and UI assets, but it does not make visual-agent work free of payload and latency trade-offs."
+        ]
+      },
+      {
+        heading: "DeepSeek Harness support is already available",
+        paragraphs: [
+          "DeepSeek Harness v0.1.1-rc.1 adds DeepSeek-V4-Flash-Vision-Exp to the DeepSeek adapter, according to the project's official GitHub release notes. Users who want that adapter route should use v0.1.1-rc.1 or a later compatible release. Harness remains a developer preview, and its release notes warn that compatibility-breaking changes are possible.",
+          "The interesting question is not whether a benchmark chart makes a model multimodal. It is whether an agent can actually use visual context to finish a job: inspect a failed UI test, read a chart, trace a screenshot back to the right component, then leave a reviewable change. Vision Exp gives DeepSeek developers a native API option for that experiment. The sensible next step is a small evaluation on the images and tool loop your team already uses."
+        ]
+      }
+    ],
+    sources: [
+      { label: "DeepSeek API Docs: V4 Flash Vision Exp release", href: "https://api-docs.deepseek.com/updates/#deepseek-v4-flash-vision-exp-release", type: "Official release" },
+      { label: "DeepSeek API Docs: Vision guide", href: "https://api-docs.deepseek.com/guides/vision/", type: "Documentation" },
+      { label: "DeepSeek API Docs: Models & Pricing", href: "https://api-docs.deepseek.com/quick_start/pricing/", type: "Documentation" },
+      { label: "DeepSeek Harness v0.1.1-rc.1 release", href: "https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.1-rc.1", type: "Code repository" }
+    ]
+  },
+  {
     slug: "grok-46-speed-as-a-model-selection-variable",
     title: "Grok 4.6: Why Speed Has Become a Model-Selection Variable",
     dek: "Grok 4.6 has a 500K context window, agent and coding features, and a lower frontier price. But its strongest pitch is simpler: a capable model is easier to use when it gets out of your way quickly.",
