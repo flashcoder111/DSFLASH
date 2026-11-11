@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     q: "Does this site sell API keys or model access?",
-    a: "No. DSFlashHub is an independent information site — we publish pricing, guides, and comparisons with links to official sources, and we are not affiliated with DeepSeek, OpenAI, Anthropic, Google, xAI, or the OpenClaw project."
+    a: "DSFlashHub publishes independent information and may offer digital model access or API credentials. Check the product description and checkout for availability, access terms, and the seller. We are not affiliated with DeepSeek, OpenAI, Anthropic, Google, xAI, or the OpenClaw project."
   }
 ];
 
