@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <PolicyPage eyebrow="Contact" title="Get in touch with the editorial team." lead="For editorial corrections, rights enquiries or general questions about this publication, email hello@deepseekflash.com.">
+  return <PolicyPage eyebrow="Contact" title="Get in touch with the editorial team." lead="For editorial corrections, rights enquiries or general questions about this publication, email hello@deepseekv4flash.com.">
     <h2>Email</h2>
-    <p><a href="mailto:hello@deepseekflash.com">hello@deepseekflash.com</a></p>
+    <p><a href="mailto:hello@deepseekv4flash.com">hello@deepseekv4flash.com</a></p>
     <h2>Corrections and source updates</h2>
     <p>Please include the page URL, the specific statement you are querying and a link to the primary source. We review substantiated correction requests and update material inaccuracies as appropriate.</p>
     <h2>Rights and product enquiries</h2>

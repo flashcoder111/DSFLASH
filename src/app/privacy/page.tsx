@@ -14,6 +14,6 @@ export default function PrivacyPage() {
     <h2>External links</h2>
     <p>Links to third-party sites are governed by the privacy practices of those sites. Please review their policies before providing information or purchasing a product.</p>
     <h2>Contact</h2>
-    <p>For privacy questions, email <a href="mailto:hello@deepseekflash.com">hello@deepseekflash.com</a>.</p>
+    <p>For privacy questions, email <a href="mailto:hello@deepseekv4flash.com">hello@deepseekv4flash.com</a>.</p>
   </PolicyPage>;
 }

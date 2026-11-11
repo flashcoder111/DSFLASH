@@ -42,7 +42,7 @@ export default function SiteFrame({ children }: Readonly<{ children: React.React
             <p className="footer-heading">{siteConfig.name}</p>
             <p className="footer-copy">Independent reporting and practical research for the open-model ecosystem. Every article keeps its sources close to the claim.</p>
             <p className="footer-copy footer-copy--contact">
-              Editorial, corrections &amp; rights enquiries: <a href="mailto:hello@deepseekflash.com">hello@deepseekflash.com</a>
+              Editorial, corrections &amp; rights enquiries: <a href="mailto:hello@deepseekv4flash.com">hello@deepseekv4flash.com</a>
             </p>
             <p className="footer-copy footer-copy--small">© 2026 Open Source Model Blog</p>
           </section>

@@ -14,6 +14,6 @@ export default function EditorialPolicyPage() {
     <h2>Images and excerpts</h2>
     <p>We use original diagrams, assets we have permission to use, or official assets under their stated terms. We do not treat an image being publicly visible on social media, a forum or another publication as permission to reuse it.</p>
     <h2>Contact</h2>
-    <p>To report an error or ask a sourcing question, email <a href="mailto:hello@deepseekflash.com">hello@deepseekflash.com</a> with the page URL and supporting source.</p>
+    <p>To report an error or ask a sourcing question, email <a href="mailto:hello@deepseekv4flash.com">hello@deepseekv4flash.com</a> with the page URL and supporting source.</p>
   </PolicyPage>;
 }

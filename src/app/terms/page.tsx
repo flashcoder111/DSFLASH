@@ -14,6 +14,6 @@ export default function TermsPage() {
     <h2>Changes to this site</h2>
     <p>We may update, correct, remove or reorganize content and these terms as the site changes. The date above indicates the most recent policy revision.</p>
     <h2>Contact</h2>
-    <p>Questions about these terms can be sent to <a href="mailto:hello@deepseekflash.com">hello@deepseekflash.com</a>.</p>
+    <p>Questions about these terms can be sent to <a href="mailto:hello@deepseekv4flash.com">hello@deepseekv4flash.com</a>.</p>
   </PolicyPage>;
 }

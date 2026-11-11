@@ -16,6 +16,6 @@ export default function AboutPage() {
     <h2>How we work</h2>
     <p>We start with primary materials such as official announcements, documentation, model cards, repositories and papers. Third-party evaluations and reporting are identified as such. Community discussion may suggest a topic, but it is not presented as independently verified reporting without supporting evidence.</p>
     <h2>Corrections and contact</h2>
-    <p>For a factual correction, rights question or general editorial enquiry, email <a href="mailto:hello@deepseekflash.com">hello@deepseekflash.com</a>. Please include the relevant page URL and source material where possible.</p>
+    <p>For a factual correction, rights question or general editorial enquiry, email <a href="mailto:hello@deepseekv4flash.com">hello@deepseekv4flash.com</a>. Please include the relevant page URL and source material where possible.</p>
   </PolicyPage>;
 }
