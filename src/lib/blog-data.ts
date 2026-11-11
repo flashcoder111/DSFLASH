@@ -1,3 +1,5 @@
+import { novemberArticles } from "./november-articles";
+
 export const siteConfig = {
   name: "Open Source Model Blog",
   title: "Open models, clearly sourced",
@@ -31,6 +33,9 @@ export type Article = {
   imageCaption?: string;
   imageFramed?: boolean;
   imageAspect?: "landscape" | "portrait";
+  secondaryImageSrc?: string;
+  secondaryImageAlt?: string;
+  sourcesAsText?: boolean;
 };
 
 export type Topic = {
@@ -724,6 +729,7 @@ export const comparisons: Comparison[] = [
 ];
 
 export const articles: Article[] = [
+  ...novemberArticles,
   {
     slug: "openai-codex-harness-open-source-platform",
     title: "OpenAI Codex Harness Is Open Source: Build Agents Into Your Own App",

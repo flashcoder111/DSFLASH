@@ -36,6 +36,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </figure> : <div className={heroClassName}><ArticleVisual variant={article.visual} label="Editorial research" /></div>}
       <article className="article-body">
         {article.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        {article.secondaryImageSrc ? <figure className="article-hero-visual"><img className="article-hero-image" src={article.secondaryImageSrc} alt={article.secondaryImageAlt ?? ""} /><figcaption>DSFlashHub editorial illustration.</figcaption></figure> : null}
         {article.sections?.map((section) => <section className="article-section" key={section.heading}>
           <h2>{section.heading}</h2>
           {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -43,8 +44,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </article>
       <section className="sources">
         <h2>Sources</h2>
-        <p>These are the materials reviewed for the factual claims on this page. Links open the original source.</p>
-        <ul>{article.sources.map((source) => <li key={source.href}><a href={source.href} target="_blank" rel="noreferrer">{source.label}</a><span>{source.type}</span></li>)}</ul>
+        <p>{article.sourcesAsText ? "These are the materials reviewed for the factual claims on this page." : "These are the materials reviewed for the factual claims on this page. Links open the original source."}</p>
+        <ul>{article.sources.map((source) => <li key={source.href}>{article.sourcesAsText ? source.label : <a href={source.href} target="_blank" rel="noreferrer">{source.label}</a>}<span>{source.type}</span></li>)}</ul>
       </section>
       {related.length > 0 && <section className="notes"><h2>Related reading</h2><div className="article-list">{related.map((item) => <ArticleListItem article={item} key={item.slug} />)}</div></section>}
     </div>
