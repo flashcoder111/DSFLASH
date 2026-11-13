@@ -92,3 +92,14 @@ button, input, textarea, select { font: inherit; }
 @media (max-width: 600px) { .site-header__inner { min-height: 64px; gap: 15px; padding: 16px 0; }.wordmark { font-size: 12px; }.primary-nav { justify-content: flex-start; flex-wrap: wrap; gap: 10px 18px; font-size: 13px; }.home-intro, .page-intro { padding-top: 60px; }.home-intro h1 { font-size: 48px; }.home-intro__copy, .page-intro p:not(.eyebrow) { font-size: 16px; }.topic-row { gap: 10px 16px; }.topic-row a::after { padding-left: 16px; }.featured__content { padding: 30px 24px 34px; }.featured h2 { font-size: 31px; }.article-grid, .directory-grid { grid-template-columns: 1fr; }.section-heading { align-items: start; flex-direction: column; gap: 11px; margin-top: 58px; }.note-row { grid-template-columns: 1fr; gap: 7px; }.article-list-item { grid-template-columns: 1fr; gap: 16px; padding: 25px 0; }.article-list-item__meta { grid-template-columns: auto auto; justify-content: start; gap: 15px; }.article-list-item h2 { font-size: 24px; }.article-header { padding-top: 60px; }.article-header h1 { font-size: 40px; }.article-header__dek { font-size: 17px; }.article-body p { font-size: 17px; }.site-footer__grid { grid-template-columns: 1fr; gap: 30px; padding: 42px 0; }.site-footer__grid > section:first-child { grid-column: auto; }.facts { grid-template-columns: 1fr; } }
 
 @media (max-width: 600px) { .radar-toolbar, .topic-toolbar { align-items: start; flex-direction: column; gap: 14px; }.radar-sort { flex-wrap: wrap; white-space: normal; }.radar-item__meta { grid-template-columns: 1fr; gap: 8px; } }
+
+.deepseek-topics { padding: 0 0 48px; }
+.deepseek-topics h2, .deepseek-archive > h2 { margin: 0 0 18px; font-size: 27px; letter-spacing: -.03em; }
+.deepseek-topics__links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.deepseek-topics__links h3 { margin: 0; font-size: 17px; }
+.deepseek-topics__links p { margin: 9px 0 14px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.deepseek-topics__links a, .deepseek-topics__all { color: var(--blue); font-size: 14px; font-weight: 650; line-height: 1.5; text-decoration: underline; text-underline-offset: 3px; }
+.deepseek-topics__links span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; }
+.deepseek-topics__all { display: inline-block; margin-top: 19px; }
+.deepseek-archive > p { max-width: 70ch; margin: 0 0 24px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+@media (max-width: 600px) { .deepseek-topics__links { grid-template-columns: 1fr; gap: 24px; }.deepseek-topics { padding-bottom: 44px; } }

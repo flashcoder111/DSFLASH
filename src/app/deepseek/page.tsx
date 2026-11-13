@@ -4,9 +4,9 @@ import { importedDeepSeekNews } from "@/lib/deepseek-imported-news";
 import { newsItems } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "DeepSeek News, Guides & Updates",
+  title: "DeepSeek News & Developer Updates",
   description:
-    "Independent DeepSeek coverage: model releases, API changes, pricing, developer guides and ecosystem updates, ordered by date.",
+    "Explore dated DeepSeek coverage of model releases, API and pricing announcements, and developer tools.",
   alternates: { canonical: "/deepseek" }
 };
 
@@ -14,23 +14,45 @@ export default function DeepSeekPage() {
   const updates = [...newsItems, ...importedDeepSeekNews].sort(
     (left, right) => Date.parse(right.date) - Date.parse(left.date)
   );
+  const topics = [
+    { title: "Model releases", slug: "deepseek-v4-pro-0813-official-api-release", description: "Release reports and model announcements." },
+    { title: "API & pricing", slug: "deepseek-v4-api-pricing-increase-0817", description: "Dated API and pricing announcements." },
+    { title: "Developer tools", slug: "deepseek-harness-github-npm-api-key-developer-preview", description: "Developer tools and integration coverage." }
+  ];
 
   return (
     <div className="page-container">
       <header className="page-intro">
         <p className="eyebrow">DeepSeek desk</p>
-        <h1>DeepSeek news, guides and practical updates.</h1>
+        <h1>DeepSeek news and developer updates.</h1>
         <p>
-          A date-ordered index of DeepSeek coverage across releases, API
-          changes, pricing, local deployment and the surrounding developer
-          ecosystem. This archive now includes {updates.length} articles,
-          including a migrated editorial collection from our sister site,
-          deepseekv4pro.com. Each entry preserves its original publication
-          link and primary source.
+          Explore our coverage of DeepSeek model releases, API changes,
+          pricing announcements and developer tools. Articles are dated;
+          older reports may not reflect current availability or prices.
         </p>
       </header>
 
-      <section className="article-list" aria-label="DeepSeek news">
+      <nav className="deepseek-topics" aria-label="Explore DeepSeek coverage">
+        <h2>Explore the coverage</h2>
+        <div className="deepseek-topics__links">
+          {topics.map((topic) => {
+            const article = updates.find((item) => item.slug === topic.slug);
+            if (!article) return null;
+            return <div key={topic.slug}>
+              <h3>{topic.title}</h3>
+              <p>{topic.description}</p>
+              <Link href={`/deepseek/${article.slug}`}>{article.title}</Link>
+              <span>{new Date(`${article.date}T00:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}</span>
+            </div>;
+          })}
+        </div>
+        <a className="deepseek-topics__all" href="#all-updates">Browse all {updates.length} updates ↓</a>
+      </nav>
+
+      <section className="deepseek-archive" id="all-updates" aria-labelledby="all-updates-heading">
+        <h2 id="all-updates-heading">All updates</h2>
+        <p>Listed by publication date. The archive includes articles migrated from our related publication, DeepSeek V4 Pro, with their original publication links preserved.</p>
+      <div className="article-list">
         {updates.map((item) => (
           <article className="article-list-item" key={item.slug}>
             <div>
@@ -46,6 +68,7 @@ export default function DeepSeekPage() {
             </div>
           </article>
         ))}
+      </div>
       </section>
     </div>
   );
