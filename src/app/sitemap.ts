@@ -17,7 +17,7 @@ function sitemapDate(value: string): string | undefined {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/china-models", "/global-models", "/github-radar", "/topics", "/models", "/compare", "/deepseek", "/about", "/plans", "/editorial-policy", "/privacy", "/terms"];
+  const staticRoutes = ["", "/china-models", "/global-models", "/github-radar", "/topics", "/models", "/compare", "/deepseek", "/about", "/contact", "/plans", "/editorial-policy", "/privacy", "/terms"];
   return [
     ...staticRoutes.map((route) => ({ url: `${siteConfig.url}${route}` })),
     ...topics.map((topic) => ({ url: `${siteConfig.url}/topics/${topic.slug}` })),
