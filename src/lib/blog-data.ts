@@ -668,9 +668,9 @@ export const comparisons: Comparison[] = [
     dek: "A source-led comparison of the project-context, tool and verification patterns each product documents for software work.",
     date: "July 27, 2026",
     body: [
-      "Both products can work with code, tools and project context. The decision should begin with the engineering surface your team already trusts: where durable instructions live, how tools are constrained, how work is delegated and how a patch is verified before it lands.",
-      "Codex documents project guidance, reusable skills and live integrations as separate layers. Claude Code documents project instructions, skills, MCP and subagents as complementary extensions around an agentic tool loop. Neither set of documents supports treating autonomous code changes as a substitute for review.",
-      "Run a controlled trial on one real issue. Give each system the same acceptance criteria, constrain its write scope, require a test command and assess the resulting review burden. The useful answer is the workflow that gives your team the clearest evidence when a change is correct—and the fastest path back when it is not."
+      "Claude Code and Codex can both work with code and project context, but neither is a single fixed model or an identical deployment. Choose a specific interface, model and permission configuration before evaluating the workflow.",
+      "Codex documents project guidance and reusable skills. Claude Code documents project instructions, skills, MCP, hooks and subagents. Compare the exact features available in your chosen versions and environment; similar names do not establish identical behavior.",
+      "A useful decision depends on how well a tool works inside your review process. Give both products the same acceptance criteria, limit their access and review the patch and tests. This article provides a comparison method, not results from a completed head-to-head experiment."
     ],
     rows: [
       { dimension: "Durable project context", left: "AGENTS.md and project-level customization can hold repository guidance and reusable workflows.", right: "Project instructions and memory files can preserve repository conventions across sessions.", note: "Keep durable rules separate from one-off task prompts." },
@@ -690,9 +690,9 @@ export const comparisons: Comparison[] = [
     dek: "Two open personal-agent approaches that make different choices about messaging, memory and long-running work.",
     date: "July 26, 2026",
     body: [
-      "OpenClaw and Hermes both aim to make an agent available beyond a single chat session. Their documented designs place emphasis in different areas: OpenClaw centres a self-hosted gateway and agent workspace contract, while Hermes foregrounds persistent memory, self-improving skills and isolated subagents.",
-      "That makes the security question concrete. A multi-channel gateway needs careful sender pairing, allowlists and workspace isolation. A learning-oriented personal workspace needs a clear memory policy, reset path and human review of the skills it retains. In either case, more autonomy increases the importance of a narrow initial deployment.",
-      "Choose by operational fit. If channel routing and controlled workspaces are the initial problem, evaluate the gateway boundary first. If repeated personal workflows and accumulated procedural knowledge are the goal, test memory and skill governance first. Do not broaden tool access until you can explain the failure and recovery path."
+      "OpenClaw and Hermes both support agent workflows that can continue beyond one chat. Their actual behavior depends on the installed version, chosen model, messaging integration and operator configuration; neither name describes one fixed deployment.",
+      "OpenClaw documents a gateway and per-agent workspaces. Hermes documents messaging, persistent memory and toolsets. Both involve channel and state management, so the decision is not simply one product with messaging versus another with memory.",
+      "Assess operational fit by mapping authorized senders, stored state, credentials, tool permissions and recovery. Begin with one restricted task and expand only after the owner can inspect outcomes and revoke access. The trial below is a suggested procedure, not a completed security test."
     ],
     rows: [
       { dimension: "Primary system shape", left: "Self-hosted gateway connecting channels, sessions and agent workspaces.", right: "Persistent personal agent with memory, skills and isolated subagents.", note: "Both require an explicit owner for identity and access policy." },
@@ -712,9 +712,9 @@ export const comparisons: Comparison[] = [
     dek: "A deployment-oriented comparison for teams choosing an open-model serving layer, without reducing the decision to a single throughput chart.",
     date: "July 22, 2026",
     body: [
-      "vLLM and SGLang are both high-performance serving projects, but the practical choice depends on the workload you intend to operate. A simple chat endpoint, a high-concurrency retrieval pipeline and an agent with structured multi-step generation can stress different parts of a serving stack.",
-      "The projects’ own descriptions make a sensible starting point: vLLM focuses on high-throughput, memory-efficient model serving, while SGLang positions itself as a serving framework for language and multimodal models. Those claims are not a substitute for a production test on your model, hardware, context length and traffic shape.",
-      "Benchmark the whole request path. Include tokenization, queueing, caching, tool-call patterns, observability and failure recovery—not merely generated tokens per second. The correct choice is the one your team can run, instrument and update reliably after the first benchmark chart has stopped being interesting."
+      "vLLM and SGLang serve AI models, but the practical choice depends on the specific model, hardware and request mix. A simple chat endpoint, high-concurrency retrieval pipeline and agent with structured multi-step generation can stress different parts of a serving stack.",
+      "Both projects document OpenAI-compatible interfaces and caching capabilities. Those descriptions do not establish identical endpoint behavior, model support or performance in a particular release. Check the features your application needs against the versions and accelerator you plan to use.",
+      "Benchmark the full request path, including tokenization, queueing, cache policy, observability and recovery. A repeatable procedure follows below; this article does not claim a winner because it does not contain a controlled performance experiment."
     ],
     rows: [
       { dimension: "Documented focus", left: "High-throughput and memory-efficient serving for LLMs.", right: "High-performance serving for language and multimodal models.", note: "Read project documentation for the current supported models and deployment modes." },

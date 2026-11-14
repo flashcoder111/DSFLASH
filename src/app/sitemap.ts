@@ -18,11 +18,13 @@ function sitemapDate(value: string): string | undefined {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/china-models", "/global-models", "/github-radar", "/topics", "/models", "/compare", "/deepseek", "/about", "/contact", "/plans", "/editorial-policy", "/privacy", "/terms"];
+  const revisedComparisons = ["/flash-vs-pro", "/compare/deepseek-v4-flash-vs-claude", "/compare/deepseek-v4-flash-vs-gpt-5-4"];
   return [
     ...staticRoutes.map((route) => ({ url: `${siteConfig.url}${route}` })),
     ...topics.map((topic) => ({ url: `${siteConfig.url}/topics/${topic.slug}` })),
     ...models.map((model) => ({ url: `${siteConfig.url}/models/${model.slug}` })),
-    ...comparisons.map((comparison) => ({ url: `${siteConfig.url}/compare/${comparison.slug}`, lastModified: sitemapDate(comparison.date) })),
+    ...revisedComparisons.map((route) => ({ url: `${siteConfig.url}${route}`, lastModified: "2026-11-14" })),
+    ...comparisons.map((comparison) => ({ url: `${siteConfig.url}/compare/${comparison.slug}`, lastModified: "2026-11-14" })),
     ...articles.map((article) => ({ url: `${siteConfig.url}/articles/${article.slug}`, lastModified: sitemapDate(article.updated) })),
     ...[...newsItems, ...importedDeepSeekNews].map((item) => ({ url: `${siteConfig.url}/deepseek/${item.slug}`, lastModified: sitemapDate(item.date) }))
   ];

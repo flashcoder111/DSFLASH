@@ -103,3 +103,34 @@ button, input, textarea, select { font: inherit; }
 .deepseek-topics__all { display: inline-block; margin-top: 19px; }
 .deepseek-archive > p { max-width: 70ch; margin: 0 0 24px; color: var(--muted); font-size: 14px; line-height: 1.6; }
 @media (max-width: 600px) { .deepseek-topics__links { grid-template-columns: 1fr; gap: 24px; }.deepseek-topics { padding-bottom: 44px; } }
+
+.comparison-directory { margin-bottom: 64px; }
+.comparison-directory > h2 { margin: 0 0 12px; font-size: 28px; letter-spacing: -.03em; }
+.comparison-directory > p { max-width: 70ch; margin: 0 0 24px; color: var(--muted); line-height: 1.6; }
+.comparison-directory .article-list-item h3 { margin: 11px 0 0; font-size: 27px; line-height: 1.1; letter-spacing: -.04em; }
+.comparison-directory .article-list-item h3 a:hover { color: var(--blue); }
+@media (max-width: 600px) { .comparison-directory .article-list-item h3 { font-size: 24px; } }
+
+.compare-jump { display: flex; flex-wrap: wrap; gap: 14px 26px; margin-top: 26px; }
+.compare-jump a { color: var(--blue); font-size: 14px; font-weight: 650; text-decoration: underline; text-underline-offset: 4px; }
+.comparison-method { max-width: 70ch; margin: 0 0 80px; }
+.comparison-method h2 { margin: 0 0 16px; font-size: 28px; letter-spacing: -.03em; }
+.comparison-method p { color: var(--muted); font-size: 16px; line-height: 1.65; }
+.comparison-navigation { width: min(900px, calc(100% - 48px)); margin: 45px auto 80px; padding-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; border-top: 1px solid var(--line); }
+.comparison-navigation a { display: grid; gap: 8px; color: var(--ink); line-height: 1.4; }
+.comparison-navigation a span, .comparison-navigation__end { color: var(--muted); font-size: 13px; }
+.comparison-navigation a strong { font-size: 16px; }
+.comparison-navigation a:hover strong { color: var(--blue); }
+.comparison-navigation > div:last-child { text-align: right; }
+@media (max-width: 600px) { .comparison-navigation { width: calc(100% - 32px); grid-template-columns: 1fr; gap: 20px; }.comparison-navigation > div:last-child { text-align: left; } }
+.comparison-review-guide { width: min(720px, calc(100% - 32px)); margin: 42px auto 64px; }
+.comparison-review-guide__date { color: var(--muted); font-size: 13px; font-weight: 650; }
+.comparison-review-guide section { margin-top: 36px; }
+.comparison-review-guide h2 { margin: 0 0 14px; font-size: 26px; line-height: 1.2; letter-spacing: -.03em; }
+.comparison-review-guide section p { color: var(--muted); font-size: 16px; line-height: 1.7; }
+.comparison-feature__back { color: var(--blue); font-size: 14px; font-weight: 650; text-decoration: underline; text-underline-offset: 3px; }
+.comparison-feature__section { margin: 42px 0; }
+.comparison-feature__section h2 { margin: 0 0 18px; font-size: 28px; line-height: 1.2; letter-spacing: -.03em; }
+.comparison-feature__section p, .comparison-feature__section li { color: var(--muted); font-size: 17px; line-height: 1.7; }
+.comparison-feature__section li { margin-bottom: 8px; }
+.comparison-feature__section .comparison-table-wrap { margin: 24px 0; }

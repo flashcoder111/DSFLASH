@@ -1,117 +1,58 @@
 import type { Metadata } from "next";
-import { ArrowDownRight, Scale } from "lucide-react";
-import SectionHeading from "@/components/SectionHeading";
-import { formatUsd, pricingModels } from "@/lib/site-data";
+import Link from "next/link";
+import ComparisonNavigation from "@/components/ComparisonNavigation";
 
 export const metadata: Metadata = {
-  title: "DeepSeek V4 Flash vs Pro: When Is 12× Worth It?",
-  description:
-    "Flash outputs at $0.28/M, Pro at $3.48/M — a 12× gap. Task-by-task routing rules and the escalation triggers that tell you when Pro earns its premium.",
-  alternates: {
-    canonical: "/flash-vs-pro"
-  }
+  title: "DeepSeek Flash vs Pro: Model Changes and API Costs",
+  description: "Compare DeepSeek's current Flash and V4 Pro API routes, peak and off-peak prices, capabilities and an example cost calculation.",
+  alternates: { canonical: "/flash-vs-pro" }
 };
 
 const rows = [
-  {
-    label: "Primary role",
-    flash: "Default production and OpenClaw route",
-    pro: "Escalation route for hard reasoning"
-  },
-  {
-    label: "Best traffic",
-    flash: "Routine agent turns, summaries, retrieval, batch code explanation",
-    pro: "Complex debugging, high-value review, long reasoning tasks"
-  },
-  {
-    label: "Cost per 1M output",
-    flash: "$0.28",
-    pro: "$3.48 (12× Flash)"
-  },
-  {
-    label: "Risk",
-    flash: "May need escalation on ambiguous or high-stakes tasks",
-    pro: "Can inflate cost if used as the default model"
-  }
+  ["API model name", "deepseek-flash", "deepseek-v4-pro"],
+  ["Model version", "V4.1 Flash 1017", "V4 Pro 0813"],
+  ["Context / maximum output", "1M / 384K tokens", "1M / 384K tokens"],
+  ["Vision input", "Supported", "Not supported"],
+  ["Input, cache miss · off-peak / peak", "$0.15 / $0.30", "$0.66 / $1.32"],
+  ["Input, cache hit · off-peak / peak", "$0.003 / $0.006", "$0.022 / $0.044"],
+  ["Output · off-peak / peak", "$0.60 / $1.20", "$1.98 / $3.96"]
 ];
 
 export default function FlashVsProPage() {
-  const flash = pricingModels.find((model) => model.model === "V4 Flash")!;
-  const pro = pricingModels.find((model) => model.model === "V4 Pro")!;
+  return <article className="article-container comparison-feature">
+    <header className="article-header">
+      <Link href="/compare" className="comparison-feature__back">All comparisons</Link>
+      <h1>DeepSeek Flash vs Pro: model changes and API costs</h1>
+      <p className="article-header__dek">The original V4 Flash has been retired. For a current API comparison, DeepSeek lists V4.1 Flash 1017 under <code>deepseek-flash</code> and V4 Pro 0813 under <code>deepseek-v4-pro</code>. Flash supports vision input; the listed Pro route does not. Choose based on your tasks and actual costs, not price alone.</p>
+      <p className="article-header__meta">Provider documentation checked November 14, 2026 · No independent performance test</p>
+    </header>
 
-  return (
-    <>
-      <section className="market-grid border-b border-white/10 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <p className="inline-flex items-center gap-2 rounded-lg border border-cyan-300/30 bg-cyan-300/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.14em] text-cyan-100">
-            <Scale className="h-4 w-4" />
-            Routing comparison
-          </p>
-          <h1 className="mt-6 max-w-4xl text-4xl font-semibold text-white sm:text-6xl">
-            DeepSeek V4 Flash vs Pro: when is 12× the price worth it?
-          </h1>
-          <p className="mt-5 max-w-3xl text-base leading-8 text-slate-400">
-            Same generation, same 1M context, a 12× gap in output price. The
-            short answer: Flash for volume, Pro for judgment. The longer
-            answer is a routing rule — run everything on Flash by default and
-            escalate to Pro on defined triggers, not vibes.
-          </p>
-        </div>
-      </section>
+    <section className="comparison-feature__section">
+      <h2>Which models does this page compare?</h2>
+      <p>This page previously compared the older V4 Flash with V4 Pro. DeepSeek now routes requests using the legacy <code>deepseek-v4-flash</code> name to V4.1 Flash. A result obtained using that alias today is therefore not a fresh test of the retired model. The comparison below concerns DeepSeek&apos;s direct API, not a third-party subscription or a self-hosted deployment.</p>
+      <p>DeepSeek lists both routes with a 1M-token context window and a maximum output of 384K tokens. These are limits, not a promise that every combination of maximum input and maximum output fits into one request. The provider&apos;s current documentation and account limits remain the final reference for a production deployment.</p>
+    </section>
 
-      <section className="px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-2">
-          {[flash, pro].map((model) => (
-            <article
-              key={model.model}
-              className="rounded-lg border border-white/10 bg-[#0d141c] p-5"
-            >
-              <ArrowDownRight className="h-6 w-6 text-cyan-200" />
-              <p className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
-                {model.model}
-              </p>
-              <h2 className="mt-2 text-3xl font-semibold text-white">
-                {formatUsd(model.input)} input / {formatUsd(model.output)} output
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-slate-400">
-                Cache-hit input:{" "}
-                {model.cachedInput ? formatUsd(model.cachedInput) : "N/A"} per 1M
-                tokens. {model.note}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
+    <section className="comparison-feature__section">
+      <h2>What differs in the direct API?</h2>
+      <p>Prices are USD per million tokens, checked November 14, 2026. Cache-hit input, cache-miss input and output are separate billable categories. Rates can change.</p>
+      <div className="comparison-table-wrap"><table className="comparison-table"><thead><tr><th scope="col">Dimension</th><th scope="col">Flash</th><th scope="col">Pro</th></tr></thead><tbody>{rows.map(([label, flash, pro]) => <tr key={label}><th scope="row">{label}</th><td>{flash}</td><td>{pro}</td></tr>)}</tbody></table></div>
+      <p>DeepSeek defines peak hours as 01:00–04:00 and 06:00–10:00 UTC on weekdays, excluding Chinese public holidays; other hours are off-peak. Check the provider&apos;s current rules and any contract terms before scheduling workloads around that distinction.</p>
+    </section>
 
-      <section className="section-band px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeading
-            eyebrow="Decision table"
-            title="Which tasks justify Pro's premium?"
-            description="Escalate when a task needs deeper reasoning or fails a defined quality check — and stay on Flash everywhere else."
-          />
-          <div className="mt-10 overflow-x-auto rounded-lg border border-white/10 bg-[#0d141c]">
-            <table className="price-table min-w-[860px]">
-              <thead>
-                <tr>
-                  <th>Question</th>
-                  <th>V4 Flash</th>
-                  <th>V4 Pro</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((row) => (
-                  <tr key={row.label}>
-                    <td className="font-semibold text-white">{row.label}</td>
-                    <td>{row.flash}</td>
-                    <td>{row.pro}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+    <section className="comparison-feature__section">
+      <h2>How much might one request cost?</h2>
+      <p>For an illustrative request with 10,000 cache-miss input tokens and 2,000 output tokens, assuming no tool fees or retries, the calculation is:</p>
+      <ul><li>Flash off-peak: 0.01 × $0.15 + 0.002 × $0.60 = <strong>$0.0027</strong>.</li><li>Pro off-peak: 0.01 × $0.66 + 0.002 × $1.98 = <strong>$0.01056</strong>.</li><li>Flash peak: 0.01 × $0.30 + 0.002 × $1.20 = <strong>$0.0054</strong>.</li><li>Pro peak: 0.01 × $1.32 + 0.002 × $3.96 = <strong>$0.02112</strong>.</li></ul>
+      <p>These figures are arithmetic examples rather than measured invoices. Cache hits, changed output length, additional tools, failed calls, taxes and contractual terms can alter the result. Equal token counts also do not prove equal task completion or equal quality.</p>
+    </section>
+
+    <section className="comparison-feature__section">
+      <h2>How should a team choose?</h2>
+      <p>Start with the requirements that are known: if the direct request needs image input, the provider&apos;s listed vision support is a meaningful distinction. For text tasks, test both routes against the same representative inputs and acceptance criteria; pricing alone cannot establish which one is sufficiently reliable.</p>
+      <ol><li>Pin the model names, test date, prompts, tools and output limits.</li><li>Run a representative set of tasks and record failures, retries and human corrections.</li><li>Compare cost per accepted result and latency, not just a price per token.</li><li>Review the decision when models, prices or your workload change.</li></ol>
+      <p>This is a proposed evaluation method. We have not run a controlled head-to-head quality, latency or reliability test for this page, so it does not claim a universal winner.</p>
+    </section>
+    <ComparisonNavigation href="/flash-vs-pro" />
+  </article>;
 }
