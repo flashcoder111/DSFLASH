@@ -251,7 +251,7 @@ export default function MigrationGuidePage() {
             per 1M on Flash). If your prompts are stable, your input bill may
             drop after migration; if your cost dashboards hard-code old rates,
             update them. Our{" "}
-            <Link href="/pricing" className="font-semibold text-cyan-200">
+            <Link href="/api-pricing" className="font-semibold text-cyan-200">
               pricing page and calculator
             </Link>{" "}
             has the current numbers.

@@ -233,7 +233,7 @@ curl http://localhost:11434/v1/chat/completions \\
             costs several thousand dollars, plus power and your time. Local
             deployment earns its keep for data-residency requirements,
             sustained heavy volume, latency control, or offline work — and the{" "}
-            <Link href="/pricing" className="font-semibold text-cyan-200">
+            <Link href="/api-pricing" className="font-semibold text-cyan-200">
               cost calculator
             </Link>{" "}
             will show you exactly where your break-even sits.

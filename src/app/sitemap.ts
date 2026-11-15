@@ -21,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const revisedComparisons = ["/flash-vs-pro", "/compare/deepseek-v4-flash-vs-claude", "/compare/deepseek-v4-flash-vs-gpt-5-4"];
   return [
     ...staticRoutes.map((route) => ({ url: `${siteConfig.url}${route}` })),
+    { url: `${siteConfig.url}/pricing`, lastModified: "2026-11-16" },
+    { url: `${siteConfig.url}/api-pricing` },
     ...topics.map((topic) => ({ url: `${siteConfig.url}/topics/${topic.slug}` })),
     ...models.map((model) => ({ url: `${siteConfig.url}/models/${model.slug}` })),
     ...revisedComparisons.map((route) => ({ url: `${siteConfig.url}${route}`, lastModified: "2026-11-14" })),

@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/blog-data";
 
 const primaryLinks = [
   { href: "/plans", label: "Coding Plans" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/deepseek", label: "DeepSeek" },
   { href: "/china-models", label: "Open-Source Models" },
   { href: "/global-models", label: "Closed-Source Models" },

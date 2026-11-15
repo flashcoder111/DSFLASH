@@ -254,7 +254,7 @@ export default function ApiQuickstartPage() {
               Flash vs Pro routing rules
             </Link>{" "}
             give concrete triggers. And the{" "}
-            <Link href="/pricing" className="font-semibold text-cyan-200">
+            <Link href="/api-pricing" className="font-semibold text-cyan-200">
               cost calculator
             </Link>{" "}
             models your monthly bill from your actual traffic mix.
