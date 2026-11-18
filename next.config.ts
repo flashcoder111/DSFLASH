@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         source: "/migration",
         destination: "/guides/deepseek-chat-migration",
         permanent: true
+      },
+      {
+        source: "/plans",
+        destination: "/pricing",
+        permanent: true
       }
     ];
   }

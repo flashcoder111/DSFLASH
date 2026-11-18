@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PolicyPage from "@/components/policy-page";
 
 export const metadata: Metadata = { title: "Terms of Service", description: "Terms of service for Open Source Model Blog and its digital products.", alternates: { canonical: "/terms" } };
@@ -10,7 +11,7 @@ export default function TermsPage() {
     <h2>Using the site</h2>
     <p>By using the site, you agree to these terms. Do not interfere with the service, attempt unauthorized access, distribute malicious code, impersonate others, or use the service unlawfully. If an account is offered, keep its credentials secure and notify us of unauthorized access. We may restrict access to address abuse or security risks, subject to applicable law.</p>
     <h2>Paid products and pricing</h2>
-    <p>Public editorial content is free and does not involve a purchase or refund. Coding plans are paid products. Pricing, billing periods, access limits and checkout will be published on our <a href="/plans">coding plans page</a> before sales begin. No payment is collected until a purchase is available and you choose to complete it.</p>
+    <p>Public editorial content is free and does not involve a purchase or refund. Coding plans are paid products. We will publish pricing, billing periods, access limits and checkout details for our own plans before sales begin. No payment is collected until a purchase is available and you choose to complete it. Visit <Link href="/pricing">Pricing</Link> to compare plans available through DeepSeekSub.</p>
     <h2>Products and purchases</h2>
     <p>Before purchase, review the product description and checkout summary for the price, currency, taxes where applicable, access period, delivery method, endpoint, usage limits and any restrictions. Products may provide managed gateway access or a provider credential, depending on the offer. A purchase does not transfer an account with a model provider unless expressly stated. Product availability and upstream services may change.</p>
     <p>Digital access or credentials are delivered electronically after payment confirmation using the method stated at checkout. If an order is not delivered or access does not work as described, contact us with the order reference. Do not send passwords, API keys or full payment-card details.</p>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PolicyPage from "@/components/policy-page";
 
 export const metadata: Metadata = {
@@ -14,6 +15,6 @@ export default function ContactPage() {
     <h2>Corrections and source updates</h2>
     <p>Please include the page URL, the specific statement you are querying and a link to the primary source. We review substantiated correction requests and update material inaccuracies as appropriate.</p>
     <h2>Rights and product enquiries</h2>
-    <p>Use the same address for image-rights questions, attribution requests and questions about our planned coding products. Purchases are not yet available on this site; see our <a href="/plans">coding plans page</a> for the current status. Please do not send passwords, API keys or full payment-card details.</p>
+    <p>Use the same address for image-rights questions, attribution requests and questions about our planned coding products. Visit <Link href="/pricing">Pricing</Link> to compare plans available through DeepSeekSub. Please do not send passwords, API keys or full payment-card details.</p>
   </PolicyPage>;
 }
