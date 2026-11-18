@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { SiteFooterContact, SiteFooterProducts } from "@/components/SiteFooterLinks";
 import { siteConfig } from "@/lib/blog-data";
+import { gpt62Comparisons } from "@/lib/gpt-6-2-comparisons";
+
+const internalFooterPaths = Object.values(gpt62Comparisons).map(({ href }) => href);
 
 const primaryLinks = [
   { href: "/pricing", label: "Pricing" },
@@ -42,9 +45,7 @@ export default function SiteFrame({ children }: Readonly<{ children: React.React
           <section>
             <p className="footer-heading">{siteConfig.name}</p>
             <p className="footer-copy">Independent reporting and practical research for the open-model ecosystem. Every article keeps its sources close to the claim.</p>
-            <p className="footer-copy footer-copy--contact">
-              Editorial, corrections &amp; rights enquiries: <a href="mailto:hello@deepseekv4flash.com">hello@deepseekv4flash.com</a>
-            </p>
+            <SiteFooterContact internalPaths={internalFooterPaths} />
             <p className="footer-copy footer-copy--small">© 2026 Open Source Model Blog</p>
           </section>
           <section>
@@ -54,20 +55,7 @@ export default function SiteFrame({ children }: Readonly<{ children: React.React
               <Link href="/models">View all models</Link>
             </div>
           </section>
-          <section>
-            <p className="footer-heading">Our products</p>
-            <div className="footer-links">
-              <a href="https://deepseekv4pro.com/" target="_blank" rel="noreferrer" className="product-link">
-                DeepSeek V4 Pro <ArrowUpRight aria-hidden="true" />
-              </a>
-              <a href="https://photocard.ai/" target="_blank" rel="noreferrer" className="product-link">
-                Photocard.ai <ArrowUpRight aria-hidden="true" />
-              </a>
-              <a href="https://christmascard.app/" target="_blank" rel="noreferrer" className="product-link">
-                ChristmasCard.app <ArrowUpRight aria-hidden="true" />
-              </a>
-            </div>
-          </section>
+          <SiteFooterProducts internalPaths={internalFooterPaths} />
           <section>
             <p className="footer-heading">About</p>
             <div className="footer-links">

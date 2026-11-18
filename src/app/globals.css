@@ -134,3 +134,4 @@ button, input, textarea, select { font: inherit; }
 .comparison-feature__section p, .comparison-feature__section li { color: var(--muted); font-size: 17px; line-height: 1.7; }
 .comparison-feature__section li { margin-bottom: 8px; }
 .comparison-feature__section .comparison-table-wrap { margin: 24px 0; }
+.comparison-feature__pricing a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }

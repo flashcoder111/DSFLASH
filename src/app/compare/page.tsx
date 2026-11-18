@@ -24,7 +24,7 @@ export default function ComparePage() {
       <p>Compare DeepSeek with other models, or explore comparisons across model families. Check each article&apos;s scope and date before making a decision.</p>
       <div className="article-list">{models.map((item) => <article className="article-list-item" key={item.href}>
         <div><p className="eyebrow">Model comparison</p><h3><Link href={item.href}>{item.title}</Link></h3><p>{item.description}</p></div>
-        <div className="article-list-item__meta"><span>Documentation review</span><span>Updated {item.date}</span></div>
+        <div className="article-list-item__meta"><span>{"label" in item ? item.label : "Documentation review"}</span><span>Updated {item.date}</span></div>
       </article>)}</div>
     </section>
     <section className="comparison-directory" id="tool-comparisons" aria-labelledby="tool-heading">

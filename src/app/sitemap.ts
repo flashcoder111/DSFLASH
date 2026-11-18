@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { articles, comparisons, models, siteConfig, topics } from "@/lib/blog-data";
 import { importedDeepSeekNews } from "@/lib/deepseek-imported-news";
+import { gpt62ComparisonDate, gpt62Comparisons } from "@/lib/gpt-6-2-comparisons";
 import { newsItems } from "@/lib/site-data";
 
 function sitemapDate(value: string): string | undefined {
@@ -26,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...topics.map((topic) => ({ url: `${siteConfig.url}/topics/${topic.slug}` })),
     ...models.map((model) => ({ url: `${siteConfig.url}/models/${model.slug}` })),
     ...revisedComparisons.map((route) => ({ url: `${siteConfig.url}${route}`, lastModified: "2026-11-14" })),
+    ...Object.values(gpt62Comparisons).map(({ href }) => ({ url: `${siteConfig.url}${href}`, lastModified: gpt62ComparisonDate })),
     ...comparisons.map((comparison) => ({ url: `${siteConfig.url}/compare/${comparison.slug}`, lastModified: "2026-11-14" })),
     ...articles.map((article) => ({ url: `${siteConfig.url}/articles/${article.slug}`, lastModified: sitemapDate(article.updated) })),
     ...[...newsItems, ...importedDeepSeekNews].map((item) => ({ url: `${siteConfig.url}/deepseek/${item.slug}`, lastModified: sitemapDate(item.date) }))
