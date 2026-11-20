@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { SiteFooterContact, SiteFooterProducts } from "@/components/SiteFooterLinks";
 import { siteConfig } from "@/lib/blog-data";
-import { gpt62Comparisons } from "@/lib/gpt-6-2-comparisons";
+import { modelComparisons } from "@/lib/model-comparisons";
 
-const internalFooterPaths = Object.values(gpt62Comparisons).map(({ href }) => href);
+const internalFooterPaths = modelComparisons.map(({ href }) => href);
 
 const primaryLinks = [
   { href: "/pricing", label: "Pricing" },
