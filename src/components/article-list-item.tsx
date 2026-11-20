@@ -11,7 +11,7 @@ export default function ArticleListItem({ article }: { article: Article }) {
       </div>
       <div className="article-list-item__meta">
         <time>{article.date}</time>
-        <span>{article.sourceCount} source{article.sourceCount === 1 ? "" : "s"}</span>
+        {article.sourceCount > 0 ? <span>{article.sourceCount} source{article.sourceCount === 1 ? "" : "s"}</span> : null}
       </div>
     </article>
   );

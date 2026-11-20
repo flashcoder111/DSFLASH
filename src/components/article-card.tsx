@@ -11,7 +11,7 @@ export default function ArticleCard({ article }: { article: Article }) {
       <div className="article-card__body">
         <p className="eyebrow">{article.topic}</p>
         <h2><Link href={`/articles/${article.slug}`}>{article.title}</Link></h2>
-        <p className="article-card__meta">{article.date} <span>•</span> {article.sourceCount} source{article.sourceCount === 1 ? "" : "s"}</p>
+        <p className="article-card__meta">{article.date}{article.sourceCount > 0 ? <> <span>•</span> {article.sourceCount} source{article.sourceCount === 1 ? "" : "s"}</> : null}</p>
         <p className="article-card__dek">{article.dek}</p>
       </div>
     </article>

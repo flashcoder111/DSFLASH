@@ -14,6 +14,19 @@ export type Source = {
   type: "Official release" | "Documentation" | "Code repository" | "Research paper" | "Reporting";
 };
 
+export type ArticleBlock =
+  | { kind: "p"; text: string }
+  | { kind: "ul"; items: string[] }
+  | { kind: "table"; head: string[]; rows: string[][] }
+  | { kind: "image"; src: string; alt: string; caption?: string }
+  | { kind: "cta"; pre: string; label: string; href: string; post?: string };
+
+export type ArticleSection = {
+  heading: string;
+  paragraphs?: string[];
+  blocks?: ArticleBlock[];
+};
+
 export type Article = {
   slug: string;
   title: string;
@@ -24,8 +37,10 @@ export type Article = {
   updated: string;
   sourceCount: number;
   visual: "network" | "context" | "loop" | "release" | "report" | "world";
+  author?: string;
+  tldr?: string[];
   body: string[];
-  sections?: { heading: string; paragraphs: string[] }[];
+  sections?: ArticleSection[];
   sources: Source[];
   modelSlugs?: string[];
   imageSrc?: string;

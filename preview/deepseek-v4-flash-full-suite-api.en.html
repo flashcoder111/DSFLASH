@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search, OCR, and TTS Used to Mean Three Vendors. On deepseek-flash They Are Three Parameters. | DeepSeek V4 Flash</title>
+<meta name="description" content="Search, file parsing, link reading and voice now live inside the deepseek-flash API. What the server handles, where the cost goes, and what to test before launch.">
+<link rel="canonical" href="https://deepseekv4flash.com/articles/deepseek-v4-flash-full-suite-api">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Search, OCR, and TTS Used to Mean Three Vendors. On deepseek-flash They Are Three Parameters.">
+<meta property="og:description" content="Search, link reading, file parsing, safety checks and voice endpoints are now part of the DeepSeek API. What shipped, how the server-side loop works, and where the bill comes from.">
+<meta property="og:url" content="https://deepseekv4flash.com/articles/deepseek-v4-flash-full-suite-api">
+<meta property="og:image" content="https://deepseekv4flash.com/images/articles/deepseek-v4-flash-full-suite-api-overview.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Search, OCR, and TTS Used to Mean Three Vendors. On deepseek-flash They Are Three Parameters.">
+<meta name="twitter:description" content="Search, link reading, file parsing, safety checks and voice endpoints are now part of the DeepSeek API.">
+<meta name="twitter:image" content="https://deepseekv4flash.com/images/articles/deepseek-v4-flash-full-suite-api-overview.svg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Search, OCR, and TTS Used to Mean Three Vendors. On deepseek-flash They Are Three Parameters.",
+  "description": "Search, file parsing, link reading and voice now live inside the deepseek-flash API. What the server handles, where the cost goes, and what to test before launch.",
+  "datePublished": "2026-11-20",
+  "dateModified": "2026-11-20",
+  "author": { "@type": "Person", "name": "Cameron Voss" },
+  "publisher": { "@type": "Organization", "name": "DeepSeek V4 Flash", "url": "https://deepseekv4flash.com" },
+  "image": ["https://deepseekv4flash.com/images/articles/deepseek-v4-flash-full-suite-api-overview.svg"],
+  "mainEntityOfPage": "https://deepseekv4flash.com/articles/deepseek-v4-flash-full-suite-api"
+}
+</script>
+<style>
+  :root{
+    --page:#fcfcfa; --ink:#171717; --muted:#636363; --faint:#8a8a86;
+    --line:#e7e7e3; --blue:#2563eb; --blue-pale:#f4f7ff; --navy:#18243d;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:#dbe6ff}
+
+  .site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(252,252,250,.94);backdrop-filter:blur(12px)}
+  .site-header__inner{width:min(1200px,calc(100% - 48px));min-height:68px;margin:0 auto;display:flex;align-items:center;gap:56px}
+  .wordmark{font-size:14px;font-weight:750;letter-spacing:-.025em;text-transform:uppercase;white-space:nowrap}
+  .primary-nav{display:flex;gap:32px;font-size:14px}
+  .primary-nav a:hover{color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+
+  .article-container{width:min(720px,calc(100% - 48px));margin:0 auto}
+  .article-header{padding:84px 0 34px;border-bottom:1px solid var(--line)}
+  .eyebrow{margin:0;color:var(--blue);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+  .article-header h1{margin:16px 0 0;font-size:clamp(38px,5.2vw,58px);line-height:1.02;letter-spacing:-.055em}
+  .byline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0 0;color:var(--muted);font-size:14px}
+  .byline__author{color:var(--ink);font-weight:700}
+  .byline__dot{color:#c9c9c4}
+  .article-header__dek{margin:24px 0 0;color:var(--muted);font-size:19px;line-height:1.55}
+
+  figure{margin:0}
+  .hero{margin:34px 0 8px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f2f6fc}
+  .hero img,.inline-figure img{display:block;width:100%;height:auto;border-radius:7px}
+  figcaption{margin:14px 4px 2px;color:var(--muted);font-size:13px;line-height:1.55}
+  .inline-figure{margin:36px 0 34px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f7f9fc}
+
+  .article-body{padding:30px 0 24px}
+  .article-body p{margin:0 0 25px;font-size:18px;line-height:1.72}
+  .article-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .article-body h2{margin:52px 0 20px;font-size:30px;line-height:1.15;letter-spacing:-.045em}
+  .article-body ul{margin:0 0 26px;padding:0 0 0 22px}
+  .article-body li{margin:0 0 12px;font-size:18px;line-height:1.68}
+  code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em;background:#f2f2ee;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+
+  .lede{border-left:3px solid var(--blue);padding:2px 0 2px 18px;color:#3d3d3a}
+
+  .callout{margin:34px 0;padding:20px 22px;border:1px solid #dbe4f8;border-radius:10px;background:var(--blue-pale)}
+  .callout p{margin:0 0 10px;font-size:15px;line-height:1.6;color:#3c4a63}
+  .callout p:last-child{margin-bottom:0}
+  .callout strong{color:var(--navy)}
+
+  .table-wrap{margin:8px 0 30px;border:1px solid var(--line);background:#fff;overflow-x:auto}
+  .cost-table{width:100%;min-width:620px;border-collapse:collapse;background:#fff}
+  .cost-table th,.cost-table td{padding:15px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:14px;line-height:1.5}
+  .cost-table th{background:#fafafa;color:var(--faint);font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+  .cost-table tr:last-child td{border-bottom:0}
+
+  .checklist{margin:6px 0 34px;padding:0;list-style:none;display:grid;gap:14px}
+  .checklist li{display:grid;grid-template-columns:20px 1fr;gap:12px;font-size:17px;line-height:1.6}
+  .checklist li::before{content:"";width:9px;height:9px;margin-top:9px;border-radius:2px;background:var(--blue)}
+
+  .tldr{margin:30px 0 10px;padding:22px 24px;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;background:#fff}
+  .tldr__title{margin:0 0 12px;font-size:12px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+  .tldr ul{margin:0;padding:0 0 0 18px}
+  .tldr li{margin:0 0 9px;font-size:15px;line-height:1.65;color:#3d3d3a}
+  .tldr li:last-child{margin-bottom:0}
+
+
+  .site-footer{border-top:1px solid var(--line);background:#f8f8f6}
+  .site-footer__inner{width:min(1200px,calc(100% - 48px));margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:34px 0;color:var(--muted);font-size:13px}
+  .site-footer__inner a:hover{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+
+  @media (max-width:640px){
+    .site-header__inner{min-height:auto;flex-wrap:wrap;gap:12px;padding:14px 0}
+    .primary-nav{width:100%;justify-content:space-between;gap:12px;font-size:13px}
+    .wordmark{font-size:12px}
+    .article-header{padding-top:58px}
+    .article-header h1{font-size:38px}
+    .article-header__dek{font-size:17px}
+    .article-body p,.article-body li{font-size:17px}
+    .article-body h2{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="https://deepseekv4flash.com/">DeepSeek V4 Flash</a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="https://deepseekv4flash.com/articles">Articles</a>
+      <a href="https://deepseekv4flash.com/guides">Guides</a>
+      <a href="https://deepseekv4flash.com/compare">Compare</a>
+      <a href="https://deepseekv4flash.com/api-pricing">Pricing</a>
+    </nav>
+  </div>
+</header>
+
+<main class="article-container">
+  <header class="article-header">
+    <p class="eyebrow">DeepSeek · API</p>
+    <h1>Search, OCR, and TTS Used to Mean Three Vendors. On deepseek-flash They Are Three Parameters.</h1>
+    <p class="byline">
+      <span class="byline__author">By Cameron Voss</span>
+      <span class="byline__dot">·</span>
+      <span>November 20, 2026</span>
+      <span class="byline__dot">·</span>
+      <span>6 min read</span>
+    </p>
+  </header>
+
+  <section class="tldr" aria-labelledby="tldr-heading">
+    <h2 class="tldr__title" id="tldr-heading">TL;DR</h2>
+    <ul>
+      <li>V4.1-Flash, the model ID <code>deepseek-flash</code>, now accepts tool parameters on Messages, Responses and Chat Completions.</li>
+      <li>Web search, deep-thinking search, file input, link reading and safety checks all run server-side inside one request.</li>
+      <li>Search, Fetch, OCR, ASR and TTS are also available as standalone endpoints for teams with their own orchestration.</li>
+      <li>Billing is the token cost plus a per-call fee for each tool use, so search depth is the variable to watch.</li>
+      <li>A lightweight open-source client is published for testing the whole stack.</li>
+    </ul>
+  </section>
+
+  <figure class="hero">
+    <img src="../public/images/articles/deepseek-v4-flash-full-suite-api-overview.svg"
+         alt="Diagram of a DeepSeek V4.1-Flash API request reaching web search, link reading, file input, deep-thinking search and safety checks"
+         width="1200" height="675" loading="eager" decoding="async">
+    <figcaption>One parameter per capability. The client sends a single request and gets a finished answer.</figcaption>
+  </figure>
+
+
+  <article class="article-body">
+
+    <p class="lede">DeepSeek's chat product has always done more than answer questions. It searches, opens pages, reads uploaded documents, understands speech and filters risky replies. Building the same thing yourself used to mean wiring several vendors together and keeping the handoffs straight in your own code. That work has moved into the model call.</p>
+
+    <p>V4.1-Flash, the model developers address as <code>deepseek-flash</code>, now accepts a set of optional tools on the Messages, Responses and Chat Completions endpoints. Switch one on and DeepSeek runs the tool, folds the result into the prompt and returns a final answer. You send one request and receive one response.</p>
+
+    <h2>Search, files, links and a safety flag</h2>
+
+    <p>Five capabilities sit on the standard endpoint:</p>
+
+    <ul>
+      <li><strong>Web search.</strong> With <code>deepseek_web_search</code> enabled in normal mode, the model decides when a question needs outside information, queries a web or image index, and answers with citations attached.</li>
+      <li><strong>Deep-thinking search.</strong> The same switch, used in thinking mode, lets the model search and read pages in the middle of a multi-step reasoning pass. It can revise a search after seeing the first result instead of committing to one query.</li>
+      <li><strong>File input.</strong> PDFs, Office documents and images are accepted. DeepSeek extracts plain text or parses layout, including mixed text and images, then puts the result into context.</li>
+      <li><strong>Link reading.</strong> Turn on <code>deepseek_read_url</code> and any URL in the user's message gets fetched and used as context.</li>
+      <li><strong>Safety checks.</strong> A screening parameter reviews input and output and returns a refusal marker when content trips a rule.</li>
+    </ul>
+
+    <p>The loop between those steps is not yours to manage. Tool choice, the calls, and the context assembly all run on DeepSeek's side. That removes a familiar class of bug from retrieval pipelines: state lost between hops, tool output dropped because an intermediate step timed out, context order scrambled by a queue.</p>
+
+    <p>The trade-off is visibility. You receive the answer, not a transcript of every lookup. Log the parameters you send and the citations you get back. Treat what happens between them as an operated black box, and design your error handling around that assumption.</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-v4-flash-full-suite-api-request-flow.svg"
+           alt="Request flow diagram showing a user message, API request, server-side tool router, context assembly and an answer with citations"
+           width="1200" height="640" loading="lazy" decoding="async">
+      <figcaption>The caller sees five stages. Stages three and four repeat internally as the model works.</figcaption>
+    </figure>
+
+    <h2>Two search behaviors in one parameter</h2>
+
+    <p>In normal mode, search behaves like a lookup. The model notices a gap, runs a query, and writes an answer with references. This is the mode to use for product descriptions, current events and questions with a factual answer somewhere on the open web.</p>
+
+    <p>In thinking mode, search becomes part of the reasoning process. The model can start from a broad query, read what comes back, and narrow the next one. For research questions, that produces better coverage than a single search, at the cost of more tool calls and more time before the first token arrives.</p>
+
+    <p>Streaming matters here. A thinking response that spends six seconds on lookups looks broken in a non-streaming client. Show progress, or at least a typing state, and put a ceiling on how many steps a single turn may take.</p>
+
+    <h2>Standalone endpoints for teams that already own the loop</h2>
+
+    <p>The same infrastructure is sold separately as Search, Fetch, OCR, ASR and TTS. That matters for two kinds of teams. If you already run an agent framework with your own tool router, you can call Search and Fetch directly and keep control of the sequence. If you are building a voice product, OCR, ASR and TTS cover the pieces that usually come from three different vendors. If you are weighing whether to keep an existing OCR or TTS contract, our <a href="https://deepseekv4flash.com/pricing">pricing page</a> lists what each plan allowance covers, which makes the comparison concrete.</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-v4-flash-standalone-apis-search-fetch-ocr-asr-tts.svg"
+           alt="Five standalone DeepSeek endpoints: Search, Fetch, OCR, ASR and TTS, with a short description of each"
+           width="1200" height="560" loading="lazy" decoding="async">
+      <figcaption>Each endpoint works on its own. Together they rebuild most of the assistant experience.</figcaption>
+    </figure>
+
+    <h2>A working client you can clone</h2>
+
+    <p>DeepSeek published a lightweight front-end demo that uses the new endpoints and imports an existing chat history. The hosted build and the source are published under the deepseek-ai organization on GitHub, in a repository named chat-demo.</p>
+
+    <p>Read it before you design your own client. It shows the request shape for each capability and a workable split between the interface and the server. Most of the value is in the parts that are boring: how uploads are passed, how citations are rendered, how a refusal is displayed without confusing the user.</p>
+
+    <h2>How the bill is built</h2>
+
+    <p>Token pricing works as before. Tool use adds a second charge, billed per call. A conversation that stays inside its context is a token calculation. A conversation that researches is also paying for every page it opened.</p>
+
+    <div class="table-wrap">
+    <table class="cost-table">
+      <thead>
+        <tr><th>Charge</th><th>What triggers it</th><th>Where it grows</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Input tokens</td>
+          <td>Prompt, conversation history, parsed file text, fetched pages</td>
+          <td>Long documents and multi-turn chats</td>
+        </tr>
+        <tr>
+          <td>Output tokens</td>
+          <td>Reasoning steps and the final answer</td>
+          <td>Thinking mode on hard questions</td>
+        </tr>
+        <tr>
+          <td>Tool calls</td>
+          <td>Each search, fetch, OCR, ASR or TTS call</td>
+          <td>Agent loops that keep looking things up</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-v4-flash-api-cost-token-vs-tool-call.svg"
+           alt="Cost diagram showing token charges and per-call tool charges combining into the total cost of one request"
+           width="1200" height="560" loading="lazy" decoding="async">
+      <figcaption>Two layers, one invoice. Tool fees sit on top of the token rate.</figcaption>
+    </figure>
+
+    <p>Instrument the tool calls, not only the token counter. Search depth is the variable that surprises teams: a thinking-mode turn on a broad question can run several paid lookups before it writes anything. Cache pages you fetch more than once. Set a step budget per conversation and log when it is hit. Before you commit a budget, the current V4.1 Flash and V4 Pro subscription plans and their usage allowances are compared on our <a href="https://deepseekv4flash.com/pricing">pricing page</a>.</p>
+
+    <h2>Before you put it in front of users</h2>
+
+    <ul class="checklist">
+      <li>Turn on the safety parameter if the app is public. It gives you a baseline filter, not a finished compliance program. Content review, model registration and AI labeling obligations stay with you where they apply.</li>
+      <li>Measure latency per stage. Search and file parsing add time before the first token, and the difference shows up in perceived quality more than in benchmarks.</li>
+      <li>Test with the documents your users actually upload. Scans, tables and two-column PDFs are where extraction fails quietly.</li>
+      <li>Keep a fallback for tool failures. A search that returns nothing should not turn into an empty answer.</li>
+    </ul>
+
+    <h2>What this changes for builders</h2>
+
+    <p>The distance between an idea and a working assistant is shorter. A team that wants search plus document reading no longer needs three vendors and a queue to keep them in order. That work is now a parameter, and the effort moves up a level: interface, permissions, retention, and the parts of the experience that are actually yours.</p>
+
+    <p>What it does not do is make the product decisions. Choosing when to search, when to read a file, and when to admit the answer is not in the context is still design work. The API removes the plumbing around those choices. It does not make them.</p>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© 2026 DeepSeek V4 Flash</span>
+    <span><a href="https://deepseekv4flash.com/editorial-policy">Editorial policy</a> · <a href="https://deepseekv4flash.com/privacy">Privacy</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

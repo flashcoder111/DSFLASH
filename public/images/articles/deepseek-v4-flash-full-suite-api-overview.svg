@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">DeepSeek V4.1-Flash full-suite API overview</title>
+  <desc id="desc">A single DeepSeek API request reaches web search, link reading, file input, deep-thinking search and safety checks.</desc>
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#efefea" stroke-width="1"/>
+    </pattern>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h1{font-family:Arial,Helvetica,sans-serif;font-size:35px;font-weight:700;letter-spacing:-0.6px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#636363}
+      .card{font-family:Arial,Helvetica,sans-serif;font-size:19px;font-weight:700;fill:#18243d}
+      .card-sub{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#636363}
+      .chip{font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;fill:#18243d}
+      .chip-sub{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#6b6b66}
+      .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;fill:#2563eb}
+    </style>
+  </defs>
+
+  <rect width="1200" height="675" fill="#fcfcfa"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <rect x="0" y="0" width="6" height="675" fill="#2563eb"/>
+
+  <text x="64" y="82" class="eyebrow">DEEPSEEK API · PRODUCT NOTE</text>
+  <text x="64" y="136" class="h1">V4.1-Flash with the app's own tools</text>
+  <text x="64" y="172" class="sub">Search, file parsing, link reading and voice, callable from one request</text>
+
+  <rect x="64" y="250" width="250" height="152" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="88" y="286" class="card">Your application</text>
+  <text x="88" y="312" class="card-sub">one POST to</text>
+  <text x="88" y="334" class="mono">/chat/completions</text>
+  <text x="88" y="362" class="card-sub">model: deepseek-flash</text>
+  <text x="88" y="384" class="card-sub">tools: enabled</text>
+
+  <line x1="316" y1="326" x2="386" y2="326" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="386,326 374,320 374,332" fill="#9fb2db"/>
+
+  <rect x="390" y="228" width="300" height="196" rx="12" fill="#f4f7ff" stroke="#b9cdfb"/>
+  <text x="414" y="266" class="card">DeepSeek API</text>
+  <text x="414" y="292" class="card-sub">Messages · Responses</text>
+  <text x="414" y="312" class="card-sub">Chat Completions</text>
+  <line x1="414" y1="330" x2="666" y2="330" stroke="#dbe4f8"/>
+  <text x="414" y="356" class="card-sub">Tool calls and context</text>
+  <text x="414" y="376" class="card-sub">assembly run on the server</text>
+  <rect x="414" y="392" width="120" height="20" rx="10" fill="#dbe6ff"/>
+  <text x="426" y="406" class="mono">V4.1-Flash</text>
+
+  <line x1="692" y1="326" x2="746" y2="326" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="746,326 734,320 734,332" fill="#9fb2db"/>
+
+  <g>
+    <rect x="750" y="222" width="386" height="52" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="768" y="245" class="chip">Web search</text>
+    <text x="768" y="264" class="chip-sub">web and image results, with citations</text>
+
+    <rect x="750" y="284" width="386" height="52" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="768" y="307" class="chip">Link reading</text>
+    <text x="768" y="326" class="chip-sub">fetches pages found in the message</text>
+
+    <rect x="750" y="346" width="386" height="52" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="768" y="369" class="chip">File input</text>
+    <text x="768" y="388" class="chip-sub">PDF, Office files and images</text>
+
+    <rect x="750" y="408" width="386" height="52" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="768" y="431" class="chip">Deep-thinking search</text>
+    <text x="768" y="450" class="chip-sub">search and read inside multi-step reasoning</text>
+
+    <rect x="750" y="470" width="386" height="52" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="768" y="493" class="chip">Safety checks</text>
+    <text x="768" y="512" class="chip-sub">input and output screening, refusal flag</text>
+  </g>
+
+  <line x1="64" y1="596" x2="1136" y2="596" stroke="#e7e7e3"/>
+  <text x="64" y="630" class="note">One parameter per capability. No client-side orchestration, no second API key.</text>
+  <text x="1136" y="630" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>

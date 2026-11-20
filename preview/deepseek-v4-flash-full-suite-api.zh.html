@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>搜索、OCR、TTS 过去意味着三家供应商，在 deepseek-flash 上它们是三个参数。</title>
+<meta name="description" content="搜索、文件解析、链接阅读和语音现在都在 deepseek-flash 的 API 里完成。服务端替你做了哪些事、钱花在哪里、上线前要测什么。">
+<link rel="canonical" href="https://deepseekv4flash.com/zh/articles/deepseek-v4-flash-full-suite-api">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搜索、OCR、TTS 过去意味着三家供应商，在 deepseek-flash 上它们是三个参数。">
+<meta property="og:description" content="搜索、链接阅读、文件解析、安全校验和语音接口都成了 DeepSeek API 的一部分。这篇写清楚它提供了什么、服务端怎么跑、账单从哪里来。">
+<meta property="og:image" content="https://deepseekv4flash.com/images/articles/deepseek-v4-flash-full-suite-api-overview.svg">
+<style>
+  :root{
+    --page:#fcfcfa; --ink:#171717; --muted:#636363; --faint:#8a8a86;
+    --line:#e7e7e3; --blue:#2563eb; --blue-pale:#f4f7ff; --navy:#18243d;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:#dbe6ff}
+
+  .site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(252,252,250,.94);backdrop-filter:blur(12px)}
+  .site-header__inner{width:min(1200px,calc(100% - 48px));min-height:68px;margin:0 auto;display:flex;align-items:center;gap:56px}
+  .wordmark{font-size:14px;font-weight:750;letter-spacing:-.025em;text-transform:uppercase;white-space:nowrap}
+  .primary-nav{display:flex;gap:32px;font-size:14px}
+  .primary-nav a:hover{color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+
+  .article-container{width:min(720px,calc(100% - 48px));margin:0 auto}
+  .article-header{padding:84px 0 34px;border-bottom:1px solid var(--line)}
+  .eyebrow{margin:0;color:var(--blue);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+  .article-header h1{margin:16px 0 0;font-size:clamp(34px,4.6vw,52px);line-height:1.12;letter-spacing:-.04em}
+  .byline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0 0;color:var(--muted);font-size:14px}
+  .byline__author{color:var(--ink);font-weight:700}
+  .byline__dot{color:#c9c9c4}
+  .article-header__dek{margin:24px 0 0;color:var(--muted);font-size:18px;line-height:1.7}
+
+  figure{margin:0}
+  .hero{margin:34px 0 8px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f2f6fc}
+  .hero img,.inline-figure img{display:block;width:100%;height:auto;border-radius:7px}
+  figcaption{margin:14px 4px 2px;color:var(--muted);font-size:13px;line-height:1.6}
+  .inline-figure{margin:36px 0 34px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f7f9fc}
+
+  .article-body{padding:30px 0 24px}
+  .article-body p{margin:0 0 24px;font-size:17px;line-height:1.85}
+  .article-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .article-body h2{margin:50px 0 18px;font-size:28px;line-height:1.25;letter-spacing:-.02em}
+  .article-body ul{margin:0 0 26px;padding:0 0 0 22px}
+  .article-body li{margin:0 0 12px;font-size:17px;line-height:1.8}
+  code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em;background:#f2f2ee;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+
+  .lede{border-left:3px solid var(--blue);padding:2px 0 2px 18px;color:#3d3d3a}
+
+  .callout{margin:34px 0;padding:20px 22px;border:1px solid #dbe4f8;border-radius:10px;background:var(--blue-pale)}
+  .callout p{margin:0 0 10px;font-size:15px;line-height:1.75;color:#3c4a63}
+  .callout p:last-child{margin-bottom:0}
+  .callout strong{color:var(--navy)}
+
+  .table-wrap{margin:8px 0 30px;border:1px solid var(--line);background:#fff;overflow-x:auto}
+  .cost-table{width:100%;min-width:620px;border-collapse:collapse;background:#fff}
+  .cost-table th,.cost-table td{padding:15px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:14px;line-height:1.6}
+  .cost-table th{background:#fafafa;color:var(--faint);font-size:12px;letter-spacing:.04em}
+  .cost-table tr:last-child td{border-bottom:0}
+
+  .checklist{margin:6px 0 34px;padding:0;list-style:none;display:grid;gap:14px}
+  .checklist li{display:grid;grid-template-columns:20px 1fr;gap:12px;font-size:16px;line-height:1.75}
+  .checklist li::before{content:"";width:9px;height:9px;margin-top:10px;border-radius:2px;background:var(--blue)}
+
+  .tldr{margin:30px 0 10px;padding:22px 24px;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;background:#fff}
+  .tldr__title{margin:0 0 12px;font-size:12px;font-weight:750;letter-spacing:.09em;color:var(--blue)}
+  .tldr ul{margin:0;padding:0 0 0 18px}
+  .tldr li{margin:0 0 9px;font-size:15px;line-height:1.75;color:#3d3d3a}
+  .tldr li:last-child{margin-bottom:0}
+
+
+  .site-footer{border-top:1px solid var(--line);background:#f8f8f6}
+  .site-footer__inner{width:min(1200px,calc(100% - 48px));margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:34px 0;color:var(--muted);font-size:13px}
+  .site-footer__inner a:hover{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+
+  @media (max-width:640px){
+    .site-header__inner{min-height:auto;flex-wrap:wrap;gap:12px;padding:14px 0}
+    .primary-nav{width:100%;justify-content:space-between;gap:12px;font-size:13px}
+    .wordmark{font-size:12px}
+    .article-header{padding-top:58px}
+    .article-header h1{font-size:32px}
+    .article-header__dek{font-size:16px}
+    .article-body p,.article-body li{font-size:16px}
+    .article-body h2{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="https://deepseekv4flash.com/">DeepSeek V4 Flash</a>
+    <nav class="primary-nav" aria-label="主导航">
+      <a href="https://deepseekv4flash.com/articles">文章</a>
+      <a href="https://deepseekv4flash.com/guides">指南</a>
+      <a href="https://deepseekv4flash.com/compare">对比</a>
+      <a href="https://deepseekv4flash.com/api-pricing">定价</a>
+    </nav>
+  </div>
+</header>
+
+<main class="article-container">
+  <header class="article-header">
+    <p class="eyebrow">DeepSeek · API</p>
+    <h1>搜索、OCR、TTS 过去意味着三家供应商，在 deepseek-flash 上它们是三个参数。</h1>
+    <p class="byline">
+      <span class="byline__author">By Cameron Voss</span>
+      <span class="byline__dot">·</span>
+      <span>2026 年 11 月 20 日</span>
+      <span class="byline__dot">·</span>
+      <span>阅读约 6 分钟</span>
+    </p>
+  </header>
+
+  <section class="tldr" aria-labelledby="tldr-heading">
+    <h2 class="tldr__title" id="tldr-heading">TL;DR</h2>
+    <ul>
+      <li>V4.1-Flash，也就是调用时的 <code>deepseek-flash</code>，在 Messages、Responses 和 Chat Completions 上都支持工具参数。</li>
+      <li>联网搜索、深度思考搜索、文件输入、链接阅读和安全校验都在服务端完成，调用方只发一次请求。</li>
+      <li>Search、Fetch、OCR、ASR、TTS 另外提供独立接口，适合已经有自己编排链路的团队。</li>
+      <li>计费是 token 费用加每次工具调用的费用，需要盯住的变量是搜索深度。</li>
+      <li>官方放出了一个轻量开源客户端，可以直接跑通整套流程。</li>
+    </ul>
+  </section>
+
+  <figure class="hero">
+    <img src="../public/images/articles/deepseek-v4-flash-full-suite-api-overview.svg"
+         alt="DeepSeek V4.1-Flash API 请求连接联网搜索、链接阅读、文件输入、深度思考搜索和安全校验的示意图"
+         width="1200" height="675" loading="eager" decoding="async">
+    <figcaption>每项能力对应一个参数。客户端只发一次请求，拿回一个完整答案。</figcaption>
+  </figure>
+
+
+  <article class="article-body">
+
+    <p class="lede">DeepSeek 的聊天产品一直不只是回答问题。它会搜网页、打开链接、读取上传的文档、听懂语音，还会过滤有风险的回复。以前想在自己的产品里做出同样的效果，得把好几家服务接在一起，再自己写好中间的传参和状态管理。这部分工作现在挪进了模型调用里。</p>
+
+    <p>V4.1-Flash 在调用时使用的模型名是 <code>deepseek-flash</code>。它在 Messages、Responses 和 Chat Completions 三个接口上都支持一组可选工具。打开参数，DeepSeek 会执行工具、把结果拼进上下文，最后返回答案。你发一次请求，收一次响应。</p>
+
+    <h2>一次请求里的五种能力</h2>
+
+    <p>标准接口上新增了五项能力：</p>
+
+    <ul>
+      <li><strong>联网搜索。</strong>普通模式下开启 <code>deepseek_web_search</code>，模型会判断当前问题是否需要外部信息，自动发起网页或图片搜索，并在答案里附上引用。</li>
+      <li><strong>深度思考搜索。</strong>同一个开关，在思考模式里使用。搜索发生在推理过程中，模型可以在多步推理之间读结果、改查询，而不是只搜一次就下结论。</li>
+      <li><strong>文件输入。</strong>支持 PDF、Office 文档和图片。可以只提取纯文本，也可以按版面解析图文混排的内容，再放进上下文。</li>
+      <li><strong>阅读链接。</strong>打开 <code>deepseek_read_url</code> 后，用户消息里的链接会被自动抓取，网页内容作为回答依据。</li>
+      <li><strong>安全校验。</strong>开启后服务端会审核输入和输出，命中风险规则时返回拒答标识。</li>
+    </ul>
+
+    <p>这些步骤之间的循环不需要你来管。工具怎么选、调用怎么发、上下文怎么拼，都在 DeepSeek 那边完成。自己做检索链路时常见的一类问题因此消失了：中间环节超时导致工具结果丢失、跳转过程中丢了状态、队列把上下文顺序打乱。</p>
+
+    <p>代价是可观测性变弱。你拿到的是答案，不是每一次查询的完整记录。实际做法是把发送的参数和返回的引用都记下来，中间过程当作一个由平台维护的黑盒，错误处理也按这个前提来设计。</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-v4-flash-full-suite-api-request-flow.svg"
+           alt="请求链路图：用户消息、API 请求、服务端工具路由、上下文拼接、带引用的答案"
+           width="1200" height="640" loading="lazy" decoding="async">
+      <figcaption>调用方只看到五个阶段。第三、第四步在内部会反复执行。</figcaption>
+    </figure>
+
+    <h2>两种搜索行为，一个参数</h2>
+
+    <p>普通模式下的搜索更像一次查询。模型发现信息不够，发一次请求，然后带着引用写答案。产品介绍、时事问题、有明确事实答案的场景，用这个模式就够了。</p>
+
+    <p>思考模式下的搜索是推理的一部分。模型可以先做宽泛的搜索，读完结果再收紧下一次查询。做资料梳理时，这种方式比单次搜索覆盖得更全，代价是工具调用次数更多，出第一个字的时间也更晚。</p>
+
+    <p>所以这里要考虑流式输出。一个思考模式的回答如果先花六秒去查资料，在不能流式的客户端里看起来就像卡住了。要么把进度显示出来，要么至少给一个正在输入的提示，同时为单轮设置步数上限。</p>
+
+    <h2>已经自己编排的团队，可以直接调独立接口</h2>
+
+    <p>同样的底层能力也拆成了单独的 Search、Fetch、OCR、ASR 和 TTS 接口。这对两类团队有用。已经有一套 agent 框架和工具路由的，直接调 Search 和 Fetch，执行顺序仍然由自己控制。做语音产品的，OCR、ASR、TTS 正好覆盖了过去通常要找三家供应商才能凑齐的部分。如果你在犹豫要不要保留现有的 OCR 或 TTS 合同，我们<a href="https://deepseekv4flash.com/pricing">定价页</a>里写清了每个档位包含的额度，对比起来更具体。</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-v4-flash-standalone-apis-search-fetch-ocr-asr-tts.svg"
+           alt="五个独立接口：Search、Fetch、OCR、ASR、TTS 及各自的用途说明"
+           width="1200" height="560" loading="lazy" decoding="async">
+      <figcaption>五个接口可以单独用，也可以组合起来还原完整的对话体验。</figcaption>
+    </figure>
+
+    <h2>有一个能直接跑的客户端</h2>
+
+    <p>DeepSeek 放出了一个轻量前端 Demo，用的是新接口，还能导入已有的对话记录。托管版和源码都在 GitHub 的 deepseek-ai 组织下，仓库名是 chat-demo。</p>
+
+    <p>建议在设计自己的客户端之前先读一遍。它展示了每种能力的请求写法，也给出了界面和服务端之间一个可用的分工方式。真正有价值的是那些不起眼的部分：上传怎么传、引用怎么渲染、拒答怎么展示才不至于让用户困惑。</p>
+
+    <h2>账单是怎么算出来的</h2>
+
+    <p>Token 计费和原来一样。使用工具会额外产生一层费用，按调用次数收取。上下文里能答完的对话，成本就是 token 的计算。需要查资料的对话，除了 token，还要为打开的每一个页面付费。</p>
+
+    <div class="table-wrap">
+    <table class="cost-table">
+      <thead>
+        <tr><th>费用项</th><th>什么时候产生</th><th>容易涨的地方</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>输入 token</td>
+          <td>提示词、对话历史、解析后的文件文本、抓取的网页</td>
+          <td>长文档和多轮对话</td>
+        </tr>
+        <tr>
+          <td>输出 token</td>
+          <td>推理过程和最终答案</td>
+          <td>难题上的思考模式</td>
+        </tr>
+        <tr>
+          <td>工具调用</td>
+          <td>每一次搜索、抓取、OCR、ASR 或 TTS 调用</td>
+          <td>反复查资料的 agent 循环</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-v4-flash-api-cost-token-vs-tool-call.svg"
+           alt="成本结构图：token 费用和按次收取的工具费用共同构成单次请求的总成本"
+           width="1200" height="560" loading="lazy" decoding="async">
+      <figcaption>两层费用，一张账单。工具费叠在 token 单价之上。</figcaption>
+    </figure>
+
+    <p>监控指标里要加上工具调用次数，只看 token 消耗会漏掉很大一块。最容易超出预期的变量是搜索深度：思考模式下问一个宽泛的问题，模型可能在动笔之前就跑了好几次付费查询。抓过的页面做缓存，同一页取两次就付两次钱。给每轮对话设一个步数预算，到了就记录一条日志。定预算之前，当前 V4.1 Flash 和 V4 Pro 的订阅方案与使用额度在我们<a href="https://deepseekv4flash.com/pricing">定价页</a>上有完整对比。</p>
+
+    <h2>上线前要确认的几件事</h2>
+
+    <ul class="checklist">
+      <li>面向公众的应用要打开安全参数。它提供的是基础过滤，不等于一套完整的合规方案。内容审核、大模型登记和 AI 标识这些义务，在适用范围内仍然由你来承担。</li>
+      <li>分阶段测延迟。搜索和文件解析会推迟出第一个字的时间，这种延迟对用户感受的影响，比在榜单上少几分要明显得多。</li>
+      <li>用用户真正会上传的文档做测试。扫描件、表格和双栏 PDF 是最容易悄悄出错的地方。</li>
+      <li>工具失败要有兜底。搜索没有返回结果，不应该变成一个空白回答。</li>
+    </ul>
+
+    <h2>对做产品的人意味着什么</h2>
+
+    <p>从想法到能用的助手，中间的路短了。以前想要搜索加文档阅读，得找三家供应商，再写一层队列把它们串起来。现在这件事是一个参数，省下来的精力会转移到更高一层：界面、权限、数据留存，以及那些真正属于你自己产品的部分。</p>
+
+    <p>它不会替你做产品判断。什么时候该搜、什么时候该读文件、什么时候该承认答案不在上下文里，这些仍然是设计工作。API 把围绕这些判断的管道拆掉了，判断本身还是得自己下。</p>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© 2026 DeepSeek V4 Flash</span>
+    <span><a href="https://deepseekv4flash.com/editorial-policy">编辑规范</a> · <a href="https://deepseekv4flash.com/privacy">隐私</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" role="img" aria-labelledby="title4 desc4">
+  <title id="title4">How a DeepSeek API bill is built from token and tool charges</title>
+  <desc id="desc4">Token charges and per-call tool charges combine into the cost of one request.</desc>
+  <defs>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h2{font-family:Arial,Helvetica,sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.4px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:15px;fill:#636363}
+      .layer{font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:700;fill:#18243d}
+      .layer-sub{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#52627b}
+      .total{font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:700;fill:#ffffff}
+      .check{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#18243d}
+      .check-sub{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#6b6b66}
+    </style>
+  </defs>
+
+  <rect width="1200" height="560" fill="#fcfcfa"/>
+  <rect x="0" y="0" width="6" height="560" fill="#2563eb"/>
+
+  <text x="64" y="76" class="eyebrow">COST STRUCTURE</text>
+  <text x="64" y="122" class="h2">Two charges build one request</text>
+  <text x="64" y="152" class="sub">Tokens are billed as before. Each tool call adds a fee on top.</text>
+
+  <rect x="64" y="196" width="600" height="66" rx="8" fill="#ffffff" stroke="#b9cdfb"/>
+  <text x="88" y="224" class="layer">Token charges</text>
+  <text x="88" y="246" class="layer-sub">input and output tokens at the model rate</text>
+
+  <text x="600" y="236" text-anchor="end" class="layer">+</text>
+
+  <rect x="64" y="276" width="600" height="66" rx="8" fill="#ffffff" stroke="#b9cdfb"/>
+  <text x="88" y="304" class="layer">Tool charges</text>
+  <text x="88" y="326" class="layer-sub">one fee per search, fetch, OCR, ASR or TTS call</text>
+
+  <rect x="64" y="356" width="600" height="62" rx="8" fill="#18243d"/>
+  <text x="88" y="394" class="total">Request total</text>
+
+  <rect x="720" y="196" width="416" height="222" rx="10" fill="#f7f9fc" stroke="#e5eaf3"/>
+  <text x="748" y="228" class="layer">Before you set a budget</text>
+
+  <circle cx="756" cy="262" r="4" fill="#2563eb"/>
+  <text x="774" y="267" class="check">Log tool calls per request</text>
+  <text x="774" y="286" class="check-sub">Search depth, not just token count, drives the bill.</text>
+
+  <circle cx="756" cy="316" r="4" fill="#2563eb"/>
+  <text x="774" y="321" class="check">Cache repeated fetches</text>
+  <text x="774" y="340" class="check-sub">The same page pulled twice is paid for twice.</text>
+
+  <circle cx="756" cy="370" r="4" fill="#2563eb"/>
+  <text x="774" y="375" class="check">Cap reasoning steps in long chats</text>
+  <text x="774" y="394" class="check-sub">A thinking loop can add several paid lookups.</text>
+
+  <line x1="64" y1="462" x2="1136" y2="462" stroke="#e7e7e3"/>
+  <text x="64" y="498" class="note">A chat that answers from context costs tokens. A chat that researches also pays for every page it opens.</text>
+  <text x="1136" y="498" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>

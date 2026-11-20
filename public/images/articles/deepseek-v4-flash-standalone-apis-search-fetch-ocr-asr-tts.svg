@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" role="img" aria-labelledby="title3 desc3">
+  <title id="title3">Standalone DeepSeek endpoints: search, fetch, OCR, ASR and TTS</title>
+  <desc id="desc3">Five independent endpoints that can be called without the chat layer.</desc>
+  <defs>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h2{font-family:Arial,Helvetica,sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.4px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:15px;fill:#636363}
+      .name{font-family:Arial,Helvetica,sans-serif;font-size:19px;font-weight:700;fill:#18243d}
+      .tag{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;fill:#2563eb}
+      .body{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#6b6b66}
+    </style>
+  </defs>
+
+  <rect width="1200" height="560" fill="#fcfcfa"/>
+  <rect x="0" y="0" width="6" height="560" fill="#2563eb"/>
+
+  <text x="64" y="76" class="eyebrow">STANDALONE ENDPOINTS</text>
+  <text x="64" y="122" class="h2">Five services you can call without the chat layer</text>
+  <text x="64" y="152" class="sub">Same infrastructure as the assistant, exposed one capability at a time.</text>
+
+  <g>
+    <rect x="64" y="196" width="204" height="222" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+    <rect x="88" y="220" width="60" height="22" rx="11" fill="#dbe6ff"/>
+    <text x="99" y="236" class="tag">SEARCH</text>
+    <text x="88" y="282" class="name">Search</text>
+    <text x="88" y="312" class="body">Query the web and image</text>
+    <text x="88" y="332" class="body">index, get ranked results</text>
+    <text x="88" y="352" class="body">with snippets.</text>
+    <text x="88" y="392" class="body">Good for retrieval</text>
+    <text x="88" y="412" class="body">inside your own agent.</text>
+
+    <rect x="292" y="196" width="204" height="222" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+    <rect x="316" y="220" width="52" height="22" rx="11" fill="#dbe6ff"/>
+    <text x="327" y="236" class="tag">FETCH</text>
+    <text x="316" y="282" class="name">Fetch</text>
+    <text x="316" y="312" class="body">Pull a page and return</text>
+    <text x="316" y="332" class="body">readable text instead of</text>
+    <text x="316" y="352" class="body">raw HTML.</text>
+    <text x="316" y="392" class="body">Handles the boilerplate</text>
+    <text x="316" y="412" class="body">cleanup for you.</text>
+
+    <rect x="520" y="196" width="204" height="222" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+    <rect x="544" y="220" width="40" height="22" rx="11" fill="#dbe6ff"/>
+    <text x="555" y="236" class="tag">OCR</text>
+    <text x="544" y="282" class="name">OCR</text>
+    <text x="544" y="312" class="body">Turn scans, screenshots</text>
+    <text x="544" y="332" class="body">and photographed pages</text>
+    <text x="544" y="352" class="body">into text.</text>
+    <text x="544" y="392" class="body">Useful for archives</text>
+    <text x="544" y="412" class="body">and invoice pipelines.</text>
+
+    <rect x="748" y="196" width="204" height="222" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+    <rect x="772" y="220" width="40" height="22" rx="11" fill="#dbe6ff"/>
+    <text x="783" y="236" class="tag">ASR</text>
+    <text x="772" y="282" class="name">ASR</text>
+    <text x="772" y="312" class="body">Transcribe audio into</text>
+    <text x="772" y="332" class="body">text for search, notes</text>
+    <text x="772" y="352" class="body">or subtitles.</text>
+    <text x="772" y="392" class="body">Base for voice input</text>
+    <text x="772" y="412" class="body">in your client.</text>
+
+    <rect x="976" y="196" width="160" height="222" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+    <rect x="1000" y="220" width="40" height="22" rx="11" fill="#dbe6ff"/>
+    <text x="1011" y="236" class="tag">TTS</text>
+    <text x="1000" y="282" class="name">TTS</text>
+    <text x="1000" y="312" class="body">Read answers aloud</text>
+    <text x="1000" y="332" class="body">in a natural voice.</text>
+    <text x="1000" y="392" class="body">Closes the loop for</text>
+    <text x="1000" y="412" class="body">hands-free tools.</text>
+  </g>
+
+  <line x1="64" y1="470" x2="1136" y2="470" stroke="#e7e7e3"/>
+  <text x="64" y="506" class="note">Use them alone when you already run your own orchestration, or together to rebuild the chat experience.</text>
+  <text x="1136" y="506" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>

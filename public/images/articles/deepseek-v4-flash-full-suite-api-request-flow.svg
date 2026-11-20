@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-labelledby="title2 desc2">
+  <title id="title2">Request path for a DeepSeek tool-enabled call</title>
+  <desc id="desc2">A user message becomes an API request, passes a server-side tool router, is assembled into context, and returns an answer with citations.</desc>
+  <defs>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h2{font-family:Arial,Helvetica,sans-serif;font-size:28px;font-weight:700;letter-spacing:-0.4px;fill:#18243d}
+      .card{font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;fill:#18243d}
+      .card-sub{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+      .num{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;fill:#2563eb}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#6b6b66}
+      .branch{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#18243d}
+      .branch-sub{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+    </style>
+  </defs>
+
+  <rect width="1200" height="640" fill="#fcfcfa"/>
+  <rect x="0" y="0" width="6" height="640" fill="#2563eb"/>
+
+  <text x="64" y="76" class="eyebrow">REQUEST PATH</text>
+  <text x="64" y="120" class="h2">What happens between prompt and answer</text>
+
+  <g>
+    <rect x="64" y="196" width="200" height="118" rx="9" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="82" y="222" class="num">01</text>
+    <text x="82" y="252" class="card">User message</text>
+    <text x="82" y="276" class="card-sub">text, an upload, or a link</text>
+    <text x="82" y="296" class="card-sub">from your product</text>
+
+    <rect x="294" y="196" width="200" height="118" rx="9" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="312" y="222" class="num">02</text>
+    <text x="312" y="252" class="card">API request</text>
+    <text x="312" y="276" class="card-sub">deepseek-flash with</text>
+    <text x="312" y="296" class="card-sub">tool parameters on</text>
+
+    <rect x="524" y="196" width="200" height="118" rx="9" fill="#f4f7ff" stroke="#b9cdfb"/>
+    <text x="542" y="222" class="num">03</text>
+    <text x="542" y="252" class="card">Tool router</text>
+    <text x="542" y="276" class="card-sub">search, URL fetch,</text>
+    <text x="542" y="296" class="card-sub">file parsing</text>
+
+    <rect x="754" y="196" width="200" height="118" rx="9" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="772" y="222" class="num">04</text>
+    <text x="772" y="252" class="card">Context assembly</text>
+    <text x="772" y="276" class="card-sub">results merged into</text>
+    <text x="772" y="296" class="card-sub">the prompt</text>
+
+    <rect x="984" y="196" width="152" height="118" rx="9" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="1002" y="222" class="num">05</text>
+    <text x="1002" y="252" class="card">Answer</text>
+    <text x="1002" y="276" class="card-sub">citations, or a</text>
+    <text x="1002" y="296" class="card-sub">refusal flag</text>
+  </g>
+
+  <g stroke="#9fb2db" stroke-width="2">
+    <line x1="266" y1="255" x2="290" y2="255"/>
+    <line x1="496" y1="255" x2="520" y2="255"/>
+    <line x1="726" y1="255" x2="750" y2="255"/>
+    <line x1="956" y1="255" x2="980" y2="255"/>
+  </g>
+  <g fill="#9fb2db">
+    <polygon points="294,255 283,250 283,260"/>
+    <polygon points="524,255 513,250 513,260"/>
+    <polygon points="754,255 743,250 743,260"/>
+    <polygon points="984,255 973,250 973,260"/>
+  </g>
+
+  <path d="M624 318 L624 352 L624 360" stroke="#9fb2db" stroke-width="2" fill="none" stroke-dasharray="5 4"/>
+
+  <rect x="364" y="366" width="420" height="104" rx="9" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="386" y="396" class="branch">Standard mode</text>
+  <text x="386" y="420" class="branch-sub">The model searches when the question needs it,</text>
+  <text x="386" y="440" class="branch-sub">then answers with inline references.</text>
+
+  <rect x="808" y="366" width="328" height="104" rx="9" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="830" y="396" class="branch">Thinking mode</text>
+  <text x="830" y="420" class="branch-sub">Search, read and search again inside</text>
+  <text x="830" y="440" class="branch-sub">one reasoning trace.</text>
+
+  <line x1="64" y1="520" x2="1136" y2="520" stroke="#e7e7e3"/>
+  <text x="64" y="556" class="note">Both modes are one request from the caller. The loop between steps 03 and 04 is internal.</text>
+  <text x="64" y="582" class="note">Latency grows with each tool call, so stream the answer and set a budget per turn.</text>
+  <text x="1136" y="582" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>
