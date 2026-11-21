@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek, Kimi, GLM, and Qwen All Ship 1M Context. The Contest Is Now the Bill per Finished Task. | DeepSeek V4 Flash</title>
+<meta name="description" content="DeepSeek V4.1 Flash, Kimi K3.1 Pro, GLM-5.3 and Qwen3.8-Max all ship 1M-token context. The real differences are in what each vendor optimised: cost, long-horizon agents, engineering or multimodal platform.">
+<link rel="canonical" href="https://deepseekv4flash.com/articles/deepseek-kimi-glm-qwen-flagship-comparison">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepSeek, Kimi, GLM, and Qwen All Ship 1M Context. The Contest Is Now the Bill per Finished Task.">
+<meta property="og:description" content="Four fall-2026 Chinese flagships, four different bets: per-token cost, long-horizon agents, engineering execution and multimodal platform. Vendor numbers, caveats and a workload-first shortlist.">
+<meta property="og:url" content="https://deepseekv4flash.com/articles/deepseek-kimi-glm-qwen-flagship-comparison">
+<meta property="og:image" content="https://deepseekv4flash.com/images/articles/deepseek-kimi-glm-qwen-flagship-llm-comparison-overview.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DeepSeek, Kimi, GLM, and Qwen All Ship 1M Context. The Contest Is Now the Bill per Finished Task.">
+<meta name="twitter:description" content="Four fall-2026 Chinese flagships, four different bets: per-token cost, long-horizon agents, engineering execution and multimodal platform.">
+<meta name="twitter:image" content="https://deepseekv4flash.com/images/articles/deepseek-kimi-glm-qwen-flagship-llm-comparison-overview.svg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DeepSeek, Kimi, GLM, and Qwen All Ship 1M Context. The Contest Is Now the Bill per Finished Task.",
+  "description": "DeepSeek V4.1 Flash, Kimi K3.1 Pro, GLM-5.3 and Qwen3.8-Max all ship 1M-token context. The real differences are in what each vendor optimised: cost, long-horizon agents, engineering or multimodal platform.",
+  "datePublished": "2026-11-21",
+  "dateModified": "2026-11-21",
+  "author": { "@type": "Person", "name": "Cameron Voss" },
+  "publisher": { "@type": "Organization", "name": "DeepSeek V4 Flash", "url": "https://deepseekv4flash.com" },
+  "image": ["https://deepseekv4flash.com/images/articles/deepseek-kimi-glm-qwen-flagship-llm-comparison-overview.svg"],
+  "mainEntityOfPage": "https://deepseekv4flash.com/articles/deepseek-kimi-glm-qwen-flagship-comparison"
+}
+</script>
+<style>
+  :root{
+    --page:#fcfcfa; --ink:#171717; --muted:#636363; --faint:#8a8a86;
+    --line:#e7e7e3; --blue:#2563eb; --blue-pale:#f4f7ff; --navy:#18243d;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:#dbe6ff}
+
+  .site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(252,252,250,.94);backdrop-filter:blur(12px)}
+  .site-header__inner{width:min(1200px,calc(100% - 48px));min-height:68px;margin:0 auto;display:flex;align-items:center;gap:56px}
+  .wordmark{font-size:14px;font-weight:750;letter-spacing:-.025em;text-transform:uppercase;white-space:nowrap}
+
+  .article-container{width:min(720px,calc(100% - 48px));margin:0 auto}
+  .article-header{padding:84px 0 34px;border-bottom:1px solid var(--line)}
+  .eyebrow{margin:0;color:var(--blue);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+  .article-header h1{margin:16px 0 0;font-size:clamp(38px,5.2vw,58px);line-height:1.02;letter-spacing:-.055em}
+  .byline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0 0;color:var(--muted);font-size:14px}
+  .byline__author{color:var(--ink);font-weight:700}
+  .byline__dot{color:#c9c9c4}
+  .article-header__dek{margin:24px 0 0;color:var(--muted);font-size:19px;line-height:1.55}
+
+  figure{margin:0}
+  .hero{margin:34px 0 8px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f2f6fc}
+  .hero img,.inline-figure img{display:block;width:100%;height:auto;border-radius:7px}
+  figcaption{margin:14px 4px 2px;color:var(--muted);font-size:13px;line-height:1.55}
+  .inline-figure{margin:36px 0 34px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f7f9fc}
+
+  .article-body{padding:30px 0 24px}
+  .article-body p{margin:0 0 25px;font-size:18px;line-height:1.72}
+  .article-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .article-body h2{margin:52px 0 20px;font-size:30px;line-height:1.15;letter-spacing:-.045em}
+  .article-body ul{margin:0 0 26px;padding:0 0 0 22px}
+  .article-body li{margin:0 0 12px;font-size:18px;line-height:1.68}
+  code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em;background:#f2f2ee;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+
+  .lede{border-left:3px solid var(--blue);padding:2px 0 2px 18px;color:#3d3d3a}
+
+  .callout{margin:34px 0;padding:20px 22px;border:1px solid #dbe4f8;border-radius:10px;background:var(--blue-pale)}
+  .callout p{margin:0 0 10px;font-size:15px;line-height:1.6;color:#3c4a63}
+  .callout p:last-child{margin-bottom:0}
+  .callout strong{color:var(--navy)}
+
+  .table-wrap{margin:8px 0 30px;border:1px solid var(--line);background:#fff;overflow-x:auto}
+  .cost-table{width:100%;min-width:620px;border-collapse:collapse;background:#fff}
+  .cost-table th,.cost-table td{padding:15px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:14px;line-height:1.5}
+  .cost-table th{background:#fafafa;color:var(--faint);font-size:11px;letter-spacing:.07em;text-transform:uppercase}
+  .cost-table tr:last-child td{border-bottom:0}
+
+  .tldr{margin:30px 0 10px;padding:22px 24px;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;background:#fff}
+  .tldr__title{margin:0 0 12px;font-size:12px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+  .tldr ul{margin:0;padding:0 0 0 18px}
+  .tldr li{margin:0 0 9px;font-size:15px;line-height:1.65;color:#3d3d3a}
+  .tldr li:last-child{margin-bottom:0}
+
+  .site-footer{border-top:1px solid var(--line);background:#f8f8f6}
+  .site-footer__inner{width:min(1200px,calc(100% - 48px));margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:34px 0;color:var(--muted);font-size:13px}
+
+  @media (max-width:640px){
+    .site-header__inner{min-height:auto;flex-wrap:wrap;gap:12px;padding:14px 0}
+    .wordmark{font-size:12px}
+    .article-header{padding-top:58px}
+    .article-header h1{font-size:38px}
+    .article-header__dek{font-size:17px}
+    .article-body p,.article-body li{font-size:17px}
+    .article-body h2{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <span class="wordmark">DeepSeek V4 Flash</span>
+  </div>
+</header>
+
+<main class="article-container">
+  <header class="article-header">
+    <p class="eyebrow">Models · Comparison</p>
+    <h1>DeepSeek, Kimi, GLM, and Qwen All Ship 1M Context. The Contest Is Now the Bill per Finished Task.</h1>
+    <p class="byline">
+      <span class="byline__author">By Cameron Voss</span>
+      <span class="byline__dot">·</span>
+      <span>November 21, 2026</span>
+      <span class="byline__dot">·</span>
+      <span>6 min read</span>
+    </p>
+  </header>
+
+  <section class="tldr" aria-labelledby="tldr-heading">
+    <h2 class="tldr__title" id="tldr-heading">TL;DR</h2>
+    <ul>
+      <li>DeepSeek V4.1 Flash, Kimi K3.1 Pro, GLM-5.3 and Qwen3.8-Max all carry 1M-token context. Context stopped being a differentiator.</li>
+      <li>DeepSeek optimises cost per token: 552B total parameters, 8B active on input, 16B on output, KV cache cut to a quarter of the previous generation.</li>
+      <li>Kimi optimises long-horizon work: 65.7% on Terminal-Bench 4.0, priced at $2 in and $10 out per million tokens.</li>
+      <li>GLM-5.3 took its gains from post-training on the same base as 5.2; the Flash sibling cuts attention compute about 3x.</li>
+      <li>Qwen3.8-Max pairs a 2.4T open-weight MoE with image and video understanding aimed at enterprise workflows.</li>
+      <li>None of the published numbers share test conditions. Read them as direction, not as a leaderboard.</li>
+    </ul>
+  </section>
+
+  <figure class="hero">
+    <img src="../public/images/articles/deepseek-kimi-glm-qwen-flagship-llm-comparison-overview.svg"
+         alt="Overview of four Chinese flagship LLMs: DeepSeek V4.1 Flash, Kimi K3.1 Pro, GLM-5.3 and Qwen3.8-Max, with parameter counts and strategic focus above a shared 1M-token context baseline"
+         width="1200" height="675" loading="eager" decoding="async">
+    <figcaption>Four flagships, four bets. The shared baseline is 1M-token context and sparse, MoE-style compute.</figcaption>
+  </figure>
+
+  <article class="article-body">
+
+    <p class="lede">The spec war between Chinese labs has settled into a shared floor: trillion-parameter-class bodies, million-token context windows, agent-grade tool calling. What separates the fall 2026 flagships is no longer on the spec sheet. It is in what each vendor spent its training and engineering budget on.</p>
+
+    <p>I went through the four models the labs are actually pushing right now: DeepSeek V4.1 Flash (updated October 17), Kimi K3.1 Pro (released October 23), Zhipu's GLM-5.3 and Alibaba's Qwen3.8-Max. Here is what each one is good at, what the vendors claim, and where I would push back.</p>
+
+    <h2>The shared spec sheet</h2>
+
+    <div class="table-wrap">
+      <table class="cost-table">
+        <thead>
+          <tr><th>Model</th><th>Total parameters</th><th>Active parameters</th><th>Context</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>DeepSeek V4.1 Flash</td><td>552B</td><td>8B on input, 16B on output</td><td>1M</td></tr>
+          <tr><td>Kimi K3.1 Pro</td><td>3T class</td><td>Not disclosed</td><td>1M</td></tr>
+          <tr><td>GLM-5.3</td><td>Not disclosed</td><td>Not disclosed</td><td>1M</td></tr>
+          <tr><td>Qwen3.8-Max</td><td>2.4T</td><td>About 95B</td><td>1M</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Two things are worth understanding before quoting any of these numbers. First, total parameters are not the compute bill. These are mixture-of-experts models: each token passes a router and wakes up only a slice of the experts. Qwen3.8-Max carries 2.4T parameters and activates roughly 95B per token. DeepSeek goes further with an asymmetric split, 8B active while reading input and 16B while generating output.</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/moe-total-vs-active-parameters-explained.svg"
+           alt="Mixture-of-experts diagram: one token passes a router that selects a small highlighted subset of experts from the full pool, and only that subset computes on the token"
+           width="1200" height="640" loading="lazy" decoding="async">
+      <figcaption>Total parameters describe capacity. Active parameters describe what a single token actually costs.</figcaption>
+    </figure>
+
+    <p>Second, a 1M-token context window is a capacity claim, not a performance claim. What matters in production is whether the model still finds the clause on page 400, keeps the original goal in mind at step 80 of a task, and connects facts across two documents. Context length tells you the size of the desk, not how organised the worker is.</p>
+
+    <h2>DeepSeek V4.1 Flash: built around the cost of intelligence</h2>
+
+    <p>If I had to summarise DeepSeek's strategy in one word it would be efficiency. V4.1 Flash does not chase the biggest body in the room. It uses an asymmetric encoder-decoder design where reading and writing get different compute budgets, because they are genuinely different jobs. Encoding a long context is parallel work. Generating output is sequential, token-by-token work. Giving both stages the same active parameter count wastes one of them.</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-v4-flash-asymmetric-input-output-architecture.svg"
+           alt="Diagram of DeepSeek V4.1 Flash stages: context enters an input stage with 8B active parameters, then an output stage with 16B active parameters, producing an answer or tool call, with KV cache HBM at one quarter and SSD at one eighth of the previous generation"
+           width="1200" height="640" loading="lazy" decoding="async">
+      <figcaption>Reading and writing get separate compute budgets. The cache reductions are what long agent sessions feel.</figcaption>
+    </figure>
+
+    <p>The other half of the story is memory. Agent sessions accumulate history across many tool calls, and that history lives in the KV cache. DeepSeek reports V4.1 Flash needs a quarter of the previous generation's HBM for that cache and an eighth of the SSD storage. For teams running long sessions, that is the difference between a cache that fits in memory and one that spills.</p>
+
+    <p>The October 17 update targeted agent work specifically: 77.0 on DeepSWE v1.1, 42.3 on Terminal-Bench 4.0, 68.2 on NL2Repo-Bench and 60.5 on Automation-Bench. The vendor also claims the update cut task runtime and output tokens at the same time, which is the claim I care about most. Better scores are common. Smaller bills per finished task are not.</p>
+
+    <p>This is the model to shortlist when the workload is high-concurrency: code analysis at scale, long-document processing, agent tool calling, any product where the API invoice is a line in your unit economics. If per-token economics drive your stack, our <a href="https://deepseekv4flash.com/pricing">pricing page</a> lists the current plans and their usage allowances, so you can cost a real workload before committing.</p>
+
+    <h2>Kimi K3.1 Pro: built around the whole task</h2>
+
+    <p>Kimi is asking a different question. Not "how cheaply can we answer" but "can the model finish the job". K3.1 Pro is a post-trained version of K3 with a heavier reinforcement-learning pass, aimed at code, 3D creation, financial research and long-horizon agent tasks.</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/long-horizon-agent-plan-execute-feedback-loop.svg"
+           alt="Agent loop diagram: read the requirement and codebase, plan steps, write code and call tools, run tests and read the environment, check the result, then deliver on pass or revise the plan on fail"
+           width="1200" height="640" loading="lazy" decoding="async">
+      <figcaption>The loop is the product. Feedback changes the next action, not the model weights.</figcaption>
+    </figure>
+
+    <p>The published numbers: 65.7% on Terminal-Bench 4.0. 61.2% on Kimi's internal Code Bench 3.0 long-horizon suite, up from 55.95% for K3. 92.7% on BenchCAD with tools, where the model rebuilds a 3D model as CAD code from multi-view renders. 64.4 on OfficeQA Pro v2, a test of retrieval and multi-step numeric reasoning over real financial documents.</p>
+
+    <p>Two caveats before you build on those. Some of the scores come from Kimi's own evaluations rather than independent runs. And the API is priced at $2 per million input tokens and $10 per million output, which puts it in a different cost tier from DeepSeek Flash. You are paying for completion, not for tokens. The full weights followed in early November, published under a custom Kimi K3.1 Pro License. It is a separate agreement, not MIT or Apache 2.0, so read the current terms before planning self-hosting or redistribution.</p>
+
+    <p>Where it fits: work that has stages and a deliverable. A model that reads the repo, writes a plan, edits code, runs tests and fixes its own failures. That loop, not the raw coding score, is what K3.1 Pro is selling.</p>
+
+    <h2>GLM-5.3: built around the engineering loop</h2>
+
+    <p>Zhipu's interesting claim is not a score, it is a method. GLM-5.3 shares its base model with GLM-5.2. The gains come from post-training: reinforcement learning inside automatically generated task environments built from real engineering problems, with tests deciding whether the model actually finished the work. On the vendor's internal Z.ai Code Bench, coding performance is up 50% over 5.2. On DeepSWE v1.1 the score moved from 46.2 to 66.9.</p>
+
+    <p>That is a useful data point for anyone planning a model roadmap. A meaningful jump without a new pretraining run.</p>
+
+    <p>The Flash sibling, GLM-5.3-Flash, covers the cost-sensitive side: 320B total parameters, 18B active, mixing sparse attention for wide retrieval with linear attention for cheap local dependencies. Zhipu reports about 3x less attention compute and about 4.4x less KV cache than GLM-5.3, plus native image, video and file input. Flagship for depth, Flash for throughput. It is a clean two-product layout.</p>
+
+    <h2>Qwen3.8-Max: built around the platform</h2>
+
+    <p>Alibaba is playing the widest hand. Qwen3.8-Max is a 2.4T-parameter MoE with hybrid attention, taking text, image and video input, with function calling and multi-tool orchestration aimed at real workflows rather than chat.</p>
+
+    <p>The demonstration the vendor keeps repeating is a 16-day run in which the model built a self-evolving agent framework from scratch: generating code, testing, previewing, reading its own logs, iterating, and eventually publishing the result as an open-source project. One internal case study is not a guarantee that your task runs for 16 days. Treat it as a statement of direction.</p>
+
+    <p>The more concrete point is the weights. The 2.4T Qwen3.8 weights are open and deployable through vLLM or SGLang. Open at that size does not mean laptop-friendly: serving it takes multi-node accelerated compute. The value of open weights here is control, meaning your infrastructure, your optimisations, your fine-tunes.</p>
+
+    <h2>Picking by workload</h2>
+
+    <p>Put the four side by side and it becomes clear they are not competing on the same axis.</p>
+
+    <div class="table-wrap">
+      <table class="cost-table">
+        <thead>
+          <tr><th>Dimension</th><th>DeepSeek</th><th>Kimi</th><th>GLM</th><th>Qwen</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Core strength</td><td>Inference efficiency, cost</td><td>Long-horizon agents</td><td>Engineering and coding</td><td>Multimodal and ecosystem</td></tr>
+          <tr><td>Multimodal</td><td>Vision</td><td>Vision plus 3D workflows</td><td>Native on Flash</td><td>Image and video</td></tr>
+          <tr><td>Context</td><td>1M</td><td>1M</td><td>1M</td><td>1M</td></tr>
+          <tr><td>Cost posture</td><td>Low cost</td><td>Capability first</td><td>Low cost on Flash</td><td>Tiered product line</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li><strong>Cost-sensitive, high-concurrency serving:</strong> DeepSeek. The bill per finished task is the product.</li>
+      <li><strong>Multi-stage projects with a deliverable:</strong> Kimi. Goal retention across many tool calls is what you are buying.</li>
+      <li><strong>Terminal-heavy software engineering:</strong> GLM. The training environments were built around exactly this loop.</li>
+      <li><strong>Multimodal input and self-hosted enterprise deployment:</strong> Qwen. Open weights plus image and video coverage.</li>
+    </ul>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/flagship-llm-selection-guide-by-workload.svg"
+           alt="Selection guide table mapping four workloads to model focus and verification points: DeepSeek for low cost and high concurrency, Kimi for complex agent work, GLM for software engineering, Qwen for multimodal enterprise deployment"
+           width="1200" height="640" loading="lazy" decoding="async">
+      <figcaption>Start from the workload. The model follows.</figcaption>
+    </figure>
+
+    <p>One warning about everything above. These numbers do not share test conditions. Different model versions, reasoning settings, tool scaffolds and harnesses sit behind them. A table like this is a map of where to start testing, not a ranking of who won.</p>
+
+    <h2>The competition moved</h2>
+
+    <p>Two years ago the contest was parameter counts and benchmark scores. The fall 2026 flagships compete on post-training, task environments, inference memory and cost per finished task. The labs are no longer selling a smarter answer. They are selling finished work: the report, the repository, the model file, the pipeline that runs without a human in the loop.</p>
+
+    <p>That shift changes how to choose. The best model is not the one that wins the most rows in a table. It is the one whose bet matches your workload, verified on your own tasks, at a cost your unit economics can carry.</p>
+
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© 2026 DeepSeek V4 Flash</span>
+    <span>Editorial comparisons are based on vendor-published material.</span>
+  </div>
+</footer>
+
+</body>
+</html>

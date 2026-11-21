@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">DeepSeek, Kimi, GLM and Qwen flagship LLM comparison overview</title>
+  <desc id="desc">Four cards summarise the fall 2026 Chinese flagship models: DeepSeek V4.1 Flash, Kimi K3.1 Pro, GLM-5.3 and Qwen3.8-Max, each with parameter counts and strategic focus, above a shared 1M-token context baseline.</desc>
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#efefea" stroke-width="1"/>
+    </pattern>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h1{font-family:Arial,Helvetica,sans-serif;font-size:35px;font-weight:700;letter-spacing:-0.6px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#636363}
+      .card{font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:700;fill:#18243d}
+      .card-sub{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#636363}
+      .bet{font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;fill:#2563eb}
+      .strip{font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;fill:#18243d}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#6b6b66}
+    </style>
+  </defs>
+
+  <rect width="1200" height="675" fill="#fcfcfa"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <rect x="0" y="0" width="6" height="675" fill="#2563eb"/>
+
+  <text x="64" y="82" class="eyebrow">CHINESE FLAGSHIP LLMs · FALL 2026</text>
+  <text x="64" y="136" class="h1">Four flagships, four different bets</text>
+  <text x="64" y="172" class="sub">All four ship 1M-token context. What each vendor optimises around it is where they split.</text>
+
+  <rect x="64" y="228" width="248" height="272" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="86" y="266" class="card">DeepSeek V4.1 Flash</text>
+  <line x1="86" y1="284" x2="290" y2="284" stroke="#e7e7e3"/>
+  <text x="86" y="314" class="card-sub">552B total parameters</text>
+  <text x="86" y="340" class="card-sub">8B active on input</text>
+  <text x="86" y="366" class="card-sub">16B active on output</text>
+  <text x="86" y="392" class="card-sub">Native vision</text>
+  <text x="86" y="440" class="bet">Bet: cost per token</text>
+  <text x="86" y="464" class="card-sub">KV cache cut to 1/4 HBM</text>
+
+  <rect x="338" y="228" width="248" height="272" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="360" y="266" class="card">Kimi K3.1 Pro</text>
+  <line x1="360" y1="284" x2="564" y2="284" stroke="#e7e7e3"/>
+  <text x="360" y="314" class="card-sub">3T-class total parameters</text>
+  <text x="360" y="340" class="card-sub">Active count undisclosed</text>
+  <text x="360" y="366" class="card-sub">RL post-training focus</text>
+  <text x="360" y="392" class="card-sub">Pro-tool workflows</text>
+  <text x="360" y="440" class="bet">Bet: long-horizon agents</text>
+  <text x="360" y="464" class="card-sub">65.7% Terminal-Bench 4.0</text>
+
+  <rect x="612" y="228" width="248" height="272" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="634" y="266" class="card">GLM-5.3</text>
+  <line x1="634" y1="284" x2="838" y2="284" stroke="#e7e7e3"/>
+  <text x="634" y="314" class="card-sub">Parameters undisclosed</text>
+  <text x="634" y="340" class="card-sub">Same base as GLM-5.2</text>
+  <text x="634" y="366" class="card-sub">Gains from post-training</text>
+  <text x="634" y="392" class="card-sub">Up to 128K output</text>
+  <text x="634" y="440" class="bet">Bet: engineering execution</text>
+  <text x="634" y="464" class="card-sub">Flash: 320B total, 18B active</text>
+
+  <rect x="886" y="228" width="248" height="272" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="908" y="266" class="card">Qwen3.8-Max</text>
+  <line x1="908" y1="284" x2="1112" y2="284" stroke="#e7e7e3"/>
+  <text x="908" y="314" class="card-sub">2.4T total parameters</text>
+  <text x="908" y="340" class="card-sub">95B active per token</text>
+  <text x="908" y="366" class="card-sub">Open weights</text>
+  <text x="908" y="392" class="card-sub">Text, image, video input</text>
+  <text x="908" y="440" class="bet">Bet: multimodal platform</text>
+  <text x="908" y="464" class="card-sub">vLLM and SGLang deployable</text>
+
+  <rect x="64" y="532" width="1070" height="56" rx="10" fill="#f4f7ff" stroke="#b9cdfb"/>
+  <text x="88" y="566" class="strip">Shared baseline: 1M-token context · sparse MoE-style compute · agent-grade tool calling</text>
+
+  <line x1="64" y1="620" x2="1136" y2="620" stroke="#e7e7e3"/>
+  <text x="64" y="648" class="note">Vendor-reported specifications, November 2026. A map of strategies, not a benchmark ranking.</text>
+  <text x="1136" y="648" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>

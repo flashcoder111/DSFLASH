@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-labelledby="title desc">
+  <title id="title">DeepSeek V4.1 Flash asymmetric input and output compute stages</title>
+  <desc id="desc">Context enters an input stage that activates 8B parameters to read and encode, then an output stage that activates 16B parameters to generate tokens, ending in an answer or tool call; KV cache needs drop to one quarter HBM and one eighth SSD.</desc>
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#efefea" stroke-width="1"/>
+    </pattern>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h1{font-family:Arial,Helvetica,sans-serif;font-size:35px;font-weight:700;letter-spacing:-0.6px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#636363}
+      .card{font-family:Arial,Helvetica,sans-serif;font-size:19px;font-weight:700;fill:#18243d}
+      .card-sub{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#636363}
+      .chip{font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;fill:#18243d}
+      .chip-sub{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+      .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;fill:#2563eb}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#6b6b66}
+    </style>
+  </defs>
+
+  <rect width="1200" height="640" fill="#fcfcfa"/>
+  <rect width="1200" height="640" fill="url(#grid)"/>
+  <rect x="0" y="0" width="6" height="640" fill="#2563eb"/>
+
+  <text x="64" y="76" class="eyebrow">DEEPSEEK V4.1 FLASH</text>
+  <text x="64" y="128" class="h1">Different compute for reading and for writing</text>
+  <text x="64" y="162" class="sub">The input stage encodes context cheaply. The output stage spends more per generated token.</text>
+
+  <rect x="64" y="252" width="160" height="88" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="144" y="290" text-anchor="middle" class="card">Context in</text>
+  <text x="144" y="314" text-anchor="middle" class="card-sub">up to 1M tokens</text>
+
+  <line x1="226" y1="296" x2="286" y2="296" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="286,296 274,290 274,302" fill="#9fb2db"/>
+
+  <rect x="290" y="230" width="290" height="132" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="435" y="268" text-anchor="middle" class="card">Input stage</text>
+  <text x="435" y="294" text-anchor="middle" class="card-sub">read and encode the context</text>
+  <rect x="365" y="312" width="140" height="24" rx="12" fill="#dbe6ff"/>
+  <text x="435" y="329" text-anchor="middle" class="mono">8B active params</text>
+
+  <line x1="582" y1="296" x2="642" y2="296" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="642,296 630,290 630,302" fill="#9fb2db"/>
+
+  <rect x="646" y="230" width="290" height="132" rx="10" fill="#f4f7ff" stroke="#b9cdfb"/>
+  <text x="791" y="268" text-anchor="middle" class="card">Output stage</text>
+  <text x="791" y="294" text-anchor="middle" class="card-sub">generate token by token</text>
+  <rect x="714" y="312" width="154" height="24" rx="12" fill="#dbe6ff"/>
+  <text x="791" y="329" text-anchor="middle" class="mono">16B active params</text>
+
+  <line x1="938" y1="296" x2="998" y2="296" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="998,296 986,290 986,302" fill="#9fb2db"/>
+
+  <rect x="1002" y="252" width="132" height="88" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="1068" y="290" text-anchor="middle" class="card">Answer</text>
+  <text x="1068" y="314" text-anchor="middle" class="card-sub">or tool call</text>
+
+  <rect x="64" y="418" width="520" height="76" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="88" y="450" class="chip">KV cache HBM: 1/4 of the previous generation</text>
+  <text x="88" y="474" class="chip-sub">vendor-reported, V4.1 Flash vs its predecessor</text>
+
+  <rect x="614" y="418" width="520" height="76" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="638" y="450" class="chip">SSD storage for cache: 1/8 of the previous generation</text>
+  <text x="638" y="474" class="chip-sub">the part that makes long agent sessions affordable</text>
+
+  <line x1="64" y1="560" x2="1136" y2="560" stroke="#e7e7e3"/>
+  <text x="64" y="590" class="note">Stage diagram drawn from the vendor description. Not actual layer counts or compute ratios.</text>
+  <text x="1136" y="590" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>

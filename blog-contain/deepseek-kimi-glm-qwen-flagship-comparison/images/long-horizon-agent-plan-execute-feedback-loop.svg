@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-labelledby="title desc">
+  <title id="title">Long-horizon agent plan, execute, check and revise loop</title>
+  <desc id="desc">Six stages in a loop: read the requirement and codebase, plan steps, write code and call tools, run tests and read the environment, check the result, then deliver on pass or revise the plan on fail.</desc>
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#efefea" stroke-width="1"/>
+    </pattern>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h1{font-family:Arial,Helvetica,sans-serif;font-size:35px;font-weight:700;letter-spacing:-0.6px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#636363}
+      .card{font-family:Arial,Helvetica,sans-serif;font-size:18px;font-weight:700;fill:#18243d}
+      .card-sub{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#636363}
+      .tag{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;fill:#6b6b66}
+      .tag-fail{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;fill:#c4453c}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#6b6b66}
+    </style>
+  </defs>
+
+  <rect width="1200" height="640" fill="#fcfcfa"/>
+  <rect width="1200" height="640" fill="url(#grid)"/>
+  <rect x="0" y="0" width="6" height="640" fill="#2563eb"/>
+
+  <text x="64" y="76" class="eyebrow">LONG-HORIZON AGENTS</text>
+  <text x="64" y="128" class="h1">Plan, execute, check, revise</text>
+  <text x="64" y="162" class="sub">Long tasks stay on track when every step produces an observable result.</text>
+
+  <rect x="64" y="220" width="300" height="84" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="214" y="254" text-anchor="middle" class="card">Read the requirement</text>
+  <text x="214" y="278" text-anchor="middle" class="card-sub">and the existing codebase</text>
+
+  <line x1="366" y1="262" x2="426" y2="262" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="426,262 414,256 414,268" fill="#9fb2db"/>
+
+  <rect x="430" y="220" width="300" height="84" rx="8" fill="#f4f7ff" stroke="#b9cdfb"/>
+  <text x="580" y="254" text-anchor="middle" class="card">Plan the steps</text>
+  <text x="580" y="278" text-anchor="middle" class="card-sub">sequence the work</text>
+
+  <line x1="732" y1="262" x2="792" y2="262" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="792,262 780,256 780,268" fill="#9fb2db"/>
+
+  <rect x="796" y="220" width="340" height="84" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="966" y="254" text-anchor="middle" class="card">Write code, call tools</text>
+  <text x="966" y="278" text-anchor="middle" class="card-sub">terminal, editors, domain apps</text>
+
+  <line x1="966" y1="306" x2="966" y2="366" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="966,366 960,354 972,354" fill="#9fb2db"/>
+
+  <rect x="796" y="370" width="340" height="84" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="966" y="404" text-anchor="middle" class="card">Run tests</text>
+  <text x="966" y="428" text-anchor="middle" class="card-sub">read the environment feedback</text>
+
+  <line x1="794" y1="412" x2="734" y2="412" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="734,412 746,406 746,418" fill="#9fb2db"/>
+
+  <rect x="430" y="370" width="300" height="84" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="580" y="404" text-anchor="middle" class="card">Check the result</text>
+  <text x="580" y="428" text-anchor="middle" class="card-sub">does it meet the requirement</text>
+
+  <line x1="428" y1="412" x2="368" y2="412" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="368,412 380,406 380,418" fill="#9fb2db"/>
+  <text x="398" y="398" text-anchor="middle" class="tag">pass</text>
+
+  <rect x="64" y="370" width="300" height="84" rx="8" fill="#f4f7ff" stroke="#b9cdfb"/>
+  <text x="214" y="404" text-anchor="middle" class="card">Deliver the project</text>
+  <text x="214" y="428" text-anchor="middle" class="card-sub">code, tests, documentation</text>
+
+  <line x1="580" y1="368" x2="580" y2="308" stroke="#c4453c" stroke-width="2"/>
+  <polygon points="580,308 574,320 586,320" fill="#c4453c"/>
+  <text x="596" y="344" class="tag-fail">fail: revise the plan</text>
+
+  <line x1="64" y1="520" x2="1136" y2="520" stroke="#e7e7e3"/>
+  <text x="64" y="552" class="card">The loop is the product.</text>
+  <text x="64" y="580" class="note">Feedback adjusts the next action. It does not update model weights.</text>
+  <text x="1136" y="580" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>

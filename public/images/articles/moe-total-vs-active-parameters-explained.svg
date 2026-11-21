@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-labelledby="title desc">
+  <title id="title">Mixture-of-experts total versus active parameters explained</title>
+  <desc id="desc">A token passes through a router that selects a small subset of experts from the full expert pool; only the highlighted experts compute on that token.</desc>
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#efefea" stroke-width="1"/>
+    </pattern>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h1{font-family:Arial,Helvetica,sans-serif;font-size:35px;font-weight:700;letter-spacing:-0.6px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#636363}
+      .card{font-family:Arial,Helvetica,sans-serif;font-size:19px;font-weight:700;fill:#18243d}
+      .card-sub{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#636363}
+      .expert{font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;fill:#6b6b66}
+      .expert-on{font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;fill:#2563eb}
+      .line1{font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:700;fill:#18243d}
+      .line2{font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:700;fill:#2563eb}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:14px;fill:#6b6b66}
+    </style>
+  </defs>
+
+  <rect width="1200" height="640" fill="#fcfcfa"/>
+  <rect width="1200" height="640" fill="url(#grid)"/>
+  <rect x="0" y="0" width="6" height="640" fill="#2563eb"/>
+
+  <text x="64" y="76" class="eyebrow">MODEL SPECS</text>
+  <text x="64" y="128" class="h1">Total parameters are not the compute bill</text>
+  <text x="64" y="162" class="sub">In a mixture-of-experts model, each token wakes up only part of the network.</text>
+
+  <rect x="64" y="248" width="150" height="72" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="139" y="291" text-anchor="middle" class="card">One token</text>
+
+  <line x1="216" y1="284" x2="276" y2="284" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="276,284 264,278 264,290" fill="#9fb2db"/>
+
+  <rect x="280" y="248" width="170" height="72" rx="8" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="365" y="291" text-anchor="middle" class="card">Router</text>
+
+  <line x1="452" y1="284" x2="512" y2="284" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="512,284 500,278 500,290" fill="#9fb2db"/>
+
+  <rect x="516" y="212" width="380" height="216" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+  <text x="706" y="246" text-anchor="middle" class="card">Expert pool</text>
+  <rect x="540" y="264" width="150" height="44" rx="6" fill="#f4f7ff" stroke="#2563eb"/>
+  <text x="615" y="292" text-anchor="middle" class="expert-on">Expert A</text>
+  <rect x="710" y="264" width="150" height="44" rx="6" fill="#fafafa" stroke="#e7e7e3"/>
+  <text x="785" y="292" text-anchor="middle" class="expert">Expert B</text>
+  <rect x="540" y="320" width="150" height="44" rx="6" fill="#fafafa" stroke="#e7e7e3"/>
+  <text x="615" y="348" text-anchor="middle" class="expert">Expert C</text>
+  <rect x="710" y="320" width="150" height="44" rx="6" fill="#f4f7ff" stroke="#2563eb"/>
+  <text x="785" y="348" text-anchor="middle" class="expert-on">Expert D</text>
+  <rect x="540" y="376" width="150" height="36" rx="6" fill="#fafafa" stroke="#e7e7e3"/>
+  <text x="615" y="400" text-anchor="middle" class="expert">Expert E</text>
+  <text x="785" y="400" text-anchor="middle" class="expert">...</text>
+
+  <line x1="898" y1="284" x2="958" y2="284" stroke="#9fb2db" stroke-width="2"/>
+  <polygon points="958,284 946,278 946,290" fill="#9fb2db"/>
+
+  <rect x="962" y="248" width="172" height="72" rx="8" fill="#f4f7ff" stroke="#b9cdfb"/>
+  <text x="1048" y="278" text-anchor="middle" class="card">Active subset</text>
+  <text x="1048" y="302" text-anchor="middle" class="card-sub">computes this token</text>
+
+  <line x1="64" y1="470" x2="1136" y2="470" stroke="#e7e7e3"/>
+  <text x="64" y="506" class="line1">Total parameters: the capacity the model can draw on.</text>
+  <text x="64" y="536" class="line2">Active parameters: the slice that actually computes on a given token.</text>
+
+  <line x1="64" y1="580" x2="1136" y2="580" stroke="#e7e7e3"/>
+  <text x="64" y="610" class="note">Concept diagram. Expert counts and proportions are illustrative, not real model specifications.</text>
+  <text x="1136" y="610" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>

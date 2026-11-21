@@ -48,7 +48,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <p className="eyebrow">{article.topic}</p>
         <h1>{article.title}</h1>
         {article.author ? <p className="article-header__byline">By <strong>{article.author}</strong></p> : null}
-        <p className="article-header__dek">{article.dek}</p>
+        {article.hideDek ? null : <p className="article-header__dek">{article.dek}</p>}
         <p className="article-header__meta">Published {article.date} · Last checked {article.updated}{article.sourceCount > 0 ? ` · ${article.sourceCount} sources reviewed` : ""}</p>
       </header>
       {article.tldr?.length ? <section className="article-tldr">

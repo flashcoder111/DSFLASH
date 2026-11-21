@@ -38,6 +38,7 @@ export type Article = {
   sourceCount: number;
   visual: "network" | "context" | "loop" | "release" | "report" | "world";
   author?: string;
+  hideDek?: boolean;
   tldr?: string[];
   body: string[];
   sections?: ArticleSection[];
