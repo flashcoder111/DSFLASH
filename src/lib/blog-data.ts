@@ -18,7 +18,7 @@ export type ArticleBlock =
   | { kind: "p"; text: string }
   | { kind: "ul"; items: string[] }
   | { kind: "table"; head: string[]; rows: string[][] }
-  | { kind: "image"; src: string; alt: string; caption?: string }
+  | { kind: "image"; src: string; alt: string; caption?: string; wide?: boolean }
   | { kind: "cta"; pre: string; label: string; href: string; post?: string };
 
 export type ArticleSection = {

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek Search API Pricing Shift: It’s Not Simply a Price Cut | DeepSeek V4 Flash</title>
+<meta name="description" content="DeepSeek prices five App API capabilities in five different units. What Search, Fetch, OCR, ASR and TTS cost, what a RAG answer costs, and where token-billed search crosses the old per-call fee.">
+<link rel="canonical" href="https://deepseekv4flash.com/articles/deepseek-app-api-suite-unit-costs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepSeek Search API Pricing Shift: It’s Not Simply a Price Cut">
+<meta property="og:description" content="The 13 November release turned the app's tools into endpoints. The end-of-November change turned server-side search into a token line item. Here is the cost map.">
+<meta property="og:url" content="https://deepseekv4flash.com/articles/deepseek-app-api-suite-unit-costs">
+<meta property="og:image" content="https://deepseekv4flash.com/images/articles/deepseek-app-api-suite-unit-cost-overview.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DeepSeek Search API Pricing Shift: It’s Not Simply a Price Cut">
+<meta name="twitter:description" content="What each App API unit costs, what a RAG answer costs under three architectures, and where the old and new search prices cross.">
+<meta name="twitter:image" content="https://deepseekv4flash.com/images/articles/deepseek-app-api-suite-unit-cost-overview.svg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DeepSeek Search API Pricing Shift: It’s Not Simply a Price Cut",
+  "description": "DeepSeek prices five App API capabilities in five different units. What Search, Fetch, OCR, ASR and TTS cost, what a RAG answer costs, and where token-billed search crosses the old per-call fee.",
+  "datePublished": "2026-11-26",
+  "dateModified": "2026-11-26",
+  "author": { "@type": "Person", "name": "Cameron Voss" },
+  "publisher": { "@type": "Organization", "name": "DeepSeek V4 Flash", "url": "https://deepseekv4flash.com" },
+  "image": ["https://deepseekv4flash.com/images/articles/deepseek-app-api-suite-unit-cost-overview.svg"],
+  "mainEntityOfPage": "https://deepseekv4flash.com/articles/deepseek-app-api-suite-unit-costs"
+}
+</script>
+<style>
+  :root{
+    --page:#fcfcfa; --ink:#171717; --muted:#636363; --faint:#8a8a86;
+    --line:#e7e7e3; --blue:#2563eb; --blue-pale:#f4f7ff; --navy:#18243d;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:#dbe6ff}
+
+  .site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(252,252,250,.94);backdrop-filter:blur(12px)}
+  .site-header__inner{width:min(1200px,calc(100% - 48px));min-height:68px;margin:0 auto;display:flex;align-items:center;gap:56px}
+  .wordmark{font-size:14px;font-weight:750;letter-spacing:-.025em;text-transform:uppercase;white-space:nowrap}
+  .primary-nav{display:flex;gap:32px;font-size:14px}
+  .primary-nav a:hover{color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+
+  .article-container{width:min(720px,calc(100% - 48px));margin:0 auto}
+  .article-header{padding:84px 0 34px;border-bottom:1px solid var(--line)}
+  .eyebrow{margin:0;color:var(--blue);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+  .article-header h1{margin:16px 0 0;font-size:clamp(32px,4vw,40px);line-height:1.12;letter-spacing:-.04em}
+  .byline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0 0;color:var(--muted);font-size:14px}
+  .byline__author{color:var(--ink);font-weight:700}
+  .byline__dot{color:#c9c9c4}
+  .article-header__dek{margin:24px 0 0;color:var(--muted);font-size:19px;line-height:1.55}
+
+  figure{margin:0}
+  .hero{margin:34px 0 8px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f2f6fc}
+  .hero img,.inline-figure img{display:block;width:100%;height:auto;border-radius:7px}
+  figcaption{margin:14px 4px 2px;color:var(--muted);font-size:13px;line-height:1.55}
+  .inline-figure{margin:36px 0 34px 50%;width:min(1120px,calc(100vw - 48px));transform:translateX(-50%);padding:16px;border:1px solid var(--line);border-radius:10px;background:#f7f9fc}
+  .inline-figure figcaption{max-width:760px}
+
+  .article-body{padding:30px 0 24px}
+  .article-body p{margin:0 0 25px;font-size:18px;line-height:1.72}
+  .article-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .article-body h2{margin:52px 0 20px;font-size:30px;line-height:1.15;letter-spacing:-.045em}
+  .article-body ul{margin:0 0 26px;padding:0 0 0 22px}
+  .article-body li{margin:0 0 12px;font-size:18px;line-height:1.68}
+  code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em;background:#f2f2ee;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+
+  .lede{border-left:3px solid var(--blue);padding:2px 0 2px 18px;color:#3d3d3a}
+
+  .callout{margin:34px 0;padding:20px 22px;border:1px solid #dbe4f8;border-radius:10px;background:var(--blue-pale)}
+  .callout p{margin:0 0 10px;font-size:15px;line-height:1.6;color:#3c4a63}
+  .callout p:last-child{margin-bottom:0}
+  .callout strong{color:var(--navy)}
+
+  .checklist{margin:6px 0 34px;padding:0;list-style:none;display:grid;gap:14px}
+  .checklist li{display:grid;grid-template-columns:20px 1fr;gap:12px;font-size:17px;line-height:1.6}
+  .checklist li::before{content:"";width:9px;height:9px;margin-top:9px;border-radius:2px;background:var(--blue)}
+
+  .tldr{margin:30px 0 10px;padding:22px 24px;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;background:#fff}
+  .tldr__title{margin:0 0 12px;font-size:12px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+  .tldr ul{margin:0;padding:0 0 0 18px}
+  .tldr li{margin:0 0 9px;font-size:15px;line-height:1.65;color:#3d3d3a}
+  .tldr li:last-child{margin-bottom:0}
+
+  .site-footer{border-top:1px solid var(--line);background:#f8f8f6}
+  .site-footer__inner{width:min(1200px,calc(100% - 48px));margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:34px 0;color:var(--muted);font-size:13px}
+
+  @media (max-width:640px){
+    .site-header__inner{min-height:auto;flex-wrap:wrap;gap:12px;padding:14px 0}
+    .primary-nav{width:100%;justify-content:space-between;gap:12px;font-size:13px}
+    .wordmark{font-size:12px}
+    .article-header{padding-top:58px}
+    .article-header h1{font-size:30px}
+    .article-header__dek{font-size:17px}
+    .article-body p,.article-body li{font-size:17px}
+    .article-body h2{font-size:26px}
+    .inline-figure{overflow-x:auto}
+    .inline-figure img{min-width:680px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="https://deepseekv4flash.com/">DeepSeek V4 Flash</a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="https://deepseekv4flash.com/articles">Articles</a>
+      <a href="https://deepseekv4flash.com/guides">Guides</a>
+      <a href="https://deepseekv4flash.com/compare">Compare</a>
+      <a href="https://deepseekv4flash.com/pricing">Pricing</a>
+    </nav>
+  </div>
+</header>
+
+<main class="article-container">
+  <header class="article-header">
+    <p class="eyebrow">DeepSeek · API Costs</p>
+    <h1>DeepSeek Search API Pricing Shift:<br>It’s Not Simply a Price Cut</h1>
+    <p class="byline">
+      <span class="byline__author">By Cameron Voss</span>
+      <span class="byline__dot">·</span>
+      <span>November 26, 2026</span>
+      <span class="byline__dot">·</span>
+      <span>6 min read</span>
+    </p>
+  </header>
+
+  <section class="tldr" aria-labelledby="tldr-heading">
+    <h2 class="tldr__title" id="tldr-heading">TL;DR</h2>
+    <ul>
+      <li>On 13 November, DeepSeek exposed the app stack as API endpoints: Search, Fetch, OCR, ASR, TTS, file input and safety checks.</li>
+      <li>List prices: Search and Fetch $0.75 per 1,000 calls, OCR $0.225 per 1,000 pages, ASR $0.058 per audio hour, TTS $0.225 per 10,000 characters.</li>
+      <li>At the end of November, server-side search moves from a per-call fee to input-token billing. A 500-token result costs about $0.00007, close to a tenth of the old fee per query.</li>
+      <li>The two search prices cross at roughly 5,400 tokens of injected results per query, about 11 results at 500 tokens each.</li>
+      <li>In a worked example, an in-model search answer costs $0.27 to $0.90 per 1,000 answers; calling the standalone Search API costs $1.02 to $1.65.</li>
+    </ul>
+  </section>
+
+  <figure class="hero">
+    <img src="../public/images/articles/deepseek-app-api-suite-unit-cost-overview.svg"
+         alt="Five DeepSeek App API capabilities with their billing units: Search and Fetch at $0.75 per 1,000 calls, OCR at $0.225 per 1,000 pages, ASR at $0.058 per hour and TTS at $0.225 per 10,000 characters"
+         width="1200" height="675" loading="eager" decoding="async">
+    <figcaption>Five capabilities, five billing units. The end-of-November change rewrites how the search meter works.</figcaption>
+  </figure>
+
+  <article class="article-body">
+
+    <p class="lede">On 13 November, DeepSeek exposed the capabilities behind its chat app as API endpoints. Web search, URL reading, file input, safety screening, OCR, speech recognition and speech synthesis became things you can call directly, or switch on inside a model request. At the end of the month, the company also changes how server-side search is billed: from a flat fee per search to the input tokens that the search results occupy.</p>
+
+    <p>Both changes are easy to describe. The second one is easy to misread as a price cut. It is not. It changes what you meter, and the bill moves in both directions depending on how much text your searches bring back.</p>
+
+    <h2>Five capabilities, five billing units</h2>
+
+    <p>The price list is short. Search costs $0.75 per 1,000 calls. Fetch, which reads a URL and returns its content, costs the same. OCR and file parsing cost $0.225 per 1,000 pages. Speech recognition costs $0.058 per audio hour. Speech synthesis costs $0.225 per 10,000 characters.</p>
+
+    <p>The units are the first thing to notice. Only Search and Fetch are priced per call. OCR is priced per page, ASR per hour and TTS per character block. Comparing the headline numbers without converting them is how budgets go wrong.</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-app-api-cost-per-1000-operations.svg"
+           alt="Log-scale horizontal bar chart of DeepSeek App API list prices per 1,000 billing units, from OCR at $0.225 to TTS at $225"
+           width="1200" height="700" loading="lazy" decoding="async">
+      <figcaption>The log axis keeps a 1,000x spread on one chart: $0.225 at the low end, $225 at the high end.</figcaption>
+    </figure>
+
+    <p>Converted to 1,000 billing units, the spread runs from $0.225 for 1,000 OCR pages to $225 for 1,000 TTS blocks. Search and Fetch sit at $0.75. The voice endpoints look cheap per unit and become large line items once volume is measured in hours and characters: 1,000 hours of audio is $58, and a product that synthesizes 1 million characters pays $22.50. Neither number is alarming on its own. Both are easy to miss when the invoice arrives.</p>
+
+    <h2>What one retrieved answer costs</h2>
+
+    <p>A unit price does not tell you what a RAG answer costs. I built a small model of a single query with a short list of assumptions: an 800-token prompt, a 300-token answer, 500 tokens per search result, and Flash at $0.14 per million input tokens and $0.28 per million output tokens. For the self-hosted case I added $1 per 1,000 queries for index hosting. That last figure is a planning assumption, not a vendor price.</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-rag-answer-cost-by-search-architecture.svg"
+           alt="Stacked bar chart comparing the cost per 1,000 RAG answers for direct Search API, in-model deepseek_web_search and self-hosted search at 1, 5 and 10 results"
+           width="1200" height="760" loading="lazy" decoding="async">
+      <figcaption>Cost per 1,000 answered queries. The search fee is fixed; the token cost grows with the number of results. The self-hosted index cost is an assumption, not a list price.</figcaption>
+    </figure>
+
+    <p>Per 1,000 answers, the in-model route, with <code>deepseek_web_search</code> enabled on the request, costs $0.27 with one result, $0.55 with five and $0.90 with ten. Calling the standalone Search API and passing the results to Flash costs $1.02, $1.30 and $1.65. The gap is the search fee: $0.75 per 1,000 queries, unchanged by result count, so it takes a larger share of a short answer and a smaller share of a long one.</p>
+
+    <p>Self-hosted search lands at $1.27, $1.55 and $1.90 with the assumed hosting cost. That makes it the most expensive route at these volumes. The comparison is incomplete on purpose: it prices the marginal cost of a query, not the fixed cost of building an index, and not the quality difference between your index and a web-scale one. Self-hosting can win on control, privacy or a narrow corpus. It rarely wins on the first invoice.</p>
+
+    <h2>The crossover at the end of November</h2>
+
+    <p>Under the old rule, a server-side search cost $0.75 per 1,000 queries regardless of how much text came back. Under the new rule, the same search costs whatever its results weigh in input tokens. At the $0.14 cache-miss rate, the two prices meet at about 5,400 tokens per query.</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-server-side-search-billing-crossover.svg"
+           alt="Line chart showing the old flat $0.75 per 1,000 search queries crossing the new input-token billing at about 5,357 tokens per query"
+           width="1200" height="700" loading="lazy" decoding="async">
+      <figcaption>Old per-call billing stays flat. Token billing rises with the content injected. They cross near 5,400 tokens per query.</figcaption>
+    </figure>
+
+    <p>At 500 tokens per result, that is roughly 11 results. Below that line, token billing is cheaper. At 1,500 tokens the bill is about $0.21 per 1,000 queries, 72% less than the old fee. Above it, the old per-call price would have been cheaper. At 10,000 tokens the new bill is $1.40 per 1,000 queries, close to double the old rate.</p>
+
+    <p>The cache-hit rate moves the crossing point past 26,000 tokens, but fresh search results rarely arrive as prefix cache hits. Planning at the cache-miss rate is the safer choice.</p>
+
+    <p>The pattern is simple: short searches get cheaper, deep research gets more expensive. If your prompts already carry a fixed result cap, the new pricing probably helps. If the model decides how many pages to read, add the token count to the same dashboard as the search count.</p>
+
+    <h2>Turning the table into a budget</h2>
+
+    <p>Three numbers from your own logs carry most of the estimate: tool calls per answered request, tokens injected per call, and the share of requests that search at all. Multiply them out with the rates above and the result is a budget rather than an example.</p>
+
+    <ul class="checklist">
+      <li>Cap results per search. Ten is a design choice; it is also a pricing choice.</li>
+      <li>Cache pages you fetch more than once. Paying twice for the same URL is avoidable in every architecture here.</li>
+      <li>Track tokens per query, not searches per query. After the switch, length is the variable that moves the bill.</li>
+      <li>Keep OCR and ASR as separate line items. They are cheap per unit and easy to forget at volume.</li>
+    </ul>
+
+    <p>The suite is convenient because one vendor covers search, reading, documents and voice. The trade-off is that the invoice has five different meters, and each one moves for a different reason. The token meters move with verbosity. The page and hour meters move with intake. The search meter now moves with the length of what comes back.</p>
+
+    <p>If you want to compare these per-unit prices with the plans on this site, the <a href="https://deepseekv4flash.com/pricing">pricing page</a> lists the current allowances and what each plan includes.</p>
+
+    <p>For a first estimate, the numbers above are enough. For a real one, replace my 500-token result and 300-token answer with yours. The rates are published. The workload is the part only you can measure.</p>
+
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© 2026 DeepSeek V4 Flash</span>
+    <span>Independent analysis. Prices in USD.</span>
+  </div>
+</footer>
+
+</body>
+</html>

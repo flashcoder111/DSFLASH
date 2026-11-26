@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepSeek 搜索 API 计费调整：这不只是降价</title>
+<meta name="description" content="DeepSeek 用五种计价单位卖出五项 App API 能力。Search、Fetch、OCR、ASR、TTS 各要多少钱，一次 RAG 回答的成本是多少，按 token 计费的搜索又在哪里越过原来的按次价格。">
+<link rel="canonical" href="https://deepseekv4flash.com/zh/articles/deepseek-app-api-suite-unit-costs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepSeek 搜索 API 计费调整：这不只是降价">
+<meta property="og:description" content="11 月 13 日的发布把 App 的能力变成了接口，月底的调整又把 server-side search 变成了 token 账单。这是一张完整的成本地图。">
+<meta property="og:url" content="https://deepseekv4flash.com/zh/articles/deepseek-app-api-suite-unit-costs">
+<meta property="og:image" content="https://deepseekv4flash.com/images/articles/deepseek-app-api-suite-unit-cost-overview.svg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DeepSeek 搜索 API 计费调整：这不只是降价",
+  "description": "DeepSeek 用五种计价单位卖出五项 App API 能力。Search、Fetch、OCR、ASR、TTS 各要多少钱，一次 RAG 回答的成本是多少，按 token 计费的搜索又在哪里越过原来的按次价格。",
+  "datePublished": "2026-11-26",
+  "dateModified": "2026-11-26",
+  "inLanguage": "zh-CN",
+  "author": { "@type": "Person", "name": "Cameron Voss" },
+  "publisher": { "@type": "Organization", "name": "DeepSeek V4 Flash", "url": "https://deepseekv4flash.com" },
+  "image": ["https://deepseekv4flash.com/images/articles/deepseek-app-api-suite-unit-cost-overview.svg"],
+  "mainEntityOfPage": "https://deepseekv4flash.com/zh/articles/deepseek-app-api-suite-unit-costs"
+}
+</script>
+<style>
+  :root{
+    --page:#fcfcfa; --ink:#171717; --muted:#636363; --faint:#8a8a86;
+    --line:#e7e7e3; --blue:#2563eb; --blue-pale:#f4f7ff; --navy:#18243d;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:#dbe6ff}
+
+  .site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(252,252,250,.94);backdrop-filter:blur(12px)}
+  .site-header__inner{width:min(1200px,calc(100% - 48px));min-height:68px;margin:0 auto;display:flex;align-items:center;gap:56px}
+  .wordmark{font-size:14px;font-weight:750;letter-spacing:-.025em;text-transform:uppercase;white-space:nowrap}
+  .primary-nav{display:flex;gap:32px;font-size:14px}
+  .primary-nav a:hover{color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+
+  .article-container{width:min(720px,calc(100% - 48px));margin:0 auto}
+  .article-header{padding:84px 0 34px;border-bottom:1px solid var(--line)}
+  .eyebrow{margin:0;color:var(--blue);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+  .article-header h1{margin:16px 0 0;font-size:clamp(30px,3.9vw,40px);line-height:1.24;letter-spacing:-.03em}
+  .byline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0 0;color:var(--muted);font-size:14px}
+  .byline__author{color:var(--ink);font-weight:700}
+  .byline__dot{color:#c9c9c4}
+  .article-header__dek{margin:24px 0 0;color:var(--muted);font-size:18px;line-height:1.7}
+
+  figure{margin:0}
+  .hero{margin:34px 0 8px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f2f6fc}
+  .hero img,.inline-figure img{display:block;width:100%;height:auto;border-radius:7px}
+  figcaption{margin:14px 4px 2px;color:var(--muted);font-size:13px;line-height:1.6}
+  .inline-figure{margin:36px 0 34px 50%;width:min(1120px,calc(100vw - 48px));transform:translateX(-50%);padding:16px;border:1px solid var(--line);border-radius:10px;background:#f7f9fc}
+  .inline-figure figcaption{max-width:760px}
+
+  .article-body{padding:30px 0 24px}
+  .article-body p{margin:0 0 24px;font-size:17px;line-height:1.85}
+  .article-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .article-body h2{margin:50px 0 18px;font-size:28px;line-height:1.25;letter-spacing:-.02em}
+  .article-body ul{margin:0 0 26px;padding:0 0 0 22px}
+  .article-body li{margin:0 0 12px;font-size:17px;line-height:1.8}
+  code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em;background:#f2f2ee;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+
+  .lede{border-left:3px solid var(--blue);padding:2px 0 2px 18px;color:#3d3d3a}
+
+  .callout{margin:34px 0;padding:20px 22px;border:1px solid #dbe4f8;border-radius:10px;background:var(--blue-pale)}
+  .callout p{margin:0 0 10px;font-size:15px;line-height:1.75;color:#3c4a63}
+  .callout p:last-child{margin-bottom:0}
+  .callout strong{color:var(--navy)}
+
+  .checklist{margin:6px 0 34px;padding:0;list-style:none;display:grid;gap:14px}
+  .checklist li{display:grid;grid-template-columns:20px 1fr;gap:12px;font-size:16px;line-height:1.75}
+  .checklist li::before{content:"";width:9px;height:9px;margin-top:10px;border-radius:2px;background:var(--blue)}
+
+  .tldr{margin:30px 0 10px;padding:22px 24px;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;background:#fff}
+  .tldr__title{margin:0 0 12px;font-size:12px;font-weight:750;letter-spacing:.09em;color:var(--blue)}
+  .tldr ul{margin:0;padding:0 0 0 18px}
+  .tldr li{margin:0 0 9px;font-size:15px;line-height:1.75;color:#3d3d3a}
+  .tldr li:last-child{margin-bottom:0}
+
+  .site-footer{border-top:1px solid var(--line);background:#f8f8f6}
+  .site-footer__inner{width:min(1200px,calc(100% - 48px));margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:34px 0;color:var(--muted);font-size:13px}
+
+  @media (max-width:640px){
+    .site-header__inner{min-height:auto;flex-wrap:wrap;gap:12px;padding:14px 0}
+    .primary-nav{width:100%;justify-content:space-between;gap:12px;font-size:13px}
+    .wordmark{font-size:12px}
+    .article-header{padding-top:58px}
+    .article-header h1{font-size:24px}
+    .article-header__dek{font-size:16px}
+    .article-body p,.article-body li{font-size:16px}
+    .article-body h2{font-size:24px}
+    .inline-figure{overflow-x:auto}
+    .inline-figure img{min-width:680px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="wordmark" href="https://deepseekv4flash.com/">DeepSeek V4 Flash</a>
+    <nav class="primary-nav" aria-label="主导航">
+      <a href="https://deepseekv4flash.com/articles">文章</a>
+      <a href="https://deepseekv4flash.com/guides">指南</a>
+      <a href="https://deepseekv4flash.com/compare">对比</a>
+      <a href="https://deepseekv4flash.com/pricing">定价</a>
+    </nav>
+  </div>
+</header>
+
+<main class="article-container">
+  <header class="article-header">
+    <p class="eyebrow">DeepSeek · API 成本</p>
+    <h1>DeepSeek 搜索 API 计费调整：<br>这不只是降价</h1>
+    <p class="byline">
+      <span class="byline__author">By Cameron Voss</span>
+      <span class="byline__dot">·</span>
+      <span>2026 年 11 月 26 日</span>
+      <span class="byline__dot">·</span>
+      <span>阅读约 6 分钟</span>
+    </p>
+  </header>
+
+  <section class="tldr" aria-labelledby="tldr-heading">
+    <h2 class="tldr__title" id="tldr-heading">TL;DR</h2>
+    <ul>
+      <li>11 月 13 日，DeepSeek 把 App 的能力开放成 API：Search、Fetch、OCR、ASR、TTS、文件输入和安全校验。</li>
+      <li>牌面价格：Search 与 Fetch 每千次 $0.75，OCR 每千页 $0.225，ASR 每小时 $0.058，TTS 每万字符 $0.225。</li>
+      <li>11 月底起，server-side search 从按次收费改为按输入 token 计费。一条 500 token 的结果约 $0.00007，接近原来单次搜索费的十分之一。</li>
+      <li>新旧价格在每次查询约 5,400 token 处相交，按每条结果 500 token 算，大约是 11 条结果。</li>
+      <li>按一套明确假设计算，模型内搜索每千次回答 $0.27 到 $0.90；单独调 Search API 是 $1.02 到 $1.65。</li>
+    </ul>
+  </section>
+
+  <figure class="hero">
+    <img src="../public/images/articles/deepseek-app-api-suite-unit-cost-overview.svg"
+         alt="DeepSeek 应用 API 的五项能力及其计费单位：Search 与 Fetch 每千次 $0.75，OCR 每千页 $0.225，ASR 每小时 $0.058，TTS 每万字符 $0.225"
+         width="1200" height="675" loading="eager" decoding="async">
+    <figcaption>五项能力，五种计费单位。11 月底的调整，改写的是搜索这一栏的计量方式。</figcaption>
+  </figure>
+
+  <article class="article-body">
+
+    <p class="lede">11 月 13 日，DeepSeek 把聊天 App 背后的能力开放成了 API。联网搜索、链接阅读、文件输入、安全校验、OCR、语音识别、语音合成，既可以单独调用，也可以作为模型请求里的开关打开。到了月底，server-side search 的计费方式也变了：从每次搜索固定收费，改成按搜索结果占用的输入 token 收费。</p>
+
+    <p>这两件事都不难描述。第二件很容易被理解成降价，其实不是。变的是计量对象，账单会往两个方向走，取决于搜索带回来多少文字。</p>
+
+    <h2>五种能力，五种计价单位</h2>
+
+    <p>价目表很短。Search 每千次 $0.75；Fetch 读取一个 URL 并返回内容，价格相同。OCR 和文件解析每千页 $0.225。语音识别每小时 $0.058。语音合成每万字符 $0.225。</p>
+
+    <p>先要注意的是单位。只有 Search 和 Fetch 按次计价，OCR 按页，ASR 按小时，TTS 按字符块。不换算就直接比大小，预算很容易算错。</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-app-api-cost-per-1000-operations.svg"
+           alt="横向柱状图：DeepSeek 应用 API 每 1,000 个计费单位的牌面价格，从 OCR 的 $0.225 到 TTS 的 $225，使用对数刻度"
+           width="1200" height="700" loading="lazy" decoding="async">
+      <figcaption>对数轴把 1,000 倍的价差放进一张图：最低 $0.225，最高 $225。</figcaption>
+    </figure>
+
+    <p>换算成 1,000 个计费单位，最低是 1,000 页 OCR 的 $0.225，最高是 1,000 块 TTS 的 $225。Search 和 Fetch 在 $0.75。语音接口单看很便宜，一旦按小时和字符数跑量，就会变成账单上的大项：1,000 小时音频是 $58，一个月合成 100 万字符是 $22.50。单看都不吓人，出现在发票上时又很容易被忽略。</p>
+
+    <h2>一次检索回答要花多少钱</h2>
+
+    <p>单价说明不了一次 RAG 回答的成本。我按一组假设搭了一个单次查询的小模型：800 token 的提示词、300 token 的回答、每条搜索结果 500 token，Flash 输入每百万 token $0.14、输出 $0.28。自建搜索再加每千次查询 $1 的索引托管成本。最后这个数字是规划假设，不是厂商报价。</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-rag-answer-cost-by-search-architecture.svg"
+           alt="堆叠柱状图：直连 Search API、模型内 deepseek_web_search、自建搜索三种架构在 1、5、10 条结果下每千次 RAG 回答的成本对比"
+           width="1200" height="760" loading="lazy" decoding="async">
+      <figcaption>每千次回答的成本。搜索费固定，token 成本随结果条数增长。自建搜索的索引成本是假设值，不是牌面价格。</figcaption>
+    </figure>
+
+    <p>每千次回答，模型内搜索（在请求里打开 <code>deepseek_web_search</code>）一条结果 $0.27，五条 $0.55，十条 $0.90。单独调 Search API 再把结果交给 Flash，分别是 $1.02、$1.30、$1.65。差额就是搜索费：每千次 $0.75，不随结果条数变化，所以在短回答里占比更高，在长回答里占比更低。</p>
+
+    <p>按假设的托管成本，自建搜索是 $1.27、$1.55、$1.90，在这个量级下最贵。这个比较故意留了缺口：它只算单次查询的边际成本，没算建索引的固定成本，也没算你的索引和网页级索引之间的质量差距。自建可以在控制权、隐私或垂直语料上赢，很少在第一张账单上赢。</p>
+
+    <h2>11 月底的交叉点</h2>
+
+    <p>旧规则下，一次 server-side search 每千次查询 $0.75，不管返回多少文字。新规则下，同样的搜索按结果占用的输入 token 计费。按 $0.14 的 cache-miss 价格，两个价格在每次查询约 5,400 token 处相交。</p>
+
+    <figure class="inline-figure">
+      <img src="../public/images/articles/deepseek-server-side-search-billing-crossover.svg"
+           alt="折线图：旧的每千次查询固定 $0.75 与新输入 token 计费在每次查询约 5,357 token 处相交"
+           width="1200" height="700" loading="lazy" decoding="async">
+      <figcaption>旧的按次计费是一条水平线，token 计费随注入内容增长。两者在每次查询约 5,400 token 处相交。</figcaption>
+    </figure>
+
+    <p>按每条结果 500 token 算，大约是 11 条。低于这条线，按 token 更便宜。1,500 token 时，每千次查询约 $0.21，比原来的 $0.75 低 72%。高于这条线，原来的按次价格反而更便宜。10,000 token 时，新账单是每千次 $1.40，接近旧价格的两倍。</p>
+
+    <p>按 cache-hit 价格算，交叉点会推到 26,000 token 以上，但刚抓回来的搜索结果很少能命中前缀缓存。做预算时用 cache-miss 价格更稳妥。</p>
+
+    <p>规律很简单：浅搜索变便宜，深检索变贵。如果提示词里已经写死了结果条数上限，新计费大概率对你有利。如果由模型自己决定读多少页，就把 token 数和搜索次数放进同一个看板。</p>
+
+    <h2>把价目表变成预算</h2>
+
+    <p>估算主要靠日志里的三个数：每次回答触发多少次工具调用、每次调用注入多少 token、有多少请求真的会搜索。用上面的单价乘一遍，得到的就是预算，不是示例。</p>
+
+    <ul class="checklist">
+      <li>给每次搜索设结果上限。十条是产品决定，也是计价决定。</li>
+      <li>同一个 URL 抓两次就缓存。在三种架构里，这块钱都可以省。</li>
+      <li>看每次查询的 token 数，不要只看搜索次数。计费切换之后，长度才是让账单变化的变量。</li>
+      <li>把 OCR 和 ASR 单独列账。它们单价低，跑量时最容易被忘掉。</li>
+    </ul>
+
+    <p>这套 API 的方便之处是一家供应商覆盖搜索、阅读、文档和语音。代价是账单上有五个不同的表，每个表变动的原因都不一样。token 表跟着输出长度走，页数和小时表跟着输入量走，搜索表现在跟着返回内容的长度走。</p>
+
+    <p>如果你想把这些单价和本站的套餐放在一起看，<a href="https://deepseekv4flash.com/pricing">定价页</a>列出了当前的额度和每个套餐包含的内容。</p>
+
+    <p>做初步估算，上面的数字够用。做真实预算，把我假设的 500 token 结果和 300 token 回答换成你自己的。单价是公开的，负载只有你能测。</p>
+
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© 2026 DeepSeek V4 Flash</span>
+    <span>独立分析，价格单位为美元。</span>
+  </div>
+</footer>
+
+</body>
+</html>

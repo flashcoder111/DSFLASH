@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-labelledby="title desc">
+  <title id="title">DeepSeek App API list prices per 1,000 billing units</title>
+  <desc id="desc">Log-scale horizontal bars: OCR 0.225 dollars per 1,000 pages, Search and Fetch 0.75 dollars per 1,000 calls, ASR 58 dollars per 1,000 hours, TTS 225 dollars per 1,000 blocks of 10,000 characters.</desc>
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#efefea" stroke-width="1"/>
+    </pattern>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h1{font-family:Arial,Helvetica,sans-serif;font-size:38px;font-weight:700;letter-spacing:-.8px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#636363}
+      .row{font-family:Arial,Helvetica,sans-serif;font-size:20px;font-weight:700;fill:#18243d}
+      .native{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+      .axis{font-family:Arial,Helvetica,sans-serif;font-size:12px;fill:#8a8a86}
+      .value{font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;fill:#18243d}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+      .scale{font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.2px;fill:#8a8a86}
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#fcfcfa"/>
+  <rect width="1200" height="700" fill="url(#grid)"/>
+  <rect x="0" y="0" width="6" height="700" fill="#2563eb"/>
+
+  <text x="64" y="64" class="eyebrow">UNIT COST MAP</text>
+  <text x="64" y="116" class="h1">What 1,000 billing units cost</text>
+  <text x="64" y="150" class="sub">Published list prices, log scale. Each bar uses the endpoint's own billing unit.</text>
+  <text x="1136" y="116" text-anchor="end" class="scale">LOG SCALE</text>
+
+  <line x1="360" y1="190" x2="1120" y2="190" stroke="#dcdcd6"/>
+  <g class="axis">
+    <text x="360" y="180" text-anchor="middle">$0.10</text>
+    <text x="550" y="180" text-anchor="middle">$1</text>
+    <text x="740" y="180" text-anchor="middle">$10</text>
+    <text x="930" y="180" text-anchor="middle">$100</text>
+    <text x="1120" y="180" text-anchor="middle">$1,000</text>
+  </g>
+  <line x1="550" y1="200" x2="550" y2="580" stroke="#eeeeea"/>
+  <line x1="740" y1="200" x2="740" y2="580" stroke="#eeeeea"/>
+  <line x1="930" y1="200" x2="930" y2="580" stroke="#eeeeea"/>
+  <line x1="1120" y1="200" x2="1120" y2="580" stroke="#eeeeea"/>
+
+  <text x="64" y="269" class="row">TTS</text>
+  <text x="64" y="290" class="native">$0.225 per 10,000 characters</text>
+  <rect x="360" y="250" width="637" height="34" rx="4" fill="#0f766e"/>
+  <text x="1009" y="272" class="value">$225</text>
+
+  <text x="64" y="339" class="row">ASR</text>
+  <text x="64" y="360" class="native">$0.058 per audio hour</text>
+  <rect x="360" y="320" width="525" height="34" rx="4" fill="#18243d"/>
+  <text x="897" y="342" class="value">$58</text>
+
+  <text x="64" y="409" class="row">Search</text>
+  <text x="64" y="430" class="native">$0.75 per 1,000 calls</text>
+  <rect x="360" y="390" width="166" height="34" rx="4" fill="#2563eb"/>
+  <text x="538" y="412" class="value">$0.75</text>
+
+  <text x="64" y="479" class="row">Fetch</text>
+  <text x="64" y="500" class="native">$0.75 per 1,000 calls</text>
+  <rect x="360" y="460" width="166" height="34" rx="4" fill="#2563eb"/>
+  <text x="538" y="482" class="value">$0.75</text>
+
+  <text x="64" y="549" class="row">OCR</text>
+  <text x="64" y="570" class="native">$0.225 per 1,000 pages</text>
+  <rect x="360" y="530" width="67" height="34" rx="4" fill="#6d8fe6"/>
+  <text x="439" y="552" class="value">$0.225</text>
+
+  <line x1="64" y1="610" x2="1136" y2="610" stroke="#e7e7e3"/>
+  <text x="64" y="638" class="note">Cost of 1,000 billing units. The units are not equivalent workloads: 1,000 audio hours cover far more work than 1,000 search calls.</text>
+  <text x="64" y="664" class="note">Source: DeepSeek App API price list, 13 November 2026. Values in USD.</text>
+  <text x="1136" y="664" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>

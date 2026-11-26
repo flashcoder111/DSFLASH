@@ -18,7 +18,7 @@ function ArticleBlockView({ block }: { block: ArticleBlock }) {
         <tbody>{block.rows.map((row) => <tr key={row.join(" | ")}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody>
       </table></div>;
     case "image":
-      return <figure><img src={block.src} alt={block.alt} loading="lazy" />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure>;
+      return <figure className={block.wide ? "article-figure--wide" : undefined}><img src={block.src} alt={block.alt} loading="lazy" />{block.caption ? <figcaption>{block.caption}</figcaption> : null}</figure>;
     case "cta":
       return <p>{block.pre}<Link href={block.href}>{block.label}</Link>{block.post}</p>;
   }

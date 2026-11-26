@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-labelledby="title desc">
+  <title id="title">Cost of 1,000 RAG answers across three search architectures</title>
+  <desc id="desc">Stacked bars for direct Search API plus Flash tokens, in-model deepseek_web_search billed as input tokens, and self-hosted search plus Flash tokens, at 1, 5 and 10 results. In-model search costs 0.27 to 0.90 dollars per 1,000 answers, the direct API 1.02 to 1.65 dollars, and self-hosted search 1.27 to 1.90 dollars.</desc>
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#efefea" stroke-width="1"/>
+    </pattern>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h1{font-family:Arial,Helvetica,sans-serif;font-size:38px;font-weight:700;letter-spacing:-.8px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:16px;fill:#636363}
+      .axis{font-family:Arial,Helvetica,sans-serif;font-size:12px;fill:#8a8a86}
+      .group{font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:700;fill:#18243d}
+      .total{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;fill:#18243d}
+      .legend{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#3d3d3a}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+      .axis-title{font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:1.2px;fill:#8a8a86}
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" fill="#fcfcfa"/>
+  <rect width="1200" height="760" fill="url(#grid)"/>
+  <rect x="0" y="0" width="6" height="760" fill="#2563eb"/>
+
+  <text x="64" y="64" class="eyebrow">RAG COST MODEL</text>
+  <text x="64" y="116" class="h1">One answered query, three ways to search</text>
+  <text x="64" y="150" class="sub">Cost per 1,000 answers. Assumptions: 800-token prompt, 300-token answer, 500 tokens per result, Flash at $0.14 in and $0.28 out per 1M.</text>
+
+  <g class="legend">
+    <rect x="120" y="176" width="12" height="12" rx="2" fill="#2563eb"/>
+    <text x="140" y="187">Input tokens (prompt + results)</text>
+    <rect x="430" y="176" width="12" height="12" rx="2" fill="#9db4ea"/>
+    <text x="450" y="187">Answer tokens</text>
+    <rect x="610" y="176" width="12" height="12" rx="2" fill="#18243d"/>
+    <text x="630" y="187">Search fee</text>
+    <rect x="760" y="176" width="12" height="12" rx="2" fill="#6b7280"/>
+    <text x="780" y="187">Index hosting</text>
+  </g>
+
+  <g class="axis">
+    <text x="104" y="594" text-anchor="end">$0</text>
+    <text x="104" y="497" text-anchor="end">$0.50</text>
+    <text x="104" y="399" text-anchor="end">$1.00</text>
+    <text x="104" y="302" text-anchor="end">$1.50</text>
+    <text x="104" y="204" text-anchor="end">$2.00</text>
+  </g>
+  <line x1="120" y1="492" x2="1140" y2="492" stroke="#eeeeea"/>
+  <line x1="120" y1="395" x2="1140" y2="395" stroke="#eeeeea"/>
+  <line x1="120" y1="298" x2="1140" y2="298" stroke="#eeeeea"/>
+  <line x1="120" y1="200" x2="1140" y2="200" stroke="#eeeeea"/>
+  <line x1="120" y1="590" x2="1140" y2="590" stroke="#d8d8d2"/>
+
+  <!-- 1 result -->
+  <text x="300" y="620" text-anchor="middle" class="group">1 result</text>
+  <text x="214" y="383" text-anchor="middle" class="total">$1.02</text>
+  <rect x="178" y="554" width="72" height="36" fill="#2563eb"/>
+  <rect x="178" y="538" width="72" height="16" fill="#9db4ea"/>
+  <rect x="178" y="392" width="72" height="146" fill="#18243d"/>
+  <text x="300" y="529" text-anchor="middle" class="total">$0.27</text>
+  <rect x="264" y="554" width="72" height="36" fill="#2563eb"/>
+  <rect x="264" y="538" width="72" height="16" fill="#9db4ea"/>
+  <text x="386" y="334" text-anchor="middle" class="total">$1.27</text>
+  <rect x="350" y="554" width="72" height="36" fill="#2563eb"/>
+  <rect x="350" y="538" width="72" height="16" fill="#9db4ea"/>
+  <rect x="350" y="343" width="72" height="195" fill="#6b7280"/>
+
+  <!-- 5 results -->
+  <text x="630" y="620" text-anchor="middle" class="group">5 results</text>
+  <text x="544" y="328" text-anchor="middle" class="total">$1.30</text>
+  <rect x="508" y="500" width="72" height="90" fill="#2563eb"/>
+  <rect x="508" y="484" width="72" height="16" fill="#9db4ea"/>
+  <rect x="508" y="337" width="72" height="147" fill="#18243d"/>
+  <text x="630" y="474" text-anchor="middle" class="total">$0.55</text>
+  <rect x="594" y="500" width="72" height="90" fill="#2563eb"/>
+  <rect x="594" y="484" width="72" height="16" fill="#9db4ea"/>
+  <text x="716" y="279" text-anchor="middle" class="total">$1.55</text>
+  <rect x="680" y="500" width="72" height="90" fill="#2563eb"/>
+  <rect x="680" y="484" width="72" height="16" fill="#9db4ea"/>
+  <rect x="680" y="289" width="72" height="195" fill="#6b7280"/>
+
+  <!-- 10 results -->
+  <text x="960" y="620" text-anchor="middle" class="group">10 results</text>
+  <text x="874" y="260" text-anchor="middle" class="total">$1.65</text>
+  <rect x="838" y="432" width="72" height="158" fill="#2563eb"/>
+  <rect x="838" y="415" width="72" height="17" fill="#9db4ea"/>
+  <rect x="838" y="269" width="72" height="146" fill="#18243d"/>
+  <text x="960" y="406" text-anchor="middle" class="total">$0.90</text>
+  <rect x="924" y="432" width="72" height="158" fill="#2563eb"/>
+  <rect x="924" y="415" width="72" height="17" fill="#9db4ea"/>
+  <text x="1046" y="211" text-anchor="middle" class="total">$1.90</text>
+  <rect x="1010" y="432" width="72" height="158" fill="#2563eb"/>
+  <rect x="1010" y="415" width="72" height="17" fill="#9db4ea"/>
+  <rect x="1010" y="220" width="72" height="195" fill="#6b7280"/>
+
+  <text x="120" y="660" class="axis-title">USD PER 1,000 ANSWERED QUERIES</text>
+  <line x1="64" y1="690" x2="1136" y2="690" stroke="#e7e7e3"/>
+  <text x="64" y="718" class="note">Bars, left to right: direct Search API + Flash; in-model deepseek_web_search billed as input tokens; self-hosted search + Flash.</text>
+  <text x="64" y="742" class="note">Self-hosted index hosting assumed at $1.00 per 1,000 queries. All other figures derive from published list prices.</text>
+  <text x="1136" y="742" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>

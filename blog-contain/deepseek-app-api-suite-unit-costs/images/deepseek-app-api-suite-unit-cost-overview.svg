@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">DeepSeek App API suite and its five billing units</title>
+  <desc id="desc">Five cards show the App API capabilities and list prices: Search and Fetch at 0.75 dollars per 1,000 calls, OCR at 0.225 dollars per 1,000 pages, ASR at 0.058 dollars per hour and TTS at 0.225 dollars per 10,000 characters.</desc>
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#efefea" stroke-width="1"/>
+    </pattern>
+    <style>
+      .eyebrow{font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:2.4px;fill:#2563eb}
+      .h1{font-family:Arial,Helvetica,sans-serif;font-size:42px;font-weight:700;letter-spacing:-1px;fill:#18243d}
+      .sub{font-family:Arial,Helvetica,sans-serif;font-size:17px;fill:#636363}
+      .card{font-family:Arial,Helvetica,sans-serif;font-size:21px;font-weight:700;fill:#18243d}
+      .card-unit{font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;letter-spacing:1.2px;fill:#8a8a86}
+      .price{font-family:Arial,Helvetica,sans-serif;font-size:30px;font-weight:700;letter-spacing:-.6px;fill:#2563eb}
+      .card-note{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#636363}
+      .band-title{font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;letter-spacing:1.4px;fill:#2563eb}
+      .band-text{font-family:Arial,Helvetica,sans-serif;font-size:19px;font-weight:700;fill:#eef3ff}
+      .note{font-family:Arial,Helvetica,sans-serif;font-size:13px;fill:#6b6b66}
+    </style>
+  </defs>
+
+  <rect width="1200" height="675" fill="#fcfcfa"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <rect x="0" y="0" width="6" height="675" fill="#2563eb"/>
+
+  <text x="64" y="68" class="eyebrow">APP API SUITE · 13 NOVEMBER</text>
+  <text x="64" y="126" class="h1">Five tools, five billing units</text>
+  <text x="64" y="160" class="sub">The capabilities inside the DeepSeek app became endpoints. Each one is priced differently.</text>
+
+  <g>
+    <rect x="64" y="216" width="200" height="238" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="88" y="260" class="card">Search</text>
+    <text x="88" y="282" class="card-unit">PER CALL</text>
+    <text x="88" y="344" class="price">$0.75</text>
+    <text x="88" y="372" class="card-note">per 1,000 calls</text>
+    <text x="88" y="412" class="card-note">Web and image index</text>
+    <text x="88" y="432" class="card-note">with citations</text>
+  </g>
+
+  <g>
+    <rect x="282" y="216" width="200" height="238" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="306" y="260" class="card">Fetch</text>
+    <text x="306" y="282" class="card-unit">PER CALL</text>
+    <text x="306" y="344" class="price">$0.75</text>
+    <text x="306" y="372" class="card-note">per 1,000 calls</text>
+    <text x="306" y="412" class="card-note">URL reading and</text>
+    <text x="306" y="432" class="card-note">page extraction</text>
+  </g>
+
+  <g>
+    <rect x="500" y="216" width="200" height="238" rx="10" fill="#ffffff" stroke="#e7e7e3"/>
+    <text x="524" y="260" class="card">OCR</text>
+    <text x="524" y="282" class="card-unit">PER PAGE</text>
+    <text x="524" y="344" class="price">$0.225</text>
+    <text x="524" y="372" class="card-note">per 1,000 pages</text>
+    <text x="524" y="412" class="card-note">File and layout</text>
+    <text x="524" y="432" class="card-note">parsing</text>
+  </g>
+
+  <g>
+    <rect x="718" y="216" width="200" height="238" rx="10" fill="#f4f7ff" stroke="#b9cdfb"/>
+    <text x="742" y="260" class="card">ASR</text>
+    <text x="742" y="282" class="card-unit">PER AUDIO HOUR</text>
+    <text x="742" y="344" class="price">$0.058</text>
+    <text x="742" y="372" class="card-note">per hour</text>
+    <text x="742" y="412" class="card-note">Speech to text</text>
+    <text x="742" y="432" class="card-note">for transcripts</text>
+  </g>
+
+  <g>
+    <rect x="936" y="216" width="200" height="238" rx="10" fill="#f4f7ff" stroke="#b9cdfb"/>
+    <text x="960" y="260" class="card">TTS</text>
+    <text x="960" y="282" class="card-unit">PER CHARACTER</text>
+    <text x="960" y="344" class="price">$0.225</text>
+    <text x="960" y="372" class="card-note">per 10,000 chars</text>
+    <text x="960" y="412" class="card-note">Text to speech</text>
+    <text x="960" y="432" class="card-note">for voice output</text>
+  </g>
+
+  <rect x="64" y="494" width="1072" height="104" rx="10" fill="#18243d"/>
+  <text x="88" y="528" class="band-title">THE BILLING CHANGE</text>
+  <text x="88" y="562" class="band-text">At the end of November, server-side search moves from $0.75 per 1,000 calls to input-token billing.</text>
+
+  <line x1="64" y1="626" x2="1136" y2="626" stroke="#e7e7e3"/>
+  <text x="64" y="652" class="note">List prices in USD as published on 13 November 2026. Billing units differ by endpoint.</text>
+  <text x="1136" y="652" text-anchor="end" class="note">deepseekv4flash.com</text>
+</svg>
