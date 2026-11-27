@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-labelledby="title desc">
+  <title id="title">Share of a 1M context window used by finished tasks</title>
+  <desc id="desc">A 1M token context window compared with the output tokens measured for four models on the MathArena June 2026 set, from 12,636 to 136,104 tokens.</desc>
+  <rect width="1200" height="675" fill="#f4f7fc"/>
+  <text x="60" y="62" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="700" fill="#18243d">A 1M window is a ceiling, not a bill</text>
+  <text x="60" y="94" font-family="Arial,Helvetica,sans-serif" font-size="17" fill="#4b5568">Output tokens per question, MathArena June 2026 set. Log scale.</text>
+
+  <g font-family="Arial,Helvetica,sans-serif">
+    <!-- gridlines: x = 360 + (log10(tokens) - 3) * 240 -->
+    <g stroke="#d8e0ee" stroke-width="1">
+      <line x1="360" y1="130" x2="360" y2="570"/>
+      <line x1="600" y1="130" x2="600" y2="570"/>
+      <line x1="840" y1="130" x2="840" y2="570"/>
+      <line x1="1080" y1="130" x2="1080" y2="570"/>
+    </g>
+    <g font-size="13" fill="#7b8698" text-anchor="middle">
+      <text x="360" y="596">1K</text>
+      <text x="600" y="596">10K</text>
+      <text x="840" y="596">100K</text>
+      <text x="1080" y="596">1M</text>
+    </g>
+
+    <g font-size="17" fill="#243149" text-anchor="end">
+      <text x="330" y="166">Context window</text>
+      <text x="330" y="246">DeepSeek-v4-Flash (Max)</text>
+      <text x="330" y="326">Claude-Fable-5.1 (max)</text>
+      <text x="330" y="406">DeepSeek-V4.1-Flash (Max)</text>
+      <text x="330" y="486">GPT-6 Astra (max)</text>
+    </g>
+
+    <!-- bars start at x=120; width = 240 + (log10(v)-3)*240 -->
+    <rect x="120" y="140" width="960" height="36" rx="5" fill="#c9d4e6"/>
+    <rect x="120" y="220" width="752" height="36" rx="5" fill="#2563eb"/>
+    <rect x="120" y="300" width="736" height="36" rx="5" fill="#8fa3c4"/>
+    <rect x="120" y="380" width="670" height="36" rx="5" fill="#2563eb"/>
+    <rect x="120" y="460" width="504" height="36" rx="5" fill="#8fa3c4"/>
+
+    <g font-size="16" font-weight="700" fill="#18243d">
+      <text x="1072" y="165" text-anchor="end" fill="#4b5568">1,000,000</text>
+      <text x="880" y="245">136,104</text>
+      <text x="864" y="325">117,076</text>
+      <text x="798" y="405">61,911</text>
+      <text x="632" y="485">12,636</text>
+    </g>
+
+    <rect x="60" y="620" width="1080" height="1" fill="#d8e0ee"/>
+    <text x="60" y="650" font-size="14" fill="#5a667a">Blue bars: DeepSeek models. The window size sets the maximum; the task sets the token count you pay for.</text>
+  </g>
+</svg>

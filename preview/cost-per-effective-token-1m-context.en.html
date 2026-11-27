@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cost Per Effective Token: What a 1M Context Window Actually Costs | DeepSeek V4 Flash</title>
+<meta name="description" content="A 1M context window is a capacity limit, not a bill. MathArena and cost-per-task data show why tokens per finished job, not list price, decide what you pay.">
+<link rel="canonical" href="https://deepseekv4flash.com/articles/cost-per-effective-token-1m-context">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cost Per Effective Token: What a 1M Context Window Actually Costs">
+<meta property="og:description" content="Two models at the same $10/$50 rate card differed 8.7x per question. The cause was output tokens, not price.">
+<meta property="og:url" content="https://deepseekv4flash.com/articles/cost-per-effective-token-1m-context">
+<meta property="og:image" content="https://deepseekv4flash.com/images/articles/deepseek-1m-context-effective-token-usage.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cost Per Effective Token: What a 1M Context Window Actually Costs">
+<meta name="twitter:description" content="Why 1M context is a ceiling, not a bill, and how to price one finished task across models.">
+<meta name="twitter:image" content="https://deepseekv4flash.com/images/articles/deepseek-1m-context-effective-token-usage.svg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cost Per Effective Token: What a 1M Context Window Actually Costs",
+  "description": "A 1M context window is a capacity limit, not a bill. MathArena and cost-per-task data show why tokens per finished job, not list price, decide what you pay.",
+  "datePublished": "2026-11-27",
+  "dateModified": "2026-11-27",
+  "author": { "@type": "Person", "name": "Cameron Voss" },
+  "publisher": { "@type": "Organization", "name": "DeepSeek V4 Flash", "url": "https://deepseekv4flash.com" },
+  "image": [
+    "https://deepseekv4flash.com/images/articles/deepseek-1m-context-effective-token-usage.svg",
+    "https://deepseekv4flash.com/images/articles/matharena-june-2026-accuracy-cost-output-tokens.webp",
+    "https://deepseekv4flash.com/images/articles/deepseek-cost-per-task-coding-score-scatter.svg"
+  ],
+  "mainEntityOfPage": "https://deepseekv4flash.com/articles/cost-per-effective-token-1m-context"
+}
+</script>
+<style>
+  :root{
+    --page:#fcfcfa; --ink:#171717; --muted:#636363; --faint:#8a8a86;
+    --line:#e7e7e3; --blue:#2563eb; --blue-pale:#f4f7ff; --navy:#18243d;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:#dbe6ff}
+
+  .site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(252,252,250,.94);backdrop-filter:blur(12px)}
+  .site-header__inner{width:min(1200px,calc(100% - 48px));min-height:68px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .wordmark{font-size:14px;font-weight:750;letter-spacing:-.025em;text-transform:uppercase;white-space:nowrap}
+  .header-note{font-size:13px;color:var(--muted)}
+  .header-note a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+
+  .article-container{width:min(720px,calc(100% - 48px));margin:0 auto}
+  .article-header{padding:84px 0 34px;border-bottom:1px solid var(--line)}
+  .eyebrow{margin:0;color:var(--blue);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+  .article-header h1{margin:16px 0 0;font-size:clamp(32px,4vw,40px);line-height:1.12;letter-spacing:-.04em}
+  .byline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0 0;color:var(--muted);font-size:14px}
+  .byline__author{color:var(--ink);font-weight:700}
+  .byline__dot{color:#c9c9c4}
+  .article-header__dek{margin:24px 0 0;color:var(--muted);font-size:19px;line-height:1.55}
+
+  figure{margin:0}
+  .hero{margin:34px 0 8px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f2f6fc}
+  .hero img,.inline-figure img{display:block;width:100%;height:auto;border-radius:7px}
+  figcaption{margin:14px 4px 2px;color:var(--muted);font-size:13px;line-height:1.55}
+  .inline-figure{margin:36px 0 34px 50%;width:min(1120px,calc(100vw - 48px));transform:translateX(-50%);padding:16px;border:1px solid var(--line);border-radius:10px;background:#f7f9fc}
+  .inline-figure figcaption{max-width:760px}
+
+  .article-body{padding:30px 0 24px}
+  .article-body p{margin:0 0 25px;font-size:18px;line-height:1.72}
+  .article-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .article-body h2{margin:52px 0 20px;font-size:29px;line-height:1.18;letter-spacing:-.04em}
+  .article-body ul{margin:0 0 26px;padding:0 0 0 22px}
+  .article-body li{margin:0 0 12px;font-size:18px;line-height:1.68}
+  code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.86em;background:#f2f2ee;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+
+  .tldr{margin:30px 0 10px;padding:22px 24px;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;background:#fff}
+  .tldr__title{margin:0 0 12px;font-size:12px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+  .tldr ul{margin:0;padding:0 0 0 18px}
+  .tldr li{margin:0 0 9px;font-size:15px;line-height:1.65;color:#3d3d3a}
+  .tldr li:last-child{margin-bottom:0}
+
+  .data-table{margin:30px 0 34px 50%;width:min(900px,calc(100vw - 48px));transform:translateX(-50%);overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  caption{padding:16px 18px 12px;text-align:left;font-size:13px;color:var(--muted)}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{background:#f6f8fc;font-size:12px;letter-spacing:.02em;text-transform:uppercase;color:#4b5568}
+  tbody tr:last-child td{border-bottom:0}
+  tr.deepseek td{background:#f4f7ff;font-weight:700;color:var(--navy)}
+
+  .site-footer{border-top:1px solid var(--line);background:#f8f8f6}
+  .site-footer__inner{width:min(1200px,calc(100% - 48px));margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:34px 0;color:var(--muted);font-size:13px}
+
+  @media (max-width:640px){
+    .site-header__inner{min-height:auto;flex-wrap:wrap;padding:14px 0}
+    .article-header{padding-top:58px}
+    .article-header h1{font-size:30px}
+    .article-body p,.article-body li{font-size:17px}
+    .article-body h2{font-size:25px}
+    .inline-figure img{min-width:680px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <span class="wordmark">DeepSeek V4 Flash</span>
+    <span class="header-note">Updated November 27, 2026 · <a href="https://deepseekv4flash.com/pricing">Plans and pricing</a></span>
+  </div>
+</header>
+
+<main class="article-container">
+  <header class="article-header">
+    <p class="eyebrow">DeepSeek · Token economics</p>
+    <h1>Cost Per Effective Token: What a 1M Context Window Actually Costs</h1>
+    <p class="byline">
+      <span class="byline__author">By Cameron Voss</span>
+      <span class="byline__dot">·</span>
+      <span>Published November 27, 2026</span>
+      <span class="byline__dot">·</span>
+      <span>Updated November 27, 2026</span>
+      <span class="byline__dot">·</span>
+      <span>6 min read</span>
+    </p>
+  </header>
+
+  <section class="tldr" aria-labelledby="tldr-heading">
+    <h2 class="tldr__title" id="tldr-heading">TL;DR</h2>
+    <ul>
+      <li>A 1M context window is a capacity limit, not a bill. You pay for tokens a task consumes, not tokens it could hold.</li>
+      <li>On the MathArena June 2026 set, two models listed at the same $10 / $50 per 1M tokens cost $0.67 and $5.86 per question, an 8.7x gap driven by 12,636 versus 117,076 output tokens.</li>
+      <li>DeepSeek-V4.1-Flash (Max) scored 57.64% at $0.037 per question with 61,911 output tokens on that set.</li>
+      <li>On a modeled multi-file coding task, DeepSeek V4.1 Flash costs $0.10 per task; 57 models span $0.03 to $4.85 for the same job.</li>
+      <li>The lever is tokens per finished task. Keep the prompt prefix stable, cap output, and measure on your own workload.</li>
+    </ul>
+  </section>
+
+  <figure class="hero">
+    <img src="images/articles/deepseek-1m-context-effective-token-usage.svg"
+         alt="Log scale comparison of a 1,000,000 token context window against actual output tokens of 12,636 to 136,104 for four models on the MathArena June 2026 set"
+         width="1200" height="675" loading="eager" decoding="async">
+    <figcaption>A 1M window is a ceiling. The measured output tokens on a single question sit far below it.</figcaption>
+  </figure>
+
+  <article class="article-body">
+
+    <h2>What does a 1M context window actually cost?</h2>
+
+    <p>Nothing by itself. The window tells you how much text the model can hold at once, and the bill follows the tokens a task actually pushes through the meter. On DeepSeek's first-party API, a full million tokens of fresh input would come to $0.14. If every one of those tokens hit the cache, the same input would come to $0.028. Output is metered on its own at $0.28 per million.</p>
+
+    <p>Real jobs rarely fill the window. A coding agent re-reads its system prompt and tool definitions on every turn, and when that prefix stays stable the tokens bill at the cache-hit rate. The modeled multi-file task in the tracker below assumes 1.5M input tokens with 90% served from cache, plus 40K output tokens in a single pass. Most of that bill comes from output and from the tenth of input that misses the cache, not from the size of the window. You can buy a bigger window, but you cannot get a discount on tokens you never send.</p>
+
+    <h2>Why do two models with the same list price bill differently?</h2>
+
+    <p>The rate is per token, and each model burns a different number of tokens to finish the same question.</p>
+
+    <p>MathArena's June 2026 set makes this easy to see. GPT-6 Astra (max) and Claude-Fable-5.1 (max) both sit at $10 per million input tokens and $50 per million output tokens. Astra scored 94.42% per question at a cost of $0.67 and wrote 12,636 output tokens. Fable 5.1 scored 90.97% at $5.86 and wrote 117,076 output tokens. That is 8.7x the spend for a slightly lower score, and the longer answers explain nearly all of it.</p>
+
+    <figure class="inline-figure">
+      <img src="images/articles/matharena-june-2026-accuracy-cost-output-tokens.webp"
+           alt="MathArena ArXivMath June 2026 ranking table listing accuracy, cost per question and output tokens for 25 models"
+           width="1734" height="2000" loading="lazy" decoding="async">
+      <figcaption>The original ranking: accuracy, cost per question and output tokens side by side. DeepSeek-V4.1-Flash (Max) appears at rank 16.</figcaption>
+    </figure>
+
+    <p>DeepSeek-V4.1-Flash (Max) scored 57.64% at $0.037 per question with 61,911 output tokens on the same set. The older DeepSeek-v4-Flash (Max) scored 43.75% at $0.038 with 136,104 tokens. The two DeepSeek rows cost almost the same, yet one writes less than half the output and scores higher. That difference is what an effective-token number is meant to catch.</p>
+
+    <h2>How many tokens does a finished task actually burn?</h2>
+
+    <p>The useful number is the cost of one completed job, not the cost of one prompt.</p>
+
+    <p>The cost-per-task tracker models a multi-file coding change as 1.5M input tokens (90% cached), 40K output tokens, one pass. It prices 57 models on that identical job. Hy4 flash finishes at $0.03 and GPT-6 Astra at $4.85, a 188x spread for the same work. DeepSeek V4.1 Flash comes in at $0.10 with a coding score of 30.6. GPT-6.1 Terra is $0.42 for a score of 47.6. Claude Fable 5.2 is $3.07 for 53.1.</p>
+
+    <figure class="inline-figure">
+      <img src="images/articles/deepseek-cost-per-task-coding-score-scatter.svg"
+           alt="Scatter plot of coding score against modeled cost per task on a log scale, with DeepSeek V4.1 Flash at 30.6 score and 0.10 dollars per task"
+           width="1200" height="700" loading="lazy" decoding="async">
+      <figcaption>Each dot is one finished task. The further right and lower a model sits, the more score it buys per dollar.</figcaption>
+    </figure>
+
+    <p>Task shape moves the ranking. DeepSeek V4.1 Flash is $0.02 for a one-file edit, $0.10 for a multi-file change and $0.20 for an agentic run. Those shifts never appear on a per-token rate card, so a rate card alone will not tell you what a workflow costs.</p>
+
+    <div class="data-table">
+      <table>
+        <caption>Modeled API cost to finish three task sizes, with independent coding score (0 to 100).</caption>
+        <thead>
+          <tr><th scope="col">Model</th><th scope="col">One-file edit</th><th scope="col">Multi-file change</th><th scope="col">Agentic task</th><th scope="col">Coding score</th></tr>
+        </thead>
+        <tbody>
+          <tr class="deepseek"><td>DeepSeek V4.1 Flash</td><td>$0.02</td><td>$0.10</td><td>$0.20</td><td>30.6</td></tr>
+          <tr><td>GPT-6.1 Terra</td><td>$0.08</td><td>$0.42</td><td>$0.83</td><td>47.6</td></tr>
+          <tr><td>Claude Fable 5.2</td><td>$0.58</td><td>$3.07</td><td>$6.14</td><td>53.1</td></tr>
+          <tr><td>GPT-6 Astra</td><td>$0.82</td><td>$4.85</td><td>$9.70</td><td>49.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>To see what the current rates look like on this site, the <a href="https://deepseekv4flash.com/pricing">pricing page</a> lists the plans and allowances.</p>
+
+    <h2>How do you compare models without a benchmark degree?</h2>
+
+    <p>Put cost, quality and speed on the same plane and pick a point you can live with.</p>
+
+    <p>That plane is the cost-intelligence frontier. For one task type, performance, speed and cost per finished job form a boundary you cannot improve on all at once, and every model choice sits somewhere on it. You can fix the spend per task and see which model scores highest, or fix the score and see which model charges least. A model at $4.85 and a model at $0.10 can land in the same accuracy band. Once you plot every candidate on cost against quality, any point well below the line can be dropped, since another model there is both cheaper and stronger.</p>
+
+    <p>The frontier belongs to the task, not the product. A model on the frontier for complex visual reasoning can sit far from it on ticket sorting. Draw it per task type instead of once per model family.</p>
+
+    <h2>How do you cut the cost per effective token?</h2>
+
+    <p>Look at what the meter sees before you swap the model on the API call.</p>
+
+    <ul>
+      <li>Keep the system prompt and tool schema byte-for-byte stable. Cache hits on DeepSeek bill at $0.028 per million instead of $0.14, which cuts repeated input by 5x.</li>
+      <li>Cap output length. Output runs at $0.28 per million, ten times the cache-hit input rate, and verbose reasoning lands on the invoice.</li>
+      <li>Count retries. If a job needs 1.5 attempts on average to pass, the effective cost is 1.5x the single-pass figure.</li>
+      <li>Measure all of it on your own tasks for 4 to 8 weeks, because model releases move the frontier faster than a yearly contract can follow.</li>
+    </ul>
+
+    <p>Data notes: MathArena ArXivMath June 2026 set (checked 23 September 2026); Capital &amp; Compute cost-per-task tracker (rates as of 21 November 2026); AI Master cost-intelligence frontier (29 October 2026). Figures come from third-party evaluations; your bill depends on your own workload.</p>
+
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© 2026 DeepSeek V4 Flash</span>
+    <span>Independent analysis. Prices in USD.</span>
+  </div>
+</footer>
+
+</body>
+</html>

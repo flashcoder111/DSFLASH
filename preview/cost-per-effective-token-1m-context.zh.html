@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>有效 Token 成本：1M 上下文窗口到底要花多少钱 | DeepSeek V4 Flash</title>
+<meta name="description" content="1M 上下文是容量上限，不是账单。MathArena 与每任务成本数据说明：决定你花多少钱的，是完成一件任务用掉的 token，而不是牌价。">
+<link rel="canonical" href="https://deepseekv4flash.com/zh/articles/cost-per-effective-token-1m-context">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有效 Token 成本：1M 上下文窗口到底要花多少钱">
+<meta property="og:description" content="两款同样 $10/$50 牌价的模型，每题账单差 8.7 倍。原因是输出 token 数，不是单价。">
+<meta property="og:url" content="https://deepseekv4flash.com/zh/articles/cost-per-effective-token-1m-context">
+<meta property="og:image" content="https://deepseekv4flash.com/images/articles/deepseek-1m-context-effective-token-usage.svg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "有效 Token 成本：1M 上下文窗口到底要花多少钱",
+  "description": "1M 上下文是容量上限，不是账单。MathArena 与每任务成本数据说明：决定你花多少钱的，是完成一件任务用掉的 token，而不是牌价。",
+  "datePublished": "2026-11-27",
+  "dateModified": "2026-11-27",
+  "author": { "@type": "Person", "name": "Cameron Voss" },
+  "publisher": { "@type": "Organization", "name": "DeepSeek V4 Flash", "url": "https://deepseekv4flash.com" },
+  "image": ["https://deepseekv4flash.com/images/articles/deepseek-1m-context-effective-token-usage.svg"],
+  "mainEntityOfPage": "https://deepseekv4flash.com/zh/articles/cost-per-effective-token-1m-context"
+}
+</script>
+<style>
+  :root{
+    --page:#fcfcfa; --ink:#171717; --muted:#636363; --line:#e7e7e3;
+    --blue:#2563eb; --blue-pale:#f4f7ff; --navy:#18243d;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:#dbe6ff}
+
+  .site-header{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(252,252,250,.94);backdrop-filter:blur(12px)}
+  .site-header__inner{width:min(1200px,calc(100% - 48px));min-height:68px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .wordmark{font-size:14px;font-weight:750;letter-spacing:-.025em;text-transform:uppercase;white-space:nowrap}
+  .header-note{font-size:13px;color:var(--muted)}
+  .header-note a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+
+  .article-container{width:min(720px,calc(100% - 48px));margin:0 auto}
+  .article-header{padding:84px 0 34px;border-bottom:1px solid var(--line)}
+  .eyebrow{margin:0;color:var(--blue);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+  .article-header h1{margin:16px 0 0;font-size:clamp(30px,4vw,38px);line-height:1.2;letter-spacing:-.03em}
+  .byline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0 0;color:var(--muted);font-size:14px}
+  .byline__author{color:var(--ink);font-weight:700}
+  .byline__dot{color:#c9c9c4}
+  .article-header__dek{margin:24px 0 0;color:var(--muted);font-size:18px;line-height:1.6}
+
+  figure{margin:0}
+  .hero{margin:34px 0 8px;padding:16px;border:1px solid var(--line);border-radius:10px;background:#f2f6fc}
+  .hero img,.inline-figure img{display:block;width:100%;height:auto;border-radius:7px}
+  figcaption{margin:14px 4px 2px;color:var(--muted);font-size:13px;line-height:1.6}
+  .inline-figure{margin:36px 0 34px 50%;width:min(1120px,calc(100vw - 48px));transform:translateX(-50%);padding:16px;border:1px solid var(--line);border-radius:10px;background:#f7f9fc}
+  .inline-figure figcaption{max-width:760px}
+
+  .article-body{padding:30px 0 24px}
+  .article-body p{margin:0 0 24px;font-size:17px;line-height:1.85}
+  .article-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+  .article-body h2{margin:50px 0 20px;font-size:27px;line-height:1.3;letter-spacing:-.03em}
+  .article-body ul{margin:0 0 26px;padding:0 0 0 22px}
+  .article-body li{margin:0 0 12px;font-size:17px;line-height:1.8}
+
+  .tldr{margin:30px 0 10px;padding:22px 24px;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;background:#fff}
+  .tldr__title{margin:0 0 12px;font-size:12px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--blue)}
+  .tldr ul{margin:0;padding:0 0 0 18px}
+  .tldr li{margin:0 0 9px;font-size:15px;line-height:1.75;color:#3d3d3a}
+  .tldr li:last-child{margin-bottom:0}
+
+  .data-table{margin:30px 0 34px 50%;width:min(900px,calc(100vw - 48px));transform:translateX(-50%);overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  caption{padding:16px 18px 12px;text-align:left;font-size:13px;color:var(--muted)}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{background:#f6f8fc;font-size:12px;color:#4b5568}
+  tbody tr:last-child td{border-bottom:0}
+  tr.deepseek td{background:#f4f7ff;font-weight:700;color:var(--navy)}
+
+  .site-footer{border-top:1px solid var(--line);background:#f8f8f6}
+  .site-footer__inner{width:min(1200px,calc(100% - 48px));margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:34px 0;color:var(--muted);font-size:13px}
+
+  @media (max-width:640px){
+    .site-header__inner{min-height:auto;flex-wrap:wrap;padding:14px 0}
+    .article-header{padding-top:58px}
+    .article-header h1{font-size:27px}
+    .article-body p,.article-body li{font-size:16px}
+    .article-body h2{font-size:23px}
+    .inline-figure img{min-width:680px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <span class="wordmark">DeepSeek V4 Flash</span>
+    <span class="header-note">更新于 2026年11月27日 · <a href="https://deepseekv4flash.com/pricing">查看价格</a></span>
+  </div>
+</header>
+
+<main class="article-container">
+  <header class="article-header">
+    <p class="eyebrow">DeepSeek · Token 经济学</p>
+    <h1>有效 Token 成本：1M 上下文窗口到底要花多少钱</h1>
+    <p class="byline">
+      <span class="byline__author">By Cameron Voss</span>
+      <span class="byline__dot">·</span>
+      <span>发布于 2026年11月27日</span>
+      <span class="byline__dot">·</span>
+      <span>更新于 2026年11月27日</span>
+      <span class="byline__dot">·</span>
+      <span>约 6 分钟</span>
+    </p>
+  </header>
+
+  <section class="tldr" aria-labelledby="tldr-heading">
+    <h2 class="tldr__title" id="tldr-heading">TL;DR</h2>
+    <ul>
+      <li>1M 上下文是容量上限，不是账单。你付的是任务真正消耗的 token，不是它能装下的 token。</li>
+      <li>MathArena 2026 年 6 月那批题里，两款牌价同为每 1M token $10／$50 的模型，每题花 $0.67 和 $5.86，差 8.7 倍；输出 token 分别是 12,636 和 117,076。</li>
+      <li>同一批题中，DeepSeek-V4.1-Flash（Max）正确率 57.64%，每题 $0.037，输出 61,911 token。</li>
+      <li>在模拟的多文件改写任务上，DeepSeek V4.1 Flash 每任务 $0.10；57 款模型在同一任务上的价格从 $0.03 到 $4.85。</li>
+      <li>真正的杠杆是每完成一件任务用掉多少 token。把提示前缀固定住、限制输出长度、用自己的任务去测。</li>
+    </ul>
+  </section>
+
+  <figure class="hero">
+    <img src="images/articles/deepseek-1m-context-effective-token-usage.svg"
+         alt="对数刻度对比：100 万 token 的上下文窗口，与四款模型在 MathArena 2026 年 6 月题目上实际输出的 12,636 至 136,104 token"
+         width="1200" height="675" loading="eager" decoding="async">
+    <figcaption>1M 窗口只是天花板。单题实测的输出 token 远低于这个数字。</figcaption>
+  </figure>
+
+  <article class="article-body">
+
+    <h2>1M 上下文窗口到底花多少钱？</h2>
+
+    <p>它本身不花钱。窗口只是告诉你模型一次能装下多少文本，账单跟的是任务真正推进计费器的那些 token。按 DeepSeek 一方 API 的价格，满打满算 100 万全新输入 token 是 $0.14；如果这些 token 全部命中缓存，同样的输入是 $0.028。输出单独计费，每百万 $0.28。</p>
+
+    <p>真实任务很少把窗口填满。编码 agent 每一轮都会重读系统提示和工具定义，只要这段前缀稳定，这些 token 就按命中缓存的价格算。下面这张表用的多文件任务模型是：150 万输入 token，其中 90% 来自缓存，加上 4 万输出 token，一次跑完。账单里占大头的是输出，以及那 10% 没命中缓存的输入，跟窗口大小关系不大。窗口可以买得更大，但你省不下那些根本没发出去的 token。</p>
+
+    <h2>牌价一样的两款模型，为什么账单差这么多？</h2>
+
+    <p>因为单价是按 token 算的，而每款模型完成同一道题烧掉的 token 数不一样。</p>
+
+    <p>MathArena 2026 年 6 月那批题把这件事摆得很清楚。GPT-6 Astra（max）和 Claude-Fable-5.1（max）的输入单价都是每百万 $10，输出都是每百万 $50。Astra 正确率 94.42%，每题 $0.67，写了 12,636 个输出 token。Fable 5.1 正确率 90.97%，每题 $5.86，写了 117,076 个输出 token。多花 8.7 倍的钱，正确率反而低一点，而差距几乎全来自更长的回答。</p>
+
+    <figure class="inline-figure">
+      <img src="images/articles/matharena-june-2026-accuracy-cost-output-tokens.webp"
+           alt="MathArena ArXivMath 2026 年 6 月排名表，列出 25 款模型的正确率、每题成本与输出 token"
+           width="1734" height="2000" loading="lazy" decoding="async">
+      <figcaption>原始排名：正确率、每题成本、输出 token 并排列出。DeepSeek-V4.1-Flash（Max）排在第 16 位。</figcaption>
+    </figure>
+
+    <p>同一批题里，DeepSeek-V4.1-Flash（Max）正确率 57.64%，每题 $0.037，输出 61,911 token。更早的 DeepSeek-v4-Flash（Max）正确率 43.75%，每题 $0.038，输出 136,104 token。两行 DeepSeek 花的钱几乎一样，但其中一个输出还不到一半，正确率却更高。这个差别，正是"有效 token"这个指标想抓住的东西。</p>
+
+    <h2>完成一件任务，到底烧掉多少 token？</h2>
+
+    <p>有用的数字是一件活干完要花多少钱，而不是一条提示要花多少钱。</p>
+
+    <p>每任务成本追踪器把一次多文件代码改写建模为：150 万输入 token（90% 来自缓存）、4 万输出 token、一次跑完。它用同一份活给 57 款模型定价。Hy4 flash 花 $0.03 就干完，GPT-6 Astra 要 $4.85，同一件活差了 188 倍。DeepSeek V4.1 Flash 是 $0.10，编码得分 30.6。GPT-6.1 Terra 是 $0.42，得分 47.6。Claude Fable 5.2 是 $3.07，得分 53.1。</p>
+
+    <figure class="inline-figure">
+      <img src="images/articles/deepseek-cost-per-task-coding-score-scatter.svg"
+           alt="编码得分与每任务建模成本的散点图，对数刻度，DeepSeek V4.1 Flash 位于 30.6 分、每任务 0.10 美元"
+           width="1200" height="700" loading="lazy" decoding="async">
+      <figcaption>每个点代表一件干完的活。位置越靠右、越低，说明每一美元买到的分数越多。</figcaption>
+    </figure>
+
+    <p>任务形态一变，排名也跟着变。DeepSeek V4.1 Flash 改单个文件是 $0.02，改多个文件是 $0.10，跑 agent 任务是 $0.20。这些变化在任何按 token 计费的价格表上都看不到，所以光看价格表算不出一条工作流到底要花多少。</p>
+
+    <div class="data-table">
+      <table>
+        <caption>三种任务规模下完成任务的建模 API 成本，附独立编码得分（0 到 100）。</caption>
+        <thead>
+          <tr><th scope="col">模型</th><th scope="col">单文件修改</th><th scope="col">多文件修改</th><th scope="col">Agent 任务</th><th scope="col">编码得分</th></tr>
+        </thead>
+        <tbody>
+          <tr class="deepseek"><td>DeepSeek V4.1 Flash</td><td>$0.02</td><td>$0.10</td><td>$0.20</td><td>30.6</td></tr>
+          <tr><td>GPT-6.1 Terra</td><td>$0.08</td><td>$0.42</td><td>$0.83</td><td>47.6</td></tr>
+          <tr><td>Claude Fable 5.2</td><td>$0.58</td><td>$3.07</td><td>$6.14</td><td>53.1</td></tr>
+          <tr><td>GPT-6 Astra</td><td>$0.82</td><td>$4.85</td><td>$9.70</td><td>49.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>想看看本站当前的价格和额度，<a href="https://deepseekv4flash.com/pricing">价格页面</a>列得很清楚。</p>
+
+    <h2>没有评测背景，怎么比较模型？</h2>
+
+    <p>把成本、质量和速度放在同一张图上，挑一个你能接受的点。</p>
+
+    <p>这张图就是成本-智能前沿。对某一类任务来说，性能、速度和每件任务的成本会形成一条边界，你没法同时把这三项都推到最好，每个模型选择都落在这条边界的某个位置上。你可以固定每任务的预算，看谁分最高；也可以固定分数，看谁最便宜。$4.85 的模型和 $0.10 的模型，可能落在同一个准确率区间里。把所有候选按成本和质量画出来，明显低于边界线的那些点可以直接划掉，因为那个位置上有更便宜、也更强的模型。</p>
+
+    <p>前沿是按任务划的，不是按产品划的。一个模型在复杂视觉推理上站在前沿，放到工单分类上可能就离得很远。所以按任务类型各画一张，别按模型家族画一次就完事。</p>
+
+    <h2>怎么把每有效 token 的成本压下来？</h2>
+
+    <p>在换模型之前，先看看计费器到底看到了什么。</p>
+
+    <ul>
+      <li>把系统提示和工具定义保持逐字节稳定。DeepSeek 命中缓存的输入是每百万 $0.028，而不是 $0.14，重复输入直接省 5 倍。</li>
+      <li>限制输出长度。输出是每百万 $0.28，是命中缓存输入的十倍，啰嗦的推理会原样出现在账单上。</li>
+      <li>把重试算进去。如果一件任务平均要试 1.5 次才能过，实际成本就是单次成本的 1.5 倍。</li>
+      <li>用自己的任务连续测 4 到 8 周。模型更新推着前沿移动的速度，比你签年度合同的速度快。</li>
+    </ul>
+
+    <p>数据说明：MathArena ArXivMath 2026 年 6 月题目（2026 年 9 月 23 日查阅）；Capital &amp; Compute 每任务成本追踪器（价格截至 2026 年 11 月 21 日）；AI Master 成本-智能前沿（2026 年 10 月 29 日）。数字来自第三方评测，你的账单取决于自己的任务。</p>
+
+  </article>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <span>© 2026 DeepSeek V4 Flash</span>
+    <span>独立分析。价格单位为美元。</span>
+  </div>
+</footer>
+
+</body>
+</html>

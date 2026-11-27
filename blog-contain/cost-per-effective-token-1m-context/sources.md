@@ -1,0 +1,8 @@
+# Sources
+
+- **MathArena ArXivMath June 2026 ranking and methodology.** Supplied the accuracy, cost-per-question and output-token figures: GPT-6 Astra (max) 94.42% at $0.67 with 12,636 output tokens, Claude-Fable-5.1 (max) 90.97% at $5.86 with 117,076 output tokens, DeepSeek-V4.1-Flash (Max) 57.64% at $0.037 with 61,911 output tokens, and DeepSeek-v4-Flash (Max) 43.75% at $0.038 with 136,104 output tokens. The published ranking screenshot was reviewed directly. Checked 23 September 2026.
+- **Capital & Compute, AI coding agent cost per task.** Supplied the modeled cost-per-task ladder for 57 models (Hy4 flash $0.03 to GPT-6 Astra $4.85), the coding-score versus cost pairs, the one-file / multi-file / agentic task price table, and the reference profile of 1.5M input tokens with 90% cached plus 40K output tokens. Rates as of 21 November 2026. Payment wall prevented direct retrieval of the source chart image; its figures were taken from the accessible article text and independently re-plotted.
+- **AI Master, cost-intelligence frontier, 29 October 2026.** Supplied the three-layer comparison framing (equal cost, equal quality, frontier distance), the task-specific nature of the frontier, and the multi-variable cost chain of effective tokens, cache hits and retries. Charts on the source page were dynamically loaded and are not reproduced.
+- **DeepSeek published API rates.** $0.14 per million cache-miss input tokens, $0.028 per million cache-hit input tokens and $0.28 per million output tokens, consistent with the site's own published rate card.
+
+No external hyperlinks are used in the published body. The only link is the site's own pricing page, https://deepseekv4flash.com/pricing, rendered through the site's standard CTA block as /pricing.
